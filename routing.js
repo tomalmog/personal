@@ -90,32 +90,38 @@ window.addEventListener('popstate', (e) => {
 
 // Full-page scroll with mouse wheel
 function handleWheelScroll(e) {
-    if (isScrolling) return;
+    if (isScrolling) {
+        e.preventDefault();
+        return;
+    }
+
+    // Only trigger on significant scroll
+    const delta = Math.abs(e.deltaY);
+    if (delta < 10) return; // Ignore tiny movements
 
     e.preventDefault();
     isScrolling = true;
 
-    const delta = e.deltaY;
-    let newIndex = currentScreenIndex;
+    const scrollDirection = e.deltaY > 0 ? 1 : -1;
+    let newIndex = currentScreenIndex + scrollDirection;
 
-    if (delta > 0 && currentScreenIndex < screenOrder.length - 1) {
-        // Scroll down
-        newIndex = currentScreenIndex + 1;
-    } else if (delta < 0 && currentScreenIndex > 0) {
-        // Scroll up
-        newIndex = currentScreenIndex - 1;
-    }
+    // Clamp to valid range
+    if (newIndex < 0) newIndex = 0;
+    if (newIndex >= screenOrder.length) newIndex = screenOrder.length - 1;
 
     if (newIndex !== currentScreenIndex) {
         const newScreenId = screenOrder[newIndex];
         const newPath = getPathFromScreenId(newScreenId);
         navigateToRoute(newPath);
+    } else {
+        // No navigation happened, reset immediately
+        isScrolling = false;
     }
 
-    // Debounce scrolling
+    // Longer debounce to prevent double-scrolling
     setTimeout(() => {
         isScrolling = false;
-    }, 800);
+    }, 1200);
 }
 
 // Get path from screen ID
@@ -183,8 +189,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Add wheel scroll listener
-    document.addEventListener('wheel', handleWheelScroll, { passive: false });
+    // Add wheel scroll listener with capture phase to ensure we catch it first
+    window.addEventListener('wheel', handleWheelScroll, { passive: false, capture: true });
 
     // Enhanced keyboard navigation
     document.addEventListener('keydown', handleKeyNavigation);
@@ -197,6 +203,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.screen').forEach(screen => {
         screen.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
     });
+
+    // Disable default scroll behavior
+    document.body.style.overflow = 'hidden';
 });
 
 console.log('🎮 Routing enabled! Use arrow keys or scroll to navigate between pages.');
