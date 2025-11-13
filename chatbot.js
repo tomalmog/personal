@@ -1,7 +1,7 @@
 // Chatbot functionality with Groq API (via serverless function)
 
-// API endpoint - will be our serverless function
-const API_ENDPOINT = '/.netlify/functions/chat';
+// API endpoint - Vercel serverless function
+const API_ENDPOINT = '/api/chat';
 
 // Knowledge base about Tom - Update this with your actual information
 const KNOWLEDGE_BASE = `

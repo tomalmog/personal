@@ -17,8 +17,9 @@ let currentScreenIndex = 0;
 let lastScrollTime = 0;
 let isAtBoundary = false; // Track if we're at a scroll boundary
 let lastWheelEventTime = 0; // Track for detecting new scroll gestures
-const SCROLL_GESTURE_TIMEOUT = 200; // ms gap to consider a new scroll gesture
-const NAVIGATION_DELTA_THRESHOLD = 30; // Require bigger scroll for navigation
+let boundaryScrollAccumulator = 0; // Accumulate scroll at boundary
+const SCROLL_GESTURE_TIMEOUT = 150; // ms gap to consider a new scroll gesture
+const NAVIGATION_SCROLL_THRESHOLD = 50; // Total accumulated scroll needed to navigate
 const screenOrder = [
     'about-screen',
     'education-screen',
@@ -146,8 +147,6 @@ function isCurrentlyAtBoundary(element, deltaY) {
 
 // Full-page scroll with mouse wheel
 function handleWheelScroll(e) {
-    console.log('🛞 Wheel event received, deltaY:', e.deltaY);
-
     const now = Date.now();
     const timeSinceLastWheel = now - lastWheelEventTime;
     const isNewGesture = timeSinceLastWheel > SCROLL_GESTURE_TIMEOUT;
@@ -157,52 +156,46 @@ function handleWheelScroll(e) {
 
     // Check if we're currently at a scroll boundary (BEFORE this scroll happens)
     const atBoundary = isCurrentlyAtBoundary(e.target, e.deltaY);
-    console.log('📍 At boundary?', atBoundary);
 
     if (!atBoundary) {
-        // Not at boundary - allow normal scrolling and reset flag
+        // Not at boundary - allow normal scrolling and reset everything
         isAtBoundary = false;
+        boundaryScrollAccumulator = 0;
         return; // Let browser handle the scroll naturally
     }
 
     // We ARE at a boundary
     e.preventDefault(); // Always prevent scroll at boundary
 
-    // If flag is not set yet, set it and return (don't navigate)
+    // If this is a new gesture, reset accumulator
+    if (isNewGesture) {
+        boundaryScrollAccumulator = 0;
+    }
+
+    // If flag is not set yet, set it and return (don't navigate yet)
     if (!isAtBoundary) {
         isAtBoundary = true;
-        console.log('🔒 Boundary reached - set flag');
+        boundaryScrollAccumulator = 0;
         return;
     }
 
-    // Flag is already set - check if this is a NEW gesture with BIG scroll
-    if (!isNewGesture) {
-        // Same gesture, ignore
-        console.log('⏭️ Same gesture, ignoring');
-        return;
+    // Accumulate scroll while at boundary
+    boundaryScrollAccumulator += Math.abs(e.deltaY);
+
+    // Check if we've accumulated enough scroll to navigate
+    if (boundaryScrollAccumulator < NAVIGATION_SCROLL_THRESHOLD) {
+        return; // Not enough yet
     }
 
-    // This is a NEW gesture at boundary - check if it's big enough
-    const delta = Math.abs(e.deltaY);
-    console.log(`🔄 New gesture at boundary - delta: ${delta}, threshold: ${NAVIGATION_DELTA_THRESHOLD}`);
-
-    if (delta < NAVIGATION_DELTA_THRESHOLD) {
-        console.log('❌ Delta too small');
-        return; // Too small, ignore
-    }
-
-    // This is a unique, deliberate, BIG scroll action!
-    console.log('✅ Attempting navigation...');
+    // We've accumulated enough scroll - navigate!
 
     // Check if already navigating
     if (isScrolling) {
-        console.log('⏸️ Already navigating');
         return;
     }
 
     // Time-based throttle for navigation
     if (now - lastScrollTime < 1500) {
-        console.log('⏸️ Too soon since last navigation');
         return;
     }
 
@@ -216,10 +209,10 @@ function handleWheelScroll(e) {
 
     // Only navigate if we're actually changing screens
     if (newIndex !== currentScreenIndex) {
-        console.log(`🚀 Navigating from ${currentScreenIndex} to ${newIndex}`);
         isScrolling = true;
         lastScrollTime = now;
         isAtBoundary = false; // Reset boundary flag after navigation
+        boundaryScrollAccumulator = 0; // Reset accumulator
 
         const newScreenId = screenOrder[newIndex];
         const newPath = getPathFromScreenId(newScreenId);
@@ -232,7 +225,7 @@ function handleWheelScroll(e) {
             isScrolling = false;
         }, 1500);
     } else {
-        console.log('⛔ Already at boundary (first/last screen)');
+        boundaryScrollAccumulator = 0; // Reset since we can't navigate
     }
 }
 
@@ -297,8 +290,6 @@ function handleKeyNavigation(e) {
 
 // Initialize routing
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🎮 Routing initialized');
-
     // Setup navigation buttons
     document.querySelectorAll('.nav-btn').forEach(btn => {
         const route = btn.getAttribute('data-route');
@@ -310,7 +301,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Add wheel scroll listener
     window.addEventListener('wheel', handleWheelScroll, { passive: false });
-    console.log('🖱️ Wheel listener attached');
 
     // Enhanced keyboard navigation
     document.addEventListener('keydown', handleKeyNavigation);

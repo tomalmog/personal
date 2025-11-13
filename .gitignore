@@ -5,6 +5,9 @@
 # Netlify
 .netlify/
 
+# Vercel
+.vercel
+
 # Node modules (if you add any dependencies later)
 node_modules/
 
