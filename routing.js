@@ -14,6 +14,7 @@ const routes = {
 
 let isScrolling = false;
 let currentScreenIndex = 0;
+let lastScrollTime = 0;
 const screenOrder = [
     'about-screen',
     'education-screen',
@@ -90,8 +91,17 @@ window.addEventListener('popstate', (e) => {
 
 // Full-page scroll with mouse wheel
 function handleWheelScroll(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    // Check if already scrolling
     if (isScrolling) {
-        e.preventDefault();
+        return;
+    }
+
+    // Time-based throttle - ignore events within 1500ms of last scroll
+    const now = Date.now();
+    if (now - lastScrollTime < 1500) {
         return;
     }
 
@@ -99,29 +109,28 @@ function handleWheelScroll(e) {
     const delta = Math.abs(e.deltaY);
     if (delta < 10) return; // Ignore tiny movements
 
-    e.preventDefault();
-    isScrolling = true;
-
-    const scrollDirection = e.deltaY > 0 ? 1 : -1;
+    // Invert scroll direction: scroll down = previous, scroll up = next
+    const scrollDirection = e.deltaY > 0 ? -1 : 1;
     let newIndex = currentScreenIndex + scrollDirection;
 
     // Clamp to valid range
     if (newIndex < 0) newIndex = 0;
     if (newIndex >= screenOrder.length) newIndex = screenOrder.length - 1;
 
+    // Only navigate if we're actually changing screens
     if (newIndex !== currentScreenIndex) {
+        isScrolling = true;
+        lastScrollTime = now;
+
         const newScreenId = screenOrder[newIndex];
         const newPath = getPathFromScreenId(newScreenId);
         navigateToRoute(newPath);
-    } else {
-        // No navigation happened, reset immediately
-        isScrolling = false;
-    }
 
-    // Longer debounce to prevent double-scrolling
-    setTimeout(() => {
-        isScrolling = false;
-    }, 1200);
+        // Reset after navigation completes
+        setTimeout(() => {
+            isScrolling = false;
+        }, 1500);
+    }
 }
 
 // Get path from screen ID
