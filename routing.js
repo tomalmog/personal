@@ -162,72 +162,63 @@ function handleWheelScroll(e) {
         return; // Let browser handle the scroll naturally
     }
 
-    // We ARE at a boundary now
-    // Check if this is a new scroll gesture (user lifted finger and scrolled again)
-    if (isNewGesture && !isAtBoundary) {
-        // This is a NEW gesture at the boundary - set flag but don't navigate
+    // We ARE at a boundary
+    e.preventDefault(); // Always prevent scroll at boundary
+
+    // If flag is not set yet, set it and return (don't navigate)
+    if (!isAtBoundary) {
         isAtBoundary = true;
-        e.preventDefault(); // Prevent scroll since we're at boundary
         return;
     }
 
-    // If this is part of the same gesture that reached the boundary, ignore it
-    if (!isNewGesture && !isAtBoundary) {
-        e.preventDefault();
+    // Flag is already set - check if this is a NEW gesture with BIG scroll
+    if (!isNewGesture) {
+        // Same gesture, ignore
         return;
     }
 
-    // We have the boundary flag set - check if this is a NEW, BIG gesture
-    if (isAtBoundary && isNewGesture) {
-        const delta = Math.abs(e.deltaY);
+    // This is a NEW gesture at boundary - check if it's big enough
+    const delta = Math.abs(e.deltaY);
+    if (delta < NAVIGATION_DELTA_THRESHOLD) {
+        return; // Too small, ignore
+    }
 
-        // Require a significant scroll for navigation
-        if (delta < NAVIGATION_DELTA_THRESHOLD) {
-            e.preventDefault();
-            return; // Too small, ignore
-        }
+    // This is a unique, deliberate, BIG scroll action!
 
-        // This is a unique, deliberate scroll action!
-        e.preventDefault();
+    // Check if already navigating
+    if (isScrolling) {
+        return;
+    }
 
-        // Check if already navigating
-        if (isScrolling) {
-            return;
-        }
+    // Time-based throttle for navigation
+    if (now - lastScrollTime < 1500) {
+        return;
+    }
 
-        // Time-based throttle for navigation
-        if (now - lastScrollTime < 1500) {
-            return;
-        }
+    // Natural scroll direction: scroll down = next, scroll up = previous
+    const scrollDirection = e.deltaY > 0 ? 1 : -1;
+    let newIndex = currentScreenIndex + scrollDirection;
 
-        // Natural scroll direction: scroll down = next, scroll up = previous
-        const scrollDirection = e.deltaY > 0 ? 1 : -1;
-        let newIndex = currentScreenIndex + scrollDirection;
+    // Clamp to valid range
+    if (newIndex < 0) newIndex = 0;
+    if (newIndex >= screenOrder.length) newIndex = screenOrder.length - 1;
 
-        // Clamp to valid range
-        if (newIndex < 0) newIndex = 0;
-        if (newIndex >= screenOrder.length) newIndex = screenOrder.length - 1;
+    // Only navigate if we're actually changing screens
+    if (newIndex !== currentScreenIndex) {
+        isScrolling = true;
+        lastScrollTime = now;
+        isAtBoundary = false; // Reset boundary flag after navigation
 
-        // Only navigate if we're actually changing screens
-        if (newIndex !== currentScreenIndex) {
-            isScrolling = true;
-            lastScrollTime = now;
-            isAtBoundary = false; // Reset boundary flag after navigation
+        const newScreenId = screenOrder[newIndex];
+        const newPath = getPathFromScreenId(newScreenId);
 
-            const newScreenId = screenOrder[newIndex];
-            const newPath = getPathFromScreenId(newScreenId);
+        // Pass direction for animation: scrollDirection (1 = forward, -1 = backward)
+        navigateToRoute(newPath, true, scrollDirection);
 
-            // Pass direction for animation: scrollDirection (1 = forward, -1 = backward)
-            navigateToRoute(newPath, true, scrollDirection);
-
-            // Reset after navigation completes
-            setTimeout(() => {
-                isScrolling = false;
-            }, 1500);
-        }
-    } else {
-        // At boundary but not a new gesture - just prevent default
-        e.preventDefault();
+        // Reset after navigation completes
+        setTimeout(() => {
+            isScrolling = false;
+        }, 1500);
     }
 }
 
