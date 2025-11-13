@@ -17,8 +17,8 @@ let currentScreenIndex = 0;
 let lastScrollTime = 0;
 let isAtBoundary = false; // Track if we're at a scroll boundary
 let lastWheelEventTime = 0; // Track for detecting new scroll gestures
-const SCROLL_GESTURE_TIMEOUT = 250; // ms gap to consider a new scroll gesture
-const NAVIGATION_DELTA_THRESHOLD = 50; // Require bigger scroll for navigation
+const SCROLL_GESTURE_TIMEOUT = 200; // ms gap to consider a new scroll gesture
+const NAVIGATION_DELTA_THRESHOLD = 30; // Require bigger scroll for navigation
 const screenOrder = [
     'about-screen',
     'education-screen',
@@ -168,30 +168,38 @@ function handleWheelScroll(e) {
     // If flag is not set yet, set it and return (don't navigate)
     if (!isAtBoundary) {
         isAtBoundary = true;
+        console.log('🔒 Boundary reached - set flag');
         return;
     }
 
     // Flag is already set - check if this is a NEW gesture with BIG scroll
     if (!isNewGesture) {
         // Same gesture, ignore
+        console.log('⏭️ Same gesture, ignoring');
         return;
     }
 
     // This is a NEW gesture at boundary - check if it's big enough
     const delta = Math.abs(e.deltaY);
+    console.log(`🔄 New gesture at boundary - delta: ${delta}, threshold: ${NAVIGATION_DELTA_THRESHOLD}`);
+
     if (delta < NAVIGATION_DELTA_THRESHOLD) {
+        console.log('❌ Delta too small');
         return; // Too small, ignore
     }
 
     // This is a unique, deliberate, BIG scroll action!
+    console.log('✅ Attempting navigation...');
 
     // Check if already navigating
     if (isScrolling) {
+        console.log('⏸️ Already navigating');
         return;
     }
 
     // Time-based throttle for navigation
     if (now - lastScrollTime < 1500) {
+        console.log('⏸️ Too soon since last navigation');
         return;
     }
 
@@ -205,6 +213,7 @@ function handleWheelScroll(e) {
 
     // Only navigate if we're actually changing screens
     if (newIndex !== currentScreenIndex) {
+        console.log(`🚀 Navigating from ${currentScreenIndex} to ${newIndex}`);
         isScrolling = true;
         lastScrollTime = now;
         isAtBoundary = false; // Reset boundary flag after navigation
@@ -219,6 +228,8 @@ function handleWheelScroll(e) {
         setTimeout(() => {
             isScrolling = false;
         }, 1500);
+    } else {
+        console.log('⛔ Already at boundary (first/last screen)');
     }
 }
 
