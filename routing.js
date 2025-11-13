@@ -146,6 +146,8 @@ function isCurrentlyAtBoundary(element, deltaY) {
 
 // Full-page scroll with mouse wheel
 function handleWheelScroll(e) {
+    console.log('🛞 Wheel event received, deltaY:', e.deltaY);
+
     const now = Date.now();
     const timeSinceLastWheel = now - lastWheelEventTime;
     const isNewGesture = timeSinceLastWheel > SCROLL_GESTURE_TIMEOUT;
@@ -155,6 +157,7 @@ function handleWheelScroll(e) {
 
     // Check if we're currently at a scroll boundary (BEFORE this scroll happens)
     const atBoundary = isCurrentlyAtBoundary(e.target, e.deltaY);
+    console.log('📍 At boundary?', atBoundary);
 
     if (!atBoundary) {
         // Not at boundary - allow normal scrolling and reset flag
@@ -294,6 +297,8 @@ function handleKeyNavigation(e) {
 
 // Initialize routing
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('🎮 Routing initialized');
+
     // Setup navigation buttons
     document.querySelectorAll('.nav-btn').forEach(btn => {
         const route = btn.getAttribute('data-route');
@@ -305,6 +310,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Add wheel scroll listener
     window.addEventListener('wheel', handleWheelScroll, { passive: false });
+    console.log('🖱️ Wheel listener attached');
 
     // Enhanced keyboard navigation
     document.addEventListener('keydown', handleKeyNavigation);
