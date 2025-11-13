@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tom Almog - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Pixel background -->
+    <div class="pixel-bg"></div>
+
+    <!-- Navigation Menu -->
+    <nav class="rpg-nav">
+        <div class="nav-content">
+            <div class="nav-title pixel-text-small">TOM ALMOG</div>
+            <div class="nav-buttons">
+                <button class="nav-btn active" onclick="showScreen('about-screen')">
+                    <span class="pixel-text-tiny">ABOUT</span>
+                </button>
+                <button class="nav-btn" onclick="showScreen('education-screen')">
+                    <span class="pixel-text-tiny">EDUCATION</span>
+                </button>
+                <button class="nav-btn" onclick="showScreen('experience-screen')">
+                    <span class="pixel-text-tiny">EXPERIENCE</span>
+                </button>
+                <button class="nav-btn" onclick="showScreen('projects-screen')">
+                    <span class="pixel-text-tiny">PROJECTS</span>
+                </button>
+                <button class="nav-btn" onclick="showScreen('skills-screen')">
+                    <span class="pixel-text-tiny">SKILLS</span>
+                </button>
+                <button class="nav-btn" onclick="showScreen('awards-screen')">
+                    <span class="pixel-text-tiny">AWARDS</span>
+                </button>
+                <button class="nav-btn" onclick="showScreen('interests-screen')">
+                    <span class="pixel-text-tiny">INTERESTS</span>
+                </button>
+                <button class="nav-btn" onclick="showScreen('contact-screen')">
+                    <span class="pixel-text-tiny">CONTACT</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Game Container -->
+    <div class="game-container">
+
+        <!-- About Screen -->
+        <section id="about-screen" class="screen active">
+            <div class="window-box">
+                <div class="window-header">
+                    <span class="pixel-text">ABOUT</span>
+                </div>
+                <div class="window-content">
+                    <div class="profile-grid">
+                        <!-- Character Sprite -->
+                        <div class="character-sprite-container">
+                            <div class="character-sprite">
+                                <!-- Add your pixel art character or photo here -->
+                                <div class="sprite-placeholder">
+                                    <span class="pixel-text-small">YOUR<br>PHOTO</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Character Info -->
+                        <div class="character-info">
+                            <h2 class="pixel-text profile-name">TOM ALMOG</h2>
+                            <p class="pixel-text-small profile-title">MATHEMATICS STUDENT</p>
+                            <p class="pixel-text-small profile-location">📍 UNIVERSITY OF WATERLOO</p>
+
+                            <div class="social-links">
+                                <a href="mailto:talmog@uwaterloo.ca" class="social-link" target="_blank">
+                                    <span class="pixel-text-tiny">✉️ EMAIL</span>
+                                </a>
+                                <a href="https://linkedin.com/in/tomalmog" class="social-link" target="_blank">
+                                    <span class="pixel-text-tiny">💼 LINKEDIN</span>
+                                </a>
+                                <a href="https://github.com/tomalmog" class="social-link" target="_blank">
+                                    <span class="pixel-text-tiny">⚙️ GITHUB</span>
+                                </a>
+                                <!-- Add more socials as needed -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- About Text Box -->
+                    <div class="dialogue-box">
+                        <div class="dialogue-text pixel-text-tiny">
+                            Hi! I'm Tom, a first-year Mathematics student at the University of Waterloo with a strong interest in machine learning and quantitative finance. I enjoy applying mathematical thinking to solve complex problems and building projects that genuinely have an impact.
+                            <br><br>
+                            Outside of programming and math, music is my biggest passion. I play the guitar and piano, and am always looking for new music to listen to. I'm also a consistent gym goer and love to play sports.
+                        </div>
+                    </div>
+
+                    <!-- Chatbot Section -->
+                    <div class="chatbot-container">
+                        <div class="chatbot-header">
+                            <span class="pixel-text-small">💬 CHAT WITH TOM</span>
+                            <button class="chatbot-toggle pixel-text-tiny" onclick="toggleChatbot()">
+                                <span id="chat-toggle-text">OPEN</span>
+                            </button>
+                        </div>
+
+                        <div class="chatbot-window" id="chatbot-window">
+                            <div class="chat-messages" id="chat-messages">
+                                <div class="chat-message bot-message">
+                                    <span class="message-icon">🤖</span>
+                                    <div class="message-content pixel-text-tiny">
+                                        Hey! I'm an AI assistant trained on Tom's portfolio. Ask me anything about his education, projects, skills, or interests!
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="chat-input-container">
+                                <input
+                                    type="text"
+                                    id="chat-input"
+                                    class="chat-input pixel-text-tiny"
+                                    placeholder="ASK ME ANYTHING..."
+                                    onkeypress="if(event.key==='Enter') sendMessage()"
+                                />
+                                <button class="chat-send-btn pixel-text-tiny" onclick="sendMessage()">
+                                    SEND
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Screen -->
+        <section id="education-screen" class="screen">
+            <div class="window-box">
+                <div class="window-header">
+                    <span class="pixel-text">EDUCATION</span>
+                </div>
+                <div class="window-content">
+
+                    <!-- Education Item Template - Copy for each degree/program -->
+                    <div class="info-card">
+                        <div class="info-card-header">
+                            <h3 class="pixel-text-small">UNIVERSITY OF WATERLOO</h3>
+                            <span class="pixel-text-tiny info-date">2024 - PRESENT</span>
+                        </div>
+                        <div class="info-card-body">
+                            <p class="pixel-text-tiny info-subtitle">Bachelor of Mathematics</p>
+                            <p class="pixel-text-tiny info-detail">• Year: First Year</p>
+                            <p class="pixel-text-tiny info-detail">• Focus: [Your specialization/interests]</p>
+                            <p class="pixel-text-tiny info-detail">• Relevant Coursework: [Add courses here]</p>
+                        </div>
+                    </div>
+
+                    <!-- Add more education items here if needed -->
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Screen -->
+        <section id="experience-screen" class="screen">
+            <div class="window-box">
+                <div class="window-header">
+                    <span class="pixel-text">EXPERIENCE</span>
+                </div>
+                <div class="window-content">
+
+                    <!-- Experience Item Template - Copy for each position -->
+                    <div class="info-card">
+                        <div class="info-card-header">
+                            <h3 class="pixel-text-small">POSITION TITLE</h3>
+                            <span class="pixel-text-tiny info-date">START - END</span>
+                        </div>
+                        <div class="info-card-body">
+                            <p class="pixel-text-tiny info-subtitle">Company Name | Location</p>
+                            <p class="pixel-text-tiny info-detail">• Describe what you did</p>
+                            <p class="pixel-text-tiny info-detail">• Key achievements and responsibilities</p>
+                            <p class="pixel-text-tiny info-detail">• Technologies used</p>
+                            <p class="pixel-text-tiny info-detail">• Impact/results</p>
+                        </div>
+                    </div>
+
+                    <!-- Example - Delete if you don't have experience yet -->
+                    <div class="info-card">
+                        <div class="info-card-header">
+                            <h3 class="pixel-text-small">NO EXPERIENCE YET?</h3>
+                        </div>
+                        <div class="info-card-body">
+                            <p class="pixel-text-tiny info-detail">That's okay! Focus on your projects and skills. You can remove this section or leave it for future updates.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Screen -->
+        <section id="projects-screen" class="screen">
+            <div class="window-box">
+                <div class="window-header">
+                    <span class="pixel-text">PROJECTS</span>
+                </div>
+                <div class="window-content">
+
+                    <!-- Project Item Template - Copy for each project -->
+                    <div class="info-card project-card">
+                        <div class="info-card-header">
+                            <h3 class="pixel-text-small">PROJECT NAME</h3>
+                            <span class="pixel-text-tiny info-date">DATE</span>
+                        </div>
+                        <div class="info-card-body">
+                            <p class="pixel-text-tiny info-detail">
+                                Brief description of your project. What problem does it solve? What did you build? What technologies did you use?
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag pixel-text-tiny">PYTHON</span>
+                                <span class="tag pixel-text-tiny">MACHINE LEARNING</span>
+                                <span class="tag pixel-text-tiny">NUMPY</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="#" class="pixel-link pixel-text-tiny" target="_blank">→ GITHUB</a>
+                                <a href="#" class="pixel-link pixel-text-tiny" target="_blank">→ DEMO</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example Project 2 -->
+                    <div class="info-card project-card">
+                        <div class="info-card-header">
+                            <h3 class="pixel-text-small">ANOTHER PROJECT</h3>
+                            <span class="pixel-text-tiny info-date">DATE</span>
+                        </div>
+                        <div class="info-card-body">
+                            <p class="pixel-text-tiny info-detail">
+                                Add your project details here. Be specific about what you accomplished and what you learned.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag pixel-text-tiny">C++</span>
+                                <span class="tag pixel-text-tiny">ALGORITHMS</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="#" class="pixel-link pixel-text-tiny" target="_blank">→ GITHUB</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add more projects by copying the info-card structure -->
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Screen -->
+        <section id="skills-screen" class="screen">
+            <div class="window-box">
+                <div class="window-header">
+                    <span class="pixel-text">SKILLS</span>
+                </div>
+                <div class="window-content">
+                    <div class="skills-grid">
+
+                        <!-- Skill Category 1 -->
+                        <div class="skill-category">
+                            <h3 class="pixel-text-small category-title">⚔️ PROGRAMMING LANGUAGES</h3>
+                            <div class="skill-items">
+                                <div class="skill-item">
+                                    <span class="skill-icon">◆</span>
+                                    <span class="pixel-text-tiny">PYTHON</span>
+                                </div>
+                                <div class="skill-item">
+                                    <span class="skill-icon">◆</span>
+                                    <span class="pixel-text-tiny">C++</span>
+                                </div>
+                                <div class="skill-item">
+                                    <span class="skill-icon">◆</span>
+                                    <span class="pixel-text-tiny">R</span>
+                                </div>
+                                <div class="skill-item">
+                                    <span class="skill-icon">◆</span>
+                                    <span class="pixel-text-tiny">SQL</span>
+                                </div>
+                                <div class="skill-item">
+                                    <span class="skill-icon">◆</span>
+                                    <span class="pixel-text-tiny">JAVASCRIPT</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Skill Category 2 -->
+                        <div class="skill-category">
+                            <h3 class="pixel-text-small category-title">🔮 MACHINE LEARNING</h3>
+                            <div class="skill-items">
+                                <div class="skill-item">
+                                    <span class="skill-icon">◆</span>
+                                    <span class="pixel-text-tiny">TENSORFLOW</span>
+                                </div>
+                                <div class="skill-item">
+                                    <span class="skill-icon">◆</span>
+                                    <span class="pixel-text-tiny">PYTORCH</span>
+                                </div>
+                                <div class="skill-item">
+                                    <span class="skill-icon">◆</span>
+                                    <span class="pixel-text-tiny">SCIKIT-LEARN</span>
+                                </div>
+                                <div class="skill-item">
+                                    <span class="skill-icon">◆</span>
+                                    <span class="pixel-text-tiny">PANDAS</span>
+                                </div>
+                                <div class="skill-item">
+                                    <span class="skill-icon">◆</span>
+                                    <span class="pixel-text-tiny">NUMPY</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Skill Category 3 -->
+                        <div class="skill-category">
+                            <h3 class="pixel-text-small category-title">📊 MATHEMATICS</h3>
+                            <div class="skill-items">
+                                <div class="skill-item">
+                                    <span class="skill-icon">◆</span>
+                                    <span class="pixel-text-tiny">LINEAR ALGEBRA</span>
+                                </div>
+                                <div class="skill-item">
+                                    <span class="skill-icon">◆</span>
+                                    <span class="pixel-text-tiny">CALCULUS</span>
+                                </div>
+                                <div class="skill-item">
+                                    <span class="skill-icon">◆</span>
+                                    <span class="pixel-text-tiny">STATISTICS</span>
+                                </div>
+                                <div class="skill-item">
+                                    <span class="skill-icon">◆</span>
+                                    <span class="pixel-text-tiny">PROBABILITY</span>
+                                </div>
+                                <div class="skill-item">
+                                    <span class="skill-icon">◆</span>
+                                    <span class="pixel-text-tiny">OPTIMIZATION</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Skill Category 4 -->
+                        <div class="skill-category">
+                            <h3 class="pixel-text-small category-title">💰 QUANTITATIVE FINANCE</h3>
+                            <div class="skill-items">
+                                <div class="skill-item">
+                                    <span class="skill-icon">◆</span>
+                                    <span class="pixel-text-tiny">FINANCIAL MODELING</span>
+                                </div>
+                                <div class="skill-item">
+                                    <span class="skill-icon">◆</span>
+                                    <span class="pixel-text-tiny">DATA ANALYSIS</span>
+                                </div>
+                                <div class="skill-item">
+                                    <span class="skill-icon">◆</span>
+                                    <span class="pixel-text-tiny">RISK ANALYSIS</span>
+                                </div>
+                                <div class="skill-item">
+                                    <span class="skill-icon">◆</span>
+                                    <span class="pixel-text-tiny">TIME SERIES</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Add more skill categories as needed -->
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Awards Screen -->
+        <section id="awards-screen" class="screen">
+            <div class="window-box">
+                <div class="window-header">
+                    <span class="pixel-text">AWARDS & ACHIEVEMENTS</span>
+                </div>
+                <div class="window-content">
+
+                    <!-- Award Item Template - Copy for each award -->
+                    <div class="info-card">
+                        <div class="info-card-header">
+                            <h3 class="pixel-text-small">AWARD/ACHIEVEMENT NAME</h3>
+                            <span class="pixel-text-tiny info-date">YEAR</span>
+                        </div>
+                        <div class="info-card-body">
+                            <p class="pixel-text-tiny info-subtitle">Organization/Competition Name</p>
+                            <p class="pixel-text-tiny info-detail">• Brief description of the achievement</p>
+                            <p class="pixel-text-tiny info-detail">• What you did to earn it</p>
+                        </div>
+                    </div>
+
+                    <!-- Example -->
+                    <div class="info-card">
+                        <div class="info-card-header">
+                            <h3 class="pixel-text-small">HACKATHON WINNER</h3>
+                            <span class="pixel-text-tiny info-date">2024</span>
+                        </div>
+                        <div class="info-card-body">
+                            <p class="pixel-text-tiny info-subtitle">Example Hackathon</p>
+                            <p class="pixel-text-tiny info-detail">• First place for [category]</p>
+                            <p class="pixel-text-tiny info-detail">• Built [project] in 24 hours</p>
+                        </div>
+                    </div>
+
+                    <!-- Add more awards by copying the info-card structure -->
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Interests Screen -->
+        <section id="interests-screen" class="screen">
+            <div class="window-box">
+                <div class="window-header">
+                    <span class="pixel-text">INTERESTS</span>
+                </div>
+                <div class="window-content">
+
+                    <div class="dialogue-box large">
+                        <div class="dialogue-text pixel-text-tiny">
+                            OUTSIDE OF PROGRAMMING AND MATH, I ENJOY:
+                        </div>
+                    </div>
+
+                    <div class="interests-grid">
+                        <!-- Interest Item Template -->
+                        <div class="interest-item">
+                            <span class="interest-icon">🎮</span>
+                            <div class="interest-content">
+                                <h4 class="pixel-text-tiny interest-title">GAMING</h4>
+                                <p class="pixel-text-tiny interest-desc">Add details about your hobby</p>
+                            </div>
+                        </div>
+
+                        <div class="interest-item">
+                            <span class="interest-icon">📚</span>
+                            <div class="interest-content">
+                                <h4 class="pixel-text-tiny interest-title">READING</h4>
+                                <p class="pixel-text-tiny interest-desc">Favorite genres or books</p>
+                            </div>
+                        </div>
+
+                        <div class="interest-item">
+                            <span class="interest-icon">🏃</span>
+                            <div class="interest-content">
+                                <h4 class="pixel-text-tiny interest-title">SPORTS/FITNESS</h4>
+                                <p class="pixel-text-tiny interest-desc">What activities you do</p>
+                            </div>
+                        </div>
+
+                        <div class="interest-item">
+                            <span class="interest-icon">🎵</span>
+                            <div class="interest-content">
+                                <h4 class="pixel-text-tiny interest-title">MUSIC</h4>
+                                <p class="pixel-text-tiny interest-desc">Instruments or genres you enjoy</p>
+                            </div>
+                        </div>
+
+                        <!-- Add more interests by copying interest-item -->
+                        <!-- Popular icons: 🎨🎬🏀⚽🎪🍳🌍✈️📷🎭 -->
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Screen -->
+        <section id="contact-screen" class="screen">
+            <div class="window-box">
+                <div class="window-header">
+                    <span class="pixel-text">CONTACT</span>
+                </div>
+                <div class="window-content">
+                    <div class="dialogue-box large">
+                        <div class="dialogue-text pixel-text-tiny">
+                            Thanks for visiting my portfolio! Feel free to reach out if you'd like to connect or discuss opportunities.
+                        </div>
+                    </div>
+
+                    <div class="contact-options">
+                        <a href="mailto:your.email@uwaterloo.ca" class="contact-item">
+                            <span class="contact-icon">✉️</span>
+                            <div class="contact-details">
+                                <div class="pixel-text-small">EMAIL</div>
+                                <div class="pixel-text-tiny">your.email@uwaterloo.ca</div>
+                            </div>
+                        </a>
+
+                        <a href="https://linkedin.com/in/yourprofile" target="_blank" class="contact-item">
+                            <span class="contact-icon">💼</span>
+                            <div class="contact-details">
+                                <div class="pixel-text-small">LINKEDIN</div>
+                                <div class="pixel-text-tiny">linkedin.com/in/yourprofile</div>
+                            </div>
+                        </a>
+
+                        <a href="https://github.com/yourusername" target="_blank" class="contact-item">
+                            <span class="contact-icon">⚙️</span>
+                            <div class="contact-details">
+                                <div class="pixel-text-small">GITHUB</div>
+                                <div class="pixel-text-tiny">github.com/yourusername</div>
+                            </div>
+                        </a>
+
+                        <!-- Add more contact methods as needed -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+    <script src="chatbot.js"></script>
+</body>
+</html>
