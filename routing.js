@@ -97,37 +97,33 @@ window.addEventListener('popstate', (e) => {
     navigateToRoute(path, false);
 });
 
-// Check if element or its parents are scrollable and not at boundary
-function isScrollableAndNotAtBoundary(element, deltaY) {
+// Check if we should allow normal scrolling (not trigger page transition)
+function shouldAllowNormalScroll(element, deltaY) {
     let currentElement = element;
 
-    while (currentElement && currentElement !== document.documentElement) {
-        // Get computed styles to check overflow
+    // Walk up the DOM tree
+    while (currentElement && currentElement !== document.body && currentElement !== document.documentElement) {
         const styles = window.getComputedStyle(currentElement);
         const overflowY = styles.overflowY;
 
-        // Check if element has scrollable overflow
-        const isScrollable = (overflowY === 'auto' || overflowY === 'scroll');
-        const hasVerticalScrollbar = currentElement.scrollHeight > currentElement.clientHeight;
+        // Check if this element is scrollable
+        const isScrollable = (overflowY === 'auto' || overflowY === 'scroll' || overflowY === 'overlay');
+        const hasScrollableContent = currentElement.scrollHeight > currentElement.clientHeight + 1;
 
-        if (isScrollable && hasVerticalScrollbar) {
-            const scrollTop = currentElement.scrollTop;
+        if (isScrollable && hasScrollableContent) {
+            const scrollTop = Math.round(currentElement.scrollTop);
             const scrollHeight = currentElement.scrollHeight;
             const clientHeight = currentElement.clientHeight;
+            const maxScroll = scrollHeight - clientHeight;
 
-            // Scrolling down (deltaY > 0)
-            if (deltaY > 0) {
-                // Not at bottom - allow normal scroll (with 2px tolerance)
-                if (scrollTop + clientHeight < scrollHeight - 2) {
-                    return true;
-                }
+            // Scrolling down (deltaY > 0) - check if not at bottom
+            if (deltaY > 0 && scrollTop < maxScroll - 3) {
+                return true;
             }
-            // Scrolling up (deltaY < 0)
-            else {
-                // Not at top - allow normal scroll (with 2px tolerance)
-                if (scrollTop > 2) {
-                    return true;
-                }
+
+            // Scrolling up (deltaY < 0) - check if not at top
+            if (deltaY < 0 && scrollTop > 3) {
+                return true;
             }
         }
 
@@ -140,13 +136,13 @@ function isScrollableAndNotAtBoundary(element, deltaY) {
 // Full-page scroll with mouse wheel
 function handleWheelScroll(e) {
     // Check if we're scrolling inside a scrollable element that hasn't reached its boundary
-    if (isScrollableAndNotAtBoundary(e.target, e.deltaY)) {
-        // Allow normal scrolling within the element
+    if (shouldAllowNormalScroll(e.target, e.deltaY)) {
+        // Allow normal scrolling within the element - don't prevent default
         return;
     }
 
+    // Only prevent default if we're actually going to do page navigation
     e.preventDefault();
-    e.stopPropagation();
 
     // Check if already scrolling
     if (isScrolling) {
@@ -163,8 +159,8 @@ function handleWheelScroll(e) {
     const delta = Math.abs(e.deltaY);
     if (delta < 10) return; // Ignore tiny movements
 
-    // Invert scroll direction: scroll down = previous, scroll up = next
-    const scrollDirection = e.deltaY > 0 ? -1 : 1;
+    // Natural scroll direction: scroll down = next, scroll up = previous
+    const scrollDirection = e.deltaY > 0 ? 1 : -1;
     let newIndex = currentScreenIndex + scrollDirection;
 
     // Clamp to valid range
@@ -259,8 +255,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Add wheel scroll listener with capture phase to ensure we catch it first
-    window.addEventListener('wheel', handleWheelScroll, { passive: false, capture: true });
+    // Add wheel scroll listener
+    window.addEventListener('wheel', handleWheelScroll, { passive: false });
 
     // Enhanced keyboard navigation
     document.addEventListener('keydown', handleKeyNavigation);
@@ -273,9 +269,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.screen').forEach(screen => {
         screen.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
     });
-
-    // Disable default scroll behavior
-    document.body.style.overflow = 'hidden';
 });
 
 console.log('🎮 Routing enabled! Use arrow keys or scroll to navigate between pages.');
