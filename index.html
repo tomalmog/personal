@@ -18,28 +18,28 @@
         <div class="nav-content">
             <div class="nav-title pixel-text-small">TOM ALMOG</div>
             <div class="nav-buttons">
-                <button class="nav-btn active" onclick="showScreen('about-screen')">
+                <button class="nav-btn active" data-route="/about">
                     <span class="pixel-text-tiny">ABOUT</span>
                 </button>
-                <button class="nav-btn" onclick="showScreen('education-screen')">
+                <button class="nav-btn" data-route="/education">
                     <span class="pixel-text-tiny">EDUCATION</span>
                 </button>
-                <button class="nav-btn" onclick="showScreen('experience-screen')">
+                <button class="nav-btn" data-route="/experience">
                     <span class="pixel-text-tiny">EXPERIENCE</span>
                 </button>
-                <button class="nav-btn" onclick="showScreen('projects-screen')">
+                <button class="nav-btn" data-route="/projects">
                     <span class="pixel-text-tiny">PROJECTS</span>
                 </button>
-                <button class="nav-btn" onclick="showScreen('skills-screen')">
+                <button class="nav-btn" data-route="/skills">
                     <span class="pixel-text-tiny">SKILLS</span>
                 </button>
-                <button class="nav-btn" onclick="showScreen('awards-screen')">
+                <button class="nav-btn" data-route="/awards">
                     <span class="pixel-text-tiny">AWARDS</span>
                 </button>
-                <button class="nav-btn" onclick="showScreen('interests-screen')">
+                <button class="nav-btn" data-route="/interests">
                     <span class="pixel-text-tiny">INTERESTS</span>
                 </button>
-                <button class="nav-btn" onclick="showScreen('contact-screen')">
+                <button class="nav-btn" data-route="/contact">
                     <span class="pixel-text-tiny">CONTACT</span>
                 </button>
             </div>
@@ -151,7 +151,7 @@
                         <div class="info-card-body">
                             <p class="pixel-text-tiny info-subtitle">Bachelor of Mathematics Co-op</p>
                             <p class="pixel-text-tiny info-detail">• Year: First Year</p>
-                            <p class="pixel-text-tiny info-detail">• Focus: Machine Learning and Quantitative Finance</p>
+                            <p class="pixel-text-tiny info-detail">• Focus: Machine Learning</p>
                             <p class="pixel-text-tiny info-detail">• Relevant Coursework: CS145 (Enriched Functional Programming), CS146 (Enriched Algorithm Design and Data Abstraction)</p>
                         </div>
                     </div>
@@ -558,6 +558,7 @@
 
     </div>
 
+    <script src="routing.js"></script>
     <script src="script.js"></script>
     <script src="chatbot.js"></script>
 </body>

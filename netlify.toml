@@ -10,5 +10,11 @@
   to = "/.netlify/functions/:splat"
   status = 200
 
+# SPA routing - serve index.html for all routes
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
 # Environment variables are set in Netlify dashboard
 # GROQ_API_KEY should be added there
