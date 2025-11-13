@@ -89,8 +89,48 @@ window.addEventListener('popstate', (e) => {
     navigateToRoute(path, false);
 });
 
+// Check if element or its parents are scrollable and not at boundary
+function isScrollableAndNotAtBoundary(element, deltaY) {
+    let currentElement = element;
+
+    while (currentElement && currentElement !== document.body) {
+        const hasVerticalScrollbar = currentElement.scrollHeight > currentElement.clientHeight;
+
+        if (hasVerticalScrollbar) {
+            const scrollTop = currentElement.scrollTop;
+            const scrollHeight = currentElement.scrollHeight;
+            const clientHeight = currentElement.clientHeight;
+
+            // Scrolling down (deltaY > 0)
+            if (deltaY > 0) {
+                // Not at bottom - allow normal scroll
+                if (scrollTop + clientHeight < scrollHeight - 1) {
+                    return true;
+                }
+            }
+            // Scrolling up (deltaY < 0)
+            else {
+                // Not at top - allow normal scroll
+                if (scrollTop > 1) {
+                    return true;
+                }
+            }
+        }
+
+        currentElement = currentElement.parentElement;
+    }
+
+    return false;
+}
+
 // Full-page scroll with mouse wheel
 function handleWheelScroll(e) {
+    // Check if we're scrolling inside a scrollable element that hasn't reached its boundary
+    if (isScrollableAndNotAtBoundary(e.target, e.deltaY)) {
+        // Allow normal scrolling within the element
+        return;
+    }
+
     e.preventDefault();
     e.stopPropagation();
 
