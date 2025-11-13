@@ -15,8 +15,10 @@ const routes = {
 let isScrolling = false;
 let currentScreenIndex = 0;
 let lastScrollTime = 0;
-let lastBoundaryTime = 0; // When we last hit the boundary
-const BOUNDARY_COOLDOWN = 200; // ms - time needed between hitting boundary and navigating
+let isAtBottomOrTop = false; // Boolean: are we at a scroll boundary?
+let scrollGestureActive = false; // Boolean: is a scroll gesture currently happening?
+let scrollGestureTimeout = null; // Timeout to detect when scroll gesture ends
+const SCROLL_GESTURE_END_DELAY = 150; // ms of no scroll events = gesture ended
 const screenOrder = [
     'about-screen',
     'education-screen',
@@ -47,8 +49,9 @@ function showScreenWithTransition(screenId, direction = 1) {
 
     if (!targetScreen) return;
 
-    // Reset boundary timer when changing screens
-    lastBoundaryTime = 0;
+    // Reset flags when changing screens
+    isAtBottomOrTop = false;
+    scrollGestureActive = false;
 
     // Direction determines animation: 1 = down/next, -1 = up/previous
     const exitTransform = direction === 1 ? 'translateY(20px)' : 'translateY(-20px)';
@@ -146,71 +149,83 @@ function isCurrentlyAtBoundary(element, deltaY) {
 function handleWheelScroll(e) {
     const now = Date.now();
 
+    // Clear any existing timeout - we got a new scroll event
+    if (scrollGestureTimeout) {
+        clearTimeout(scrollGestureTimeout);
+    }
+
+    // Set timeout to detect when scroll gesture ends (no more events)
+    scrollGestureTimeout = setTimeout(() => {
+        scrollGestureActive = false;
+    }, SCROLL_GESTURE_END_DELAY);
+
     // Check if we're currently at a scroll boundary
     const atBoundary = isCurrentlyAtBoundary(e.target, e.deltaY);
 
     if (!atBoundary) {
-        // Not at boundary - allow normal scrolling and reset boundary timer
-        lastBoundaryTime = 0;
+        // Not at boundary - allow normal scrolling
+        isAtBottomOrTop = false;
+        scrollGestureActive = true; // Mark that a gesture is happening
         return; // Let browser handle the scroll naturally
     }
 
     // We ARE at a boundary - prevent the scroll
     e.preventDefault();
 
-    // Check if this is the first time hitting the boundary
-    if (lastBoundaryTime === 0) {
-        // First time at boundary - just record the time, don't navigate yet
-        lastBoundaryTime = now;
+    // Mark gesture as active since we just got a scroll event
+    const wasGestureActive = scrollGestureActive;
+    scrollGestureActive = true;
+
+    // If gesture was already active (we just reached boundary with same gesture), just set flag
+    if (wasGestureActive && !isAtBottomOrTop) {
+        // This is the scroll that brought us to the boundary - don't navigate
+        isAtBottomOrTop = true;
         return;
     }
 
-    // We've been at the boundary before - check if enough time has passed
-    const timeSinceBoundary = now - lastBoundaryTime;
-    if (timeSinceBoundary < BOUNDARY_COOLDOWN) {
-        // Not enough time has passed - this is the same scroll gesture
-        return;
-    }
+    // If gesture was NOT active, this is a NEW scroll at the boundary - navigate!
+    if (!wasGestureActive && isAtBottomOrTop) {
+        // Check if already navigating
+        if (isScrolling) {
+            return;
+        }
 
-    // Enough time has passed - this is a NEW scroll gesture, navigate!
+        // Time-based throttle for navigation
+        if (now - lastScrollTime < 1500) {
+            return;
+        }
 
-    // Check if already navigating
-    if (isScrolling) {
-        return;
-    }
+        // Natural scroll direction: scroll down = next, scroll up = previous
+        const scrollDirection = e.deltaY > 0 ? 1 : -1;
+        let newIndex = currentScreenIndex + scrollDirection;
 
-    // Time-based throttle for navigation
-    if (now - lastScrollTime < 1500) {
-        return;
-    }
+        // Clamp to valid range
+        if (newIndex < 0) newIndex = 0;
+        if (newIndex >= screenOrder.length) newIndex = screenOrder.length - 1;
 
-    // Natural scroll direction: scroll down = next, scroll up = previous
-    const scrollDirection = e.deltaY > 0 ? 1 : -1;
-    let newIndex = currentScreenIndex + scrollDirection;
+        // Only navigate if we're actually changing screens
+        if (newIndex !== currentScreenIndex) {
+            isScrolling = true;
+            lastScrollTime = now;
+            isAtBottomOrTop = false; // Reset flag
 
-    // Clamp to valid range
-    if (newIndex < 0) newIndex = 0;
-    if (newIndex >= screenOrder.length) newIndex = screenOrder.length - 1;
+            const newScreenId = screenOrder[newIndex];
+            const newPath = getPathFromScreenId(newScreenId);
 
-    // Only navigate if we're actually changing screens
-    if (newIndex !== currentScreenIndex) {
-        isScrolling = true;
-        lastScrollTime = now;
-        lastBoundaryTime = 0; // Reset boundary timer
+            // Pass direction for animation: scrollDirection (1 = forward, -1 = backward)
+            navigateToRoute(newPath, true, scrollDirection);
 
-        const newScreenId = screenOrder[newIndex];
-        const newPath = getPathFromScreenId(newScreenId);
-
-        // Pass direction for animation: scrollDirection (1 = forward, -1 = backward)
-        navigateToRoute(newPath, true, scrollDirection);
-
-        // Reset after navigation completes
-        setTimeout(() => {
-            isScrolling = false;
-        }, 1500);
+            // Reset after navigation completes
+            setTimeout(() => {
+                isScrolling = false;
+            }, 1500);
+        } else {
+            // Can't navigate further - reset flag
+            isAtBottomOrTop = false;
+        }
     } else {
-        // Can't navigate further - reset boundary timer
-        lastBoundaryTime = 0;
+        // We're at boundary, set the flag
+        isAtBottomOrTop = true;
     }
 }
 
