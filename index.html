@@ -16,7 +16,9 @@
     <!-- Navigation Menu -->
     <nav class="rpg-nav">
         <div class="nav-content">
-            <div class="nav-title pixel-text-small">TOM ALMOG</div>
+            <a href="/" class="nav-title-link" data-route="/">
+                <div class="nav-title pixel-text-small">TOM ALMOG</div>
+            </a>
             <div class="nav-buttons">
                 <button class="nav-btn active" data-route="/about">
                     <span class="pixel-text-tiny">ABOUT</span>
@@ -45,9 +47,9 @@
             </div>
             <div class="font-selector">
                 <select id="font-select" class="font-select pixel-text-tiny">
-                    <option value="pixel">🎮 PIXEL</option>
-                    <option value="sans">📖 SANS</option>
-                    <option value="serif">📜 SERIF</option>
+                    <option value="pixel" style="font-family: 'Press Start 2P', cursive;">🎮 PIXEL</option>
+                    <option value="serif" style="font-family: Georgia, 'Times New Roman', serif;">📜 SERIF</option>
+                    <option value="sans" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">📖 SANS</option>
                 </select>
             </div>
         </div>
@@ -78,19 +80,40 @@
                         <div class="character-info">
                             <h2 class="pixel-text profile-name">TOM ALMOG</h2>
                             <p class="pixel-text-small profile-title">MATHEMATICS STUDENT</p>
-                            <p class="pixel-text-small profile-location">📍 UNIVERSITY OF WATERLOO</p>
+                            <p class="pixel-text-small profile-location">UNIVERSITY OF WATERLOO</p>
 
                             <div class="social-links">
                                 <a href="mailto:talmog@uwaterloo.ca" class="social-link" target="_blank">
-                                    <span class="pixel-text-tiny">✉️ EMAIL</span>
+                                    <span class="pixel-text-tiny">EMAIL</span>
                                 </a>
                                 <a href="https://linkedin.com/in/tomalmog" class="social-link" target="_blank">
-                                    <span class="pixel-text-tiny">💼 LINKEDIN</span>
+                                    <span class="pixel-text-tiny">LINKEDIN</span>
                                 </a>
                                 <a href="https://github.com/tomalmog" class="social-link" target="_blank">
-                                    <span class="pixel-text-tiny">⚙️ GITHUB</span>
+                                    <span class="pixel-text-tiny">GITHUB</span>
                                 </a>
                                 <!-- Add more socials as needed -->
+                            </div>
+                        </div>
+
+                        <!-- Arrow Key Visualization -->
+                        <div class="arrow-keys-container">
+                            <div class="arrow-keys-grid">
+                                <div class="arrow-key-spacer"></div>
+                                <button class="arrow-key" data-key="ArrowUp">
+                                    <span>▲</span>
+                                </button>
+                                <div class="arrow-key-spacer"></div>
+
+                                <button class="arrow-key" data-key="ArrowLeft">
+                                    <span>◀</span>
+                                </button>
+                                <button class="arrow-key" data-key="ArrowDown">
+                                    <span>▼</span>
+                                </button>
+                                <button class="arrow-key" data-key="ArrowRight">
+                                    <span>▶</span>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -107,7 +130,7 @@
                     <!-- Chatbot Section -->
                     <div class="chatbot-container">
                         <div class="chatbot-header">
-                            <span class="pixel-text-small">💬 CHAT WITH TOM</span>
+                            <span class="pixel-text-small">CHAT WITH TOM</span>
                             <button class="chatbot-toggle pixel-text-tiny" onclick="toggleChatbot()">
                                 <span id="chat-toggle-text">OPEN</span>
                             </button>
@@ -567,6 +590,7 @@
 
     <script src="font-selector.js"></script>
     <script src="routing.js"></script>
+    <script src="arrow-keys.js"></script>
     <script src="script.js"></script>
     <script src="chatbot.js"></script>
 </body>

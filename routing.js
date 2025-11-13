@@ -32,9 +32,12 @@ const screenOrder = [
 
 // Navigate to a route
 function navigateToRoute(path, pushState = true, direction = 1) {
-    const screenId = routes[path] || routes['/'];
+    // Normalize path - treat root as about
+    const normalizedPath = (path === '/' || path === '/index.html') ? '/about' : path;
+    const screenId = routes[normalizedPath] || routes['/'];
 
     if (pushState) {
+        // Push the actual path to history (keep "/" as "/")
         history.pushState({ path }, '', path);
     }
 
@@ -89,10 +92,13 @@ function showScreenWithTransition(screenId, direction = 1) {
 
 // Update active navigation button
 function updateActiveNavButton(path) {
+    // Treat root path "/" as "/about" for highlighting
+    const activePath = (path === '/' || path === '/index.html') ? '/about' : path;
+
     document.querySelectorAll('.nav-btn').forEach(btn => {
         btn.classList.remove('active');
         const btnPath = btn.getAttribute('data-route');
-        if (btnPath === path) {
+        if (btnPath === activePath) {
             btn.classList.add('active');
         }
     });
@@ -243,6 +249,15 @@ document.addEventListener('DOMContentLoaded', () => {
             navigateToRoute(route);
         });
     });
+
+    // Setup nav title link (home link)
+    const navTitleLink = document.querySelector('.nav-title-link');
+    if (navTitleLink) {
+        navTitleLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            navigateToRoute('/');
+        });
+    }
 
     // Add wheel scroll listener
     window.addEventListener('wheel', handleWheelScroll, { passive: false });

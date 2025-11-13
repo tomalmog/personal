@@ -116,32 +116,58 @@ body.font-serif .chat-input {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 2rem;
+    gap: 1rem;
+}
+
+.nav-title-link {
+    text-decoration: none;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.nav-title-link:hover .nav-title {
+    color: var(--border-color);
+    text-shadow: 0 0 10px var(--border-color);
 }
 
 .nav-title {
     color: var(--text-yellow);
     white-space: nowrap;
+    cursor: pointer;
 }
 
 .nav-buttons {
     display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
+    gap: 0.4rem;
+    flex-wrap: nowrap;
     align-items: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.nav-buttons::-webkit-scrollbar {
+    height: 0;
+    display: none;
+}
+
+@media (max-width: 1200px) {
+    .nav-buttons {
+        gap: 0.3rem;
+    }
 }
 
 .font-selector {
-    margin-left: 1rem;
+    margin-left: 0.5rem;
     display: flex;
     align-items: center;
+    flex-shrink: 0;
 }
 
 .font-select {
     background: var(--card-bg);
     color: var(--text-light);
     border: 2px solid var(--border-color);
-    padding: 0.5rem 0.75rem;
+    padding: 0.5rem 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
     appearance: none;
@@ -149,8 +175,11 @@ body.font-serif .chat-input {
     -moz-appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2316c79a' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position: right 0.5rem center;
-    padding-right: 2rem;
+    background-position: right 0.75rem center;
+    padding-right: 2.5rem;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.625rem;
+    text-transform: uppercase;
 }
 
 .font-select:hover {
@@ -167,7 +196,24 @@ body.font-serif .chat-input {
 .font-select option {
     background: var(--bg-dark);
     color: var(--text-light);
-    padding: 0.5rem;
+    padding: 0.75rem;
+    font-size: 1rem;
+}
+
+/* Font preview in options - each option uses its own font */
+.font-select option[value="pixel"] {
+    font-family: 'Press Start 2P', cursive !important;
+    font-size: 0.75rem;
+}
+
+.font-select option[value="serif"] {
+    font-family: Georgia, 'Times New Roman', serif !important;
+    font-size: 1rem;
+}
+
+.font-select option[value="sans"] {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    font-size: 1rem;
 }
 
 .nav-btn {
@@ -273,18 +319,20 @@ body.font-serif .chat-input {
     grid-template-columns: 200px 1fr;
     gap: 2rem;
     margin-bottom: 2rem;
+    position: relative;
 }
 
 .character-sprite-container {
-    text-align: center;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
 }
 
 .character-sprite {
-    width: 180px;
-    height: 180px;
+    width: 100%;
+    aspect-ratio: 1;
     border: 4px solid var(--border-color);
     background: var(--bg-dark);
-    margin: 0 auto 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -357,28 +405,14 @@ body.font-serif .chat-input {
     position: relative;
 }
 
-.dialogue-box::before {
-    content: '▶';
-    position: absolute;
-    left: 1rem;
-    top: 1rem;
-    color: var(--border-color);
-    animation: blink 1s infinite;
-}
-
 .dialogue-text {
     color: var(--text-light);
     line-height: 1.8;
-    padding-left: 1.5rem;
 }
 
 .dialogue-box.large {
     padding: 2rem;
     margin-bottom: 2rem;
-}
-
-.dialogue-box.large .dialogue-text {
-    padding-left: 2rem;
 }
 
 @keyframes blink {
@@ -610,6 +644,8 @@ body.font-serif .chat-input {
     .nav-buttons {
         justify-content: center;
         gap: 0.25rem;
+        flex-wrap: wrap;
+        overflow-x: visible;
     }
 
     .font-selector {
@@ -619,7 +655,7 @@ body.font-serif .chat-input {
 
     .font-select {
         padding: 0.4rem 0.6rem;
-        font-size: 0.6rem;
+        font-size: 0.55rem;
     }
 
     .nav-btn {
@@ -670,8 +706,8 @@ body.font-serif .chat-input {
     }
 
     .character-sprite {
-        width: 120px;
-        height: 120px;
+        width: 100%;
+        max-width: 150px;
     }
 
     .social-links {
@@ -747,6 +783,7 @@ body.font-serif .chat-input {
     margin-top: 2rem;
     border: 4px solid var(--border-color);
     background: var(--bg-dark);
+    position: relative;
 }
 
 .chatbot-header {
@@ -754,8 +791,20 @@ body.font-serif .chat-input {
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
+    padding-left: 3rem;
     background: var(--card-bg);
     border-bottom: 2px solid var(--border-dark);
+    position: relative;
+}
+
+.chatbot-header::before {
+    content: '▶';
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--border-color);
+    animation: blink 1s infinite;
 }
 
 .chatbot-header span {
@@ -935,5 +984,110 @@ body.font-serif .chat-input {
 
     .chat-send-btn {
         width: 100%;
+    }
+}
+
+/* Arrow Key Visualization */
+.arrow-keys-container {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.arrow-keys-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 2.875rem);
+    grid-template-rows: repeat(2, 2.875rem);
+    gap: 0.25rem;
+    padding: 0.5rem;
+    background: var(--bg-dark);
+    border: 3px solid var(--border-dark);
+    border-radius: 4px;
+}
+
+.arrow-key {
+    width: 2.875rem;
+    height: 2.875rem;
+    background: var(--card-bg);
+    border: 3px solid var(--border-dark);
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-size: 1.2rem;
+    box-shadow: 0 3px 0 var(--border-dark);
+    position: relative;
+}
+
+.arrow-key span {
+    display: block;
+    line-height: 1;
+}
+
+.arrow-key:hover {
+    border-color: var(--border-color);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 0 var(--border-dark);
+}
+
+.arrow-key:active,
+.arrow-key.pressed {
+    background: var(--border-color);
+    color: var(--bg-darker);
+    transform: translateY(3px);
+    box-shadow: 0 0 0 var(--border-dark);
+    border-color: var(--border-color);
+}
+
+.arrow-key.pressed {
+    animation: keyPress 0.2s ease forwards;
+}
+
+@keyframes keyPress {
+    0% {
+        background: var(--card-bg);
+        color: var(--text-light);
+        transform: translateY(0);
+    }
+    100% {
+        background: var(--border-color);
+        color: var(--bg-darker);
+        transform: translateY(3px);
+        box-shadow: 0 0 0 var(--border-dark);
+        border-color: var(--border-color);
+    }
+}
+
+.arrow-key-spacer {
+    width: 2.875rem;
+    height: 2.875rem;
+}
+
+/* Hide arrow keys on all screens except About */
+section:not(#about-screen) .arrow-keys-container {
+    display: none;
+}
+
+/* Responsive arrow keys */
+@media (max-width: 768px) {
+    .arrow-keys-container {
+        position: static;
+        margin-top: 1rem;
+    }
+
+    .arrow-keys-grid {
+        grid-template-columns: repeat(3, 2.5rem);
+        grid-template-rows: repeat(2, 2.5rem);
+        gap: 0.2rem;
+        padding: 0.4rem;
+    }
+
+    .arrow-key,
+    .arrow-key-spacer {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1rem;
     }
 }
