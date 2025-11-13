@@ -15,11 +15,8 @@ const routes = {
 let isScrolling = false;
 let currentScreenIndex = 0;
 let lastScrollTime = 0;
-let isAtBoundary = false; // Track if we're at a scroll boundary
-let lastWheelEventTime = 0; // Track for detecting new scroll gestures
-let boundaryScrollAccumulator = 0; // Accumulate scroll at boundary
-const SCROLL_GESTURE_TIMEOUT = 150; // ms gap to consider a new scroll gesture
-const NAVIGATION_SCROLL_THRESHOLD = 50; // Total accumulated scroll needed to navigate
+let lastBoundaryTime = 0; // When we last hit the boundary
+const BOUNDARY_COOLDOWN = 200; // ms - time needed between hitting boundary and navigating
 const screenOrder = [
     'about-screen',
     'education-screen',
@@ -50,8 +47,8 @@ function showScreenWithTransition(screenId, direction = 1) {
 
     if (!targetScreen) return;
 
-    // Reset boundary flag when changing screens
-    isAtBoundary = false;
+    // Reset boundary timer when changing screens
+    lastBoundaryTime = 0;
 
     // Direction determines animation: 1 = down/next, -1 = up/previous
     const exitTransform = direction === 1 ? 'translateY(20px)' : 'translateY(-20px)';
@@ -148,46 +145,34 @@ function isCurrentlyAtBoundary(element, deltaY) {
 // Full-page scroll with mouse wheel
 function handleWheelScroll(e) {
     const now = Date.now();
-    const timeSinceLastWheel = now - lastWheelEventTime;
-    const isNewGesture = timeSinceLastWheel > SCROLL_GESTURE_TIMEOUT;
 
-    // Update last wheel event time
-    lastWheelEventTime = now;
-
-    // Check if we're currently at a scroll boundary (BEFORE this scroll happens)
+    // Check if we're currently at a scroll boundary
     const atBoundary = isCurrentlyAtBoundary(e.target, e.deltaY);
 
     if (!atBoundary) {
-        // Not at boundary - allow normal scrolling and reset everything
-        isAtBoundary = false;
-        boundaryScrollAccumulator = 0;
+        // Not at boundary - allow normal scrolling and reset boundary timer
+        lastBoundaryTime = 0;
         return; // Let browser handle the scroll naturally
     }
 
-    // We ARE at a boundary
-    e.preventDefault(); // Always prevent scroll at boundary
+    // We ARE at a boundary - prevent the scroll
+    e.preventDefault();
 
-    // If this is a new gesture, reset accumulator
-    if (isNewGesture) {
-        boundaryScrollAccumulator = 0;
-    }
-
-    // If flag is not set yet, set it and return (don't navigate yet)
-    if (!isAtBoundary) {
-        isAtBoundary = true;
-        boundaryScrollAccumulator = 0;
+    // Check if this is the first time hitting the boundary
+    if (lastBoundaryTime === 0) {
+        // First time at boundary - just record the time, don't navigate yet
+        lastBoundaryTime = now;
         return;
     }
 
-    // Accumulate scroll while at boundary
-    boundaryScrollAccumulator += Math.abs(e.deltaY);
-
-    // Check if we've accumulated enough scroll to navigate
-    if (boundaryScrollAccumulator < NAVIGATION_SCROLL_THRESHOLD) {
-        return; // Not enough yet
+    // We've been at the boundary before - check if enough time has passed
+    const timeSinceBoundary = now - lastBoundaryTime;
+    if (timeSinceBoundary < BOUNDARY_COOLDOWN) {
+        // Not enough time has passed - this is the same scroll gesture
+        return;
     }
 
-    // We've accumulated enough scroll - navigate!
+    // Enough time has passed - this is a NEW scroll gesture, navigate!
 
     // Check if already navigating
     if (isScrolling) {
@@ -211,8 +196,7 @@ function handleWheelScroll(e) {
     if (newIndex !== currentScreenIndex) {
         isScrolling = true;
         lastScrollTime = now;
-        isAtBoundary = false; // Reset boundary flag after navigation
-        boundaryScrollAccumulator = 0; // Reset accumulator
+        lastBoundaryTime = 0; // Reset boundary timer
 
         const newScreenId = screenOrder[newIndex];
         const newPath = getPathFromScreenId(newScreenId);
@@ -225,7 +209,8 @@ function handleWheelScroll(e) {
             isScrolling = false;
         }, 1500);
     } else {
-        boundaryScrollAccumulator = 0; // Reset since we can't navigate
+        // Can't navigate further - reset boundary timer
+        lastBoundaryTime = 0;
     }
 }
 
