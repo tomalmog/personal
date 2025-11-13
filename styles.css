@@ -32,6 +32,8 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     padding-top: var(--nav-height);
+    overscroll-behavior-x: none;
+    overscroll-behavior-y: none;
 }
 
 /* Increase readability with larger text */
@@ -244,6 +246,7 @@ body.font-serif .chat-input {
     margin: 0 auto;
     padding: 1rem 2rem 2rem 2rem;
     min-height: calc(100vh - var(--nav-height));
+    overscroll-behavior: none;
 }
 
 /* Screen Management */
@@ -254,6 +257,7 @@ body.font-serif .chat-input {
     overflow-y: auto;
     overflow-x: hidden;
     outline: none;
+    overscroll-behavior: none;
 }
 
 .screen.active {

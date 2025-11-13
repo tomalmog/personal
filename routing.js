@@ -122,8 +122,9 @@ function handleWheelScroll(e) {
         return; // Allow normal vertical scrolling
     }
 
-    // We have horizontal scrolling - prevent default and handle navigation
+    // We have horizontal scrolling - prevent default immediately to block browser navigation
     e.preventDefault();
+    e.stopPropagation();
 
     // Reset accumulator if too much time has passed (new gesture)
     if (now - lastHorizontalScrollTime > HORIZONTAL_SCROLL_RESET_TIME) {
