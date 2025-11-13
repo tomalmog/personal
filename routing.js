@@ -101,8 +101,8 @@ window.addEventListener('popstate', (e) => {
     navigateToRoute(path, false);
 });
 
-// Check if we should allow normal scrolling (not trigger page transition)
-function shouldAllowNormalScroll(element, deltaY) {
+// Check if element is currently at a scroll boundary
+function isCurrentlyAtBoundary(element, deltaY) {
     let currentElement = element;
 
     // Walk up the DOM tree
@@ -120,41 +120,47 @@ function shouldAllowNormalScroll(element, deltaY) {
             const clientHeight = currentElement.clientHeight;
             const maxScroll = scrollHeight - clientHeight;
 
-            // Scrolling down (deltaY > 0) - check if not at bottom
-            if (deltaY > 0 && scrollTop < maxScroll - 3) {
-                return true;
+            // Scrolling down (deltaY > 0) - check if at bottom
+            if (deltaY > 0 && scrollTop >= maxScroll - 3) {
+                return true; // At bottom boundary
             }
 
-            // Scrolling up (deltaY < 0) - check if not at top
-            if (deltaY < 0 && scrollTop > 3) {
-                return true;
+            // Scrolling up (deltaY < 0) - check if at top
+            if (deltaY < 0 && scrollTop <= 3) {
+                return true; // At top boundary
             }
+
+            // Not at boundary - still can scroll
+            return false;
         }
 
         currentElement = currentElement.parentElement;
     }
 
-    return false;
+    // No scrollable element found - we're at page boundary
+    return true;
 }
 
 // Full-page scroll with mouse wheel
 function handleWheelScroll(e) {
-    // Check if we're scrolling inside a scrollable element that hasn't reached its boundary
-    if (shouldAllowNormalScroll(e.target, e.deltaY)) {
-        // Allow normal scrolling within the element - reset boundary flag
+    // Check if we're currently at a scroll boundary (BEFORE this scroll happens)
+    const atBoundary = isCurrentlyAtBoundary(e.target, e.deltaY);
+
+    if (!atBoundary) {
+        // Not at boundary - allow normal scrolling and reset flag
         isAtBoundary = false;
-        return;
+        return; // Let browser handle the scroll naturally
     }
 
-    // We've reached a boundary - but was this the scroll that reached it, or a new scroll?
+    // We ARE at a boundary - check if this is a new scroll action
     if (!isAtBoundary) {
-        // This is the first scroll at the boundary - don't navigate yet
+        // First scroll at boundary - just set the flag, don't navigate
         isAtBoundary = true;
-        e.preventDefault();
+        e.preventDefault(); // Prevent scroll since we're at boundary
         return;
     }
 
-    // We were already at the boundary and user scrolled again - now we can navigate
+    // We were ALREADY at the boundary and user scrolled again - this is a unique action!
     e.preventDefault();
 
     // Check if already scrolling
