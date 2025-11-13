@@ -15,10 +15,10 @@ const routes = {
 let isScrolling = false;
 let currentScreenIndex = 0;
 let lastScrollTime = 0;
-let isAtBottomOrTop = false; // Boolean: are we at a scroll boundary?
-let scrollGestureActive = false; // Boolean: is a scroll gesture currently happening?
-let scrollGestureTimeout = null; // Timeout to detect when scroll gesture ends
-const SCROLL_GESTURE_END_DELAY = 150; // ms of no scroll events = gesture ended
+let horizontalScrollAccumulator = 0;
+let lastHorizontalScrollTime = 0;
+const HORIZONTAL_SCROLL_THRESHOLD = 50; // Pixels needed to trigger navigation
+const HORIZONTAL_SCROLL_RESET_TIME = 200; // Reset accumulator after this many ms
 const screenOrder = [
     'about-screen',
     'education-screen',
@@ -49,9 +49,8 @@ function showScreenWithTransition(screenId, direction = 1) {
 
     if (!targetScreen) return;
 
-    // Reset flags when changing screens
-    isAtBottomOrTop = false;
-    scrollGestureActive = false;
+    // Reset accumulator when changing screens
+    horizontalScrollAccumulator = 0;
 
     // Direction determines animation: 1 = down/next, -1 = up/previous
     const exitTransform = direction === 1 ? 'translateY(20px)' : 'translateY(-20px)';
@@ -105,127 +104,73 @@ window.addEventListener('popstate', (e) => {
     navigateToRoute(path, false);
 });
 
-// Check if element is currently at a scroll boundary
-function isCurrentlyAtBoundary(element, deltaY) {
-    let currentElement = element;
-
-    // Walk up the DOM tree
-    while (currentElement && currentElement !== document.body && currentElement !== document.documentElement) {
-        const styles = window.getComputedStyle(currentElement);
-        const overflowY = styles.overflowY;
-
-        // Check if this element is scrollable
-        const isScrollable = (overflowY === 'auto' || overflowY === 'scroll' || overflowY === 'overlay');
-        const hasScrollableContent = currentElement.scrollHeight > currentElement.clientHeight + 1;
-
-        if (isScrollable && hasScrollableContent) {
-            const scrollTop = Math.round(currentElement.scrollTop);
-            const scrollHeight = currentElement.scrollHeight;
-            const clientHeight = currentElement.clientHeight;
-            const maxScroll = scrollHeight - clientHeight;
-
-            // Scrolling down (deltaY > 0) - check if at bottom
-            if (deltaY > 0 && scrollTop >= maxScroll - 3) {
-                return true; // At bottom boundary
-            }
-
-            // Scrolling up (deltaY < 0) - check if at top
-            if (deltaY < 0 && scrollTop <= 3) {
-                return true; // At top boundary
-            }
-
-            // Not at boundary - still can scroll
-            return false;
-        }
-
-        currentElement = currentElement.parentElement;
-    }
-
-    // No scrollable element found - we're at page boundary
-    return true;
-}
-
-// Full-page scroll with mouse wheel
+// Horizontal scroll/swipe navigation with mouse wheel
 function handleWheelScroll(e) {
     const now = Date.now();
 
-    // Clear any existing timeout - we got a new scroll event
-    if (scrollGestureTimeout) {
-        clearTimeout(scrollGestureTimeout);
+    // Check if there's horizontal scroll component (trackpad swipe or shift+scroll)
+    const horizontalDelta = e.deltaX;
+
+    // If no horizontal scroll, let default vertical scrolling happen
+    if (Math.abs(horizontalDelta) < 5) {
+        return; // Allow normal vertical scrolling
     }
 
-    // Set timeout to detect when scroll gesture ends (no more events)
-    scrollGestureTimeout = setTimeout(() => {
-        scrollGestureActive = false;
-    }, SCROLL_GESTURE_END_DELAY);
-
-    // Check if we're currently at a scroll boundary
-    const atBoundary = isCurrentlyAtBoundary(e.target, e.deltaY);
-
-    if (!atBoundary) {
-        // Not at boundary - allow normal scrolling
-        isAtBottomOrTop = false;
-        scrollGestureActive = true; // Mark that a gesture is happening
-        return; // Let browser handle the scroll naturally
-    }
-
-    // We ARE at a boundary - prevent the scroll
+    // We have horizontal scrolling - prevent default and handle navigation
     e.preventDefault();
 
-    // Mark gesture as active since we just got a scroll event
-    const wasGestureActive = scrollGestureActive;
-    scrollGestureActive = true;
+    // Reset accumulator if too much time has passed (new gesture)
+    if (now - lastHorizontalScrollTime > HORIZONTAL_SCROLL_RESET_TIME) {
+        horizontalScrollAccumulator = 0;
+    }
 
-    // If gesture was already active (we just reached boundary with same gesture), just set flag
-    if (wasGestureActive && !isAtBottomOrTop) {
-        // This is the scroll that brought us to the boundary - don't navigate
-        isAtBottomOrTop = true;
+    lastHorizontalScrollTime = now;
+
+    // Accumulate horizontal scroll
+    horizontalScrollAccumulator += horizontalDelta;
+
+    // Check if we've accumulated enough to navigate
+    if (Math.abs(horizontalScrollAccumulator) < HORIZONTAL_SCROLL_THRESHOLD) {
+        return; // Not enough yet
+    }
+
+    // Check if already navigating
+    if (isScrolling) {
         return;
     }
 
-    // If gesture was NOT active, this is a NEW scroll at the boundary - navigate!
-    if (!wasGestureActive && isAtBottomOrTop) {
-        // Check if already navigating
-        if (isScrolling) {
-            return;
-        }
+    // Time-based throttle for navigation
+    if (now - lastScrollTime < 1000) {
+        return;
+    }
 
-        // Time-based throttle for navigation
-        if (now - lastScrollTime < 1500) {
-            return;
-        }
+    // Determine direction: positive deltaX = swipe left = next, negative = previous
+    const scrollDirection = horizontalScrollAccumulator > 0 ? 1 : -1;
+    let newIndex = currentScreenIndex + scrollDirection;
 
-        // Natural scroll direction: scroll down = next, scroll up = previous
-        const scrollDirection = e.deltaY > 0 ? 1 : -1;
-        let newIndex = currentScreenIndex + scrollDirection;
+    // Clamp to valid range
+    if (newIndex < 0) newIndex = 0;
+    if (newIndex >= screenOrder.length) newIndex = screenOrder.length - 1;
 
-        // Clamp to valid range
-        if (newIndex < 0) newIndex = 0;
-        if (newIndex >= screenOrder.length) newIndex = screenOrder.length - 1;
+    // Only navigate if we're actually changing screens
+    if (newIndex !== currentScreenIndex) {
+        isScrolling = true;
+        lastScrollTime = now;
+        horizontalScrollAccumulator = 0; // Reset accumulator
 
-        // Only navigate if we're actually changing screens
-        if (newIndex !== currentScreenIndex) {
-            isScrolling = true;
-            lastScrollTime = now;
-            isAtBottomOrTop = false; // Reset flag
+        const newScreenId = screenOrder[newIndex];
+        const newPath = getPathFromScreenId(newScreenId);
 
-            const newScreenId = screenOrder[newIndex];
-            const newPath = getPathFromScreenId(newScreenId);
+        // Pass direction for animation: scrollDirection (1 = forward, -1 = backward)
+        navigateToRoute(newPath, true, scrollDirection);
 
-            // Pass direction for animation: scrollDirection (1 = forward, -1 = backward)
-            navigateToRoute(newPath, true, scrollDirection);
-
-            // Reset after navigation completes
-            setTimeout(() => {
-                isScrolling = false;
-            }, 1500);
-        } else {
-            // Can't navigate further - reset flag
-            isAtBottomOrTop = false;
-        }
+        // Reset after navigation completes
+        setTimeout(() => {
+            isScrolling = false;
+        }, 1000);
     } else {
-        // We're at boundary, set the flag
-        isAtBottomOrTop = true;
+        // Can't navigate further - reset accumulator
+        horizontalScrollAccumulator = 0;
     }
 }
 
@@ -305,9 +250,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Enhanced keyboard navigation
     document.addEventListener('keydown', handleKeyNavigation);
 
-    // Initial route
+    // Initial route - handle root and /about as same
     const initialPath = window.location.pathname;
-    navigateToRoute(initialPath, false);
+    const routePath = (initialPath === '/' || initialPath === '/index.html') ? '/about' : initialPath;
+    navigateToRoute(routePath, false);
 
     // Add smooth transitions to screens
     document.querySelectorAll('.screen').forEach(screen => {
@@ -315,4 +261,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-console.log('🎮 Routing enabled! Use arrow keys or scroll to navigate between pages.');
+console.log('🎮 Routing enabled! Use arrow keys or horizontal swipe to navigate between pages.');

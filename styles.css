@@ -129,7 +129,7 @@ body {
 .game-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 1rem 2rem 2rem 2rem;
     min-height: calc(100vh - var(--nav-height));
 }
 
@@ -140,6 +140,7 @@ body {
     height: calc(100vh - var(--nav-height));
     overflow-y: auto;
     overflow-x: hidden;
+    outline: none;
 }
 
 .screen.active {
