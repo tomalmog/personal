@@ -15,6 +15,7 @@ const routes = {
 let isScrolling = false;
 let currentScreenIndex = 0;
 let lastScrollTime = 0;
+let isAtBoundary = false; // Track if we're at a scroll boundary
 const screenOrder = [
     'about-screen',
     'education-screen',
@@ -44,6 +45,9 @@ function showScreenWithTransition(screenId, direction = 1) {
     const targetScreen = document.getElementById(screenId);
 
     if (!targetScreen) return;
+
+    // Reset boundary flag when changing screens
+    isAtBoundary = false;
 
     // Direction determines animation: 1 = down/next, -1 = up/previous
     const exitTransform = direction === 1 ? 'translateY(20px)' : 'translateY(-20px)';
@@ -137,11 +141,20 @@ function shouldAllowNormalScroll(element, deltaY) {
 function handleWheelScroll(e) {
     // Check if we're scrolling inside a scrollable element that hasn't reached its boundary
     if (shouldAllowNormalScroll(e.target, e.deltaY)) {
-        // Allow normal scrolling within the element - don't prevent default
+        // Allow normal scrolling within the element - reset boundary flag
+        isAtBoundary = false;
         return;
     }
 
-    // Only prevent default if we're actually going to do page navigation
+    // We've reached a boundary - but was this the scroll that reached it, or a new scroll?
+    if (!isAtBoundary) {
+        // This is the first scroll at the boundary - don't navigate yet
+        isAtBoundary = true;
+        e.preventDefault();
+        return;
+    }
+
+    // We were already at the boundary and user scrolled again - now we can navigate
     e.preventDefault();
 
     // Check if already scrolling
@@ -171,6 +184,7 @@ function handleWheelScroll(e) {
     if (newIndex !== currentScreenIndex) {
         isScrolling = true;
         lastScrollTime = now;
+        isAtBoundary = false; // Reset boundary flag after navigation
 
         const newScreenId = screenOrder[newIndex];
         const newPath = getPathFromScreenId(newScreenId);
