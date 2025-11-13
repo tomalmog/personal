@@ -27,29 +27,33 @@ const screenOrder = [
 ];
 
 // Navigate to a route
-function navigateToRoute(path, pushState = true) {
+function navigateToRoute(path, pushState = true, direction = 1) {
     const screenId = routes[path] || routes['/'];
 
     if (pushState) {
         history.pushState({ path }, '', path);
     }
 
-    showScreenWithTransition(screenId);
+    showScreenWithTransition(screenId, direction);
     updateActiveNavButton(path);
 }
 
 // Show screen with smooth transition
-function showScreenWithTransition(screenId) {
+function showScreenWithTransition(screenId, direction = 1) {
     const allScreens = document.querySelectorAll('.screen');
     const targetScreen = document.getElementById(screenId);
 
     if (!targetScreen) return;
 
-    // Fade out current screen
+    // Direction determines animation: 1 = down/next, -1 = up/previous
+    const exitTransform = direction === 1 ? 'translateY(20px)' : 'translateY(-20px)';
+    const enterTransform = direction === 1 ? 'translateY(-20px)' : 'translateY(20px)';
+
+    // Fade out current screen with directional movement
     allScreens.forEach(screen => {
         if (screen.classList.contains('active')) {
             screen.style.opacity = '0';
-            screen.style.transform = 'translateY(20px)';
+            screen.style.transform = exitTransform;
         }
     });
 
@@ -61,14 +65,18 @@ function showScreenWithTransition(screenId) {
         // Update current index
         currentScreenIndex = screenOrder.indexOf(screenId);
 
+        // Set initial position for fade in (opposite direction)
+        targetScreen.style.opacity = '0';
+        targetScreen.style.transform = enterTransform;
+
+        // Scroll new screen to top
+        targetScreen.scrollTop = 0;
+
         // Fade in new screen
         setTimeout(() => {
             targetScreen.style.opacity = '1';
             targetScreen.style.transform = 'translateY(0)';
         }, 50);
-
-        // Scroll to top
-        window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 300);
 }
 
@@ -93,25 +101,31 @@ window.addEventListener('popstate', (e) => {
 function isScrollableAndNotAtBoundary(element, deltaY) {
     let currentElement = element;
 
-    while (currentElement && currentElement !== document.body) {
+    while (currentElement && currentElement !== document.documentElement) {
+        // Get computed styles to check overflow
+        const styles = window.getComputedStyle(currentElement);
+        const overflowY = styles.overflowY;
+
+        // Check if element has scrollable overflow
+        const isScrollable = (overflowY === 'auto' || overflowY === 'scroll');
         const hasVerticalScrollbar = currentElement.scrollHeight > currentElement.clientHeight;
 
-        if (hasVerticalScrollbar) {
+        if (isScrollable && hasVerticalScrollbar) {
             const scrollTop = currentElement.scrollTop;
             const scrollHeight = currentElement.scrollHeight;
             const clientHeight = currentElement.clientHeight;
 
             // Scrolling down (deltaY > 0)
             if (deltaY > 0) {
-                // Not at bottom - allow normal scroll
-                if (scrollTop + clientHeight < scrollHeight - 1) {
+                // Not at bottom - allow normal scroll (with 2px tolerance)
+                if (scrollTop + clientHeight < scrollHeight - 2) {
                     return true;
                 }
             }
             // Scrolling up (deltaY < 0)
             else {
-                // Not at top - allow normal scroll
-                if (scrollTop > 1) {
+                // Not at top - allow normal scroll (with 2px tolerance)
+                if (scrollTop > 2) {
                     return true;
                 }
             }
@@ -164,7 +178,9 @@ function handleWheelScroll(e) {
 
         const newScreenId = screenOrder[newIndex];
         const newPath = getPathFromScreenId(newScreenId);
-        navigateToRoute(newPath);
+
+        // Pass direction for animation: scrollDirection (1 = forward, -1 = backward)
+        navigateToRoute(newPath, true, scrollDirection);
 
         // Reset after navigation completes
         setTimeout(() => {
@@ -188,6 +204,7 @@ function handleKeyNavigation(e) {
     if (isScrolling) return;
 
     let newIndex = currentScreenIndex;
+    let direction = 1;
 
     switch(e.key) {
         case 'ArrowRight':
@@ -195,6 +212,7 @@ function handleKeyNavigation(e) {
         case 'PageDown':
             if (currentScreenIndex < screenOrder.length - 1) {
                 newIndex = currentScreenIndex + 1;
+                direction = 1;
             }
             break;
         case 'ArrowLeft':
@@ -202,13 +220,16 @@ function handleKeyNavigation(e) {
         case 'PageUp':
             if (currentScreenIndex > 0) {
                 newIndex = currentScreenIndex - 1;
+                direction = -1;
             }
             break;
         case 'Home':
             newIndex = 0;
+            direction = -1;
             break;
         case 'End':
             newIndex = screenOrder.length - 1;
+            direction = 1;
             break;
         default:
             return;
@@ -219,7 +240,7 @@ function handleKeyNavigation(e) {
         isScrolling = true;
         const newScreenId = screenOrder[newIndex];
         const newPath = getPathFromScreenId(newScreenId);
-        navigateToRoute(newPath);
+        navigateToRoute(newPath, true, direction);
 
         setTimeout(() => {
             isScrolling = false;

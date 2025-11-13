@@ -137,6 +137,8 @@ body {
 .screen {
     display: none;
     animation: fadeIn 0.5s ease-in;
+    max-height: calc(100vh - var(--nav-height));
+    overflow-y: auto;
 }
 
 .screen.active {
