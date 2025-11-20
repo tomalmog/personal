@@ -6,9 +6,6 @@ const routes = {
     '/education': 'education-screen',
     '/experience': 'experience-screen',
     '/projects': 'projects-screen',
-    '/skills': 'skills-screen',
-    '/awards': 'awards-screen',
-    '/interests': 'interests-screen',
     '/contact': 'contact-screen'
 };
 
@@ -24,9 +21,6 @@ const screenOrder = [
     'education-screen',
     'experience-screen',
     'projects-screen',
-    'skills-screen',
-    'awards-screen',
-    'interests-screen',
     'contact-screen'
 ];
 
