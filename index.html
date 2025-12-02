@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <!-- Pixel background -->
     <div class="pixel-bg"></div>
@@ -40,7 +42,8 @@
                 <select id="font-select" class="font-select pixel-text-tiny">
                     <option value="pixel" style="font-family: 'Press Start 2P', cursive;">🎮 PIXEL</option>
                     <option value="serif" style="font-family: Georgia, 'Times New Roman', serif;">📜 SERIF</option>
-                    <option value="sans" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">📖 SANS</option>
+                    <option value="sans"
+                        style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">📖 SANS</option>
                 </select>
             </div>
         </div>
@@ -60,10 +63,7 @@
                         <!-- Character Sprite -->
                         <div class="character-sprite-container">
                             <div class="character-sprite">
-                                <!-- Add your pixel art character or photo here -->
-                                <div class="sprite-placeholder">
-                                    <span class="pixel-text-small">YOUR<br>PHOTO</span>
-                                </div>
+                                <img src="images/profile.jpeg" alt="Tom Almog Profile Photo" class="profile-photo">
                             </div>
                         </div>
 
@@ -112,9 +112,13 @@
                     <!-- About Text Box -->
                     <div class="dialogue-box">
                         <div class="dialogue-text pixel-text-tiny">
-                            Hi! I'm Tom, a first-year Mathematics student at the University of Waterloo with a strong interest in machine learning and quantitative finance. I enjoy applying mathematical thinking to solve complex problems and building projects that genuinely have an impact.
+                            Hi! I'm Tom, a first-year Mathematics student at the University of Waterloo with a strong
+                            interest in machine learning and quantitative finance. I enjoy applying mathematical
+                            thinking to solve complex problems and building projects that genuinely have an impact.
                             <br><br>
-                            Outside of programming and math, music is my biggest passion. I play the guitar and piano, and am always looking for new music to listen to. I'm also a consistent gym goer and love to play sports.
+                            Outside of programming and math, music is my biggest passion. I play the guitar and piano,
+                            and am always looking for new music to listen to. I'm also a consistent gym goer and love to
+                            play sports.
                         </div>
                     </div>
 
@@ -132,19 +136,16 @@
                                 <div class="chat-message bot-message">
                                     <span class="message-icon">🤖</span>
                                     <div class="message-content pixel-text-tiny">
-                                        Hey! I'm an AI assistant trained on Tom's portfolio. Ask me anything about his education, experience, or projects!
+                                        Hey! I'm an AI assistant trained on Tom's portfolio. Ask me anything about his
+                                        education, experience, or projects!
                                     </div>
                                 </div>
                             </div>
 
                             <div class="chat-input-container">
-                                <input
-                                    type="text"
-                                    id="chat-input"
-                                    class="chat-input pixel-text-tiny"
+                                <input type="text" id="chat-input" class="chat-input pixel-text-tiny"
                                     placeholder="ASK ME ANYTHING..."
-                                    onkeypress="if(event.key==='Enter') sendMessage()"
-                                />
+                                    onkeypress="if(event.key==='Enter') sendMessage()" />
                                 <button class="chat-send-btn pixel-text-tiny" onclick="sendMessage()">
                                     SEND
                                 </button>
@@ -173,7 +174,8 @@
                             <p class="pixel-text-tiny info-subtitle">Bachelor of Mathematics Co-op</p>
                             <p class="pixel-text-tiny info-detail">• Year: First Year</p>
                             <p class="pixel-text-tiny info-detail">• Focus: Machine Learning</p>
-                            <p class="pixel-text-tiny info-detail">• Relevant Coursework: CS145 (Enriched Functional Programming), CS146 (Enriched Algorithm Design and Data Abstraction)</p>
+                            <p class="pixel-text-tiny info-detail">• Relevant Coursework: CS145 (Enriched Functional
+                                Programming), CS146 (Enriched Algorithm Design and Data Abstraction)</p>
                         </div>
                     </div>
 
@@ -198,11 +200,17 @@
                             <span class="pixel-text-tiny info-date">SEPT 2025 - PRESENT</span>
                         </div>
                         <div class="info-card-body">
-                            <p class="pixel-text-tiny info-subtitle">Wat.AI | Deep Learning, Medical Imaging, Explainable AI</p>
-                            <p class="pixel-text-tiny info-detail">• Contributing to SEE-DR, a mobile AI system for early detection of diabetic retinopathy using CNN-based image segmentation and classification on retinal scans</p>
-                            <p class="pixel-text-tiny info-detail">• Implementing Grad-CAM to generate interpretable heatmaps highlighting clinically relevant regions</p>
-                            <p class="pixel-text-tiny info-detail">• Preparing and preprocessing large-scale image datasets for model training</p>
-                            <p class="pixel-text-tiny info-detail">• Collaborating on model deployment pipelines using TensorFlow Lite and ONNX Runtime for mobile platforms</p>
+                            <p class="pixel-text-tiny info-subtitle">Wat.AI | Deep Learning, Medical Imaging,
+                                Explainable AI</p>
+                            <p class="pixel-text-tiny info-detail">• Contributing to SEE-DR, a mobile AI system for
+                                early detection of diabetic retinopathy using CNN-based image segmentation and
+                                classification on retinal scans</p>
+                            <p class="pixel-text-tiny info-detail">• Implementing Grad-CAM to generate interpretable
+                                heatmaps highlighting clinically relevant regions</p>
+                            <p class="pixel-text-tiny info-detail">• Preparing and preprocessing large-scale image
+                                datasets for model training</p>
+                            <p class="pixel-text-tiny info-detail">• Collaborating on model deployment pipelines using
+                                TensorFlow Lite and ONNX Runtime for mobile platforms</p>
                         </div>
                     </div>
 
@@ -213,10 +221,14 @@
                             <span class="pixel-text-tiny info-date">SEPT 2025 - PRESENT</span>
                         </div>
                         <div class="info-card-body">
-                            <p class="pixel-text-tiny info-subtitle">Waterloo Aerial Robotics Group | Machine Learning, Computer Vision, UAV Autonomy</p>
-                            <p class="pixel-text-tiny info-detail">• Training deep learning models for perception tasks including object detection, tracking, and scene segmentation</p>
-                            <p class="pixel-text-tiny info-detail">• Curating and preprocessing vision datasets to improve model generalization and robustness</p>
-                            <p class="pixel-text-tiny info-detail">• Deploying optimized ML models to UAV systems for real-time inference, integrating with navigation pipelines</p>
+                            <p class="pixel-text-tiny info-subtitle">Waterloo Aerial Robotics Group | Machine Learning,
+                                Computer Vision, UAV Autonomy</p>
+                            <p class="pixel-text-tiny info-detail">• Training deep learning models for perception tasks
+                                including object detection, tracking, and scene segmentation</p>
+                            <p class="pixel-text-tiny info-detail">• Curating and preprocessing vision datasets to
+                                improve model generalization and robustness</p>
+                            <p class="pixel-text-tiny info-detail">• Deploying optimized ML models to UAV systems for
+                                real-time inference, integrating with navigation pipelines</p>
                         </div>
                     </div>
 
@@ -228,9 +240,12 @@
                         </div>
                         <div class="info-card-body">
                             <p class="pixel-text-tiny info-subtitle">myPip | AI Research & Product Development</p>
-                            <p class="pixel-text-tiny info-detail">• Developing multimodal LLM pipelines that convert user prompts into deployable React Native app components</p>
-                            <p class="pixel-text-tiny info-detail">• Improved accuracy of generated UI structures by 40% through iterative fine-tuning and model pipeline optimization</p>
-                            <p class="pixel-text-tiny info-detail">• Built modular API connectors for generated apps, supporting services like Spotify and allowing real-time data access</p>
+                            <p class="pixel-text-tiny info-detail">• Developing multimodal LLM pipelines that convert
+                                user prompts into deployable React Native app components</p>
+                            <p class="pixel-text-tiny info-detail">• Improved accuracy of generated UI structures by 40%
+                                through iterative fine-tuning and model pipeline optimization</p>
+                            <p class="pixel-text-tiny info-detail">• Built modular API connectors for generated apps,
+                                supporting services like Spotify and allowing real-time data access</p>
                         </div>
                     </div>
 
@@ -242,9 +257,12 @@
                         </div>
                         <div class="info-card-body">
                             <p class="pixel-text-tiny info-subtitle">Python, TensorFlow</p>
-                            <p class="pixel-text-tiny info-detail">• Mentored 10+ students in Python, OOP, algorithms, and ML fundamentals, resulting in grade improvements</p>
-                            <p class="pixel-text-tiny info-detail">• Guided students through projects including games, web applications, and AI projects</p>
-                            <p class="pixel-text-tiny info-detail">• Introduced recursion, sorting, and asynchronous programming in an accessible, project-based style</p>
+                            <p class="pixel-text-tiny info-detail">• Mentored 10+ students in Python, OOP, algorithms,
+                                and ML fundamentals, resulting in grade improvements</p>
+                            <p class="pixel-text-tiny info-detail">• Guided students through projects including games,
+                                web applications, and AI projects</p>
+                            <p class="pixel-text-tiny info-detail">• Introduced recursion, sorting, and asynchronous
+                                programming in an accessible, project-based style</p>
                         </div>
                     </div>
 
@@ -268,13 +286,21 @@
                         </div>
                         <div class="info-card-body">
                             <p class="pixel-text-tiny info-detail" style="font-style: italic; margin-bottom: 8px;">
-                                An Analysis of Optimizer Choice on Energy Efficiency and Performance in Neural Network Training
+                                An Analysis of Optimizer Choice on Energy Efficiency and Performance in Neural Network
+                                Training
                             </p>
                             <p class="pixel-text-tiny info-detail">
-                                Comprehensive empirical study investigating the relationship between optimizer choice and energy efficiency in neural network training. Conducted 360 controlled experiments across three benchmark datasets (MNIST, CIFAR-10, CIFAR-100) using eight popular optimizers. Using CodeCarbon for precise energy tracking on Apple M1 Pro hardware, measured training duration, peak memory usage, CO2 emissions, and final model performance. Identified AdamW and NAdam as consistently efficient choices, while SGD demonstrates superior performance on complex datasets despite higher emissions.
+                                Comprehensive empirical study investigating the relationship between optimizer choice
+                                and energy efficiency in neural network training. Conducted 360 controlled experiments
+                                across three benchmark datasets (MNIST, CIFAR-10, CIFAR-100) using eight popular
+                                optimizers. Using CodeCarbon for precise energy tracking on Apple M1 Pro hardware,
+                                measured training duration, peak memory usage, CO2 emissions, and final model
+                                performance. Identified AdamW and NAdam as consistently efficient choices, while SGD
+                                demonstrates superior performance on complex datasets despite higher emissions.
                             </p>
                             <p class="pixel-text-tiny info-detail" style="margin-top: 8px;">
-                                <strong>Status:</strong> Submitted to Sustainable Computing: Informatics and Systems (Elsevier), Manuscript ID: SUSCOM-D-25-02415, under review.
+                                <strong>Status:</strong> Submitted to Sustainable Computing: Informatics and Systems
+                                (Elsevier), Manuscript ID: SUSCOM-D-25-02415, under review.
                             </p>
                             <div class="project-tags">
                                 <span class="tag pixel-text-tiny">ENERGY EFFICIENCY</span>
@@ -282,9 +308,12 @@
                                 <span class="tag pixel-text-tiny">SUSTAINABLE AI</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://ssrn.com/abstract=5465242" class="pixel-link pixel-text-tiny" target="_blank">→ SSRN</a>
-                                <a href="https://arxiv.org/abs/2509.13516" class="pixel-link pixel-text-tiny" target="_blank">→ ARXIV</a>
-                                <a href="https://github.com/tomalmog/optimizer-energy-study" class="pixel-link pixel-text-tiny" target="_blank">→ GITHUB</a>
+                                <a href="https://ssrn.com/abstract=5465242" class="pixel-link pixel-text-tiny"
+                                    target="_blank">→ SSRN</a>
+                                <a href="https://arxiv.org/abs/2509.13516" class="pixel-link pixel-text-tiny"
+                                    target="_blank">→ ARXIV</a>
+                                <a href="https://github.com/tomalmog/optimizer-energy-study"
+                                    class="pixel-link pixel-text-tiny" target="_blank">→ GITHUB</a>
                             </div>
                         </div>
                     </div>
@@ -297,7 +326,10 @@
                         </div>
                         <div class="info-card-body">
                             <p class="pixel-text-tiny info-detail">
-                                Designed a quantitative research framework analyzing whether open-source development correlates with stock prices. Implemented full AR/CAR estimation pipeline with Market, Mean-Adjusted, and Market-Adjusted models. Developed automated modules for event detection, data ingestion, and preprocessing across equities and sectors.
+                                Designed a quantitative research framework analyzing whether open-source development
+                                correlates with stock prices. Implemented full AR/CAR estimation pipeline with Market,
+                                Mean-Adjusted, and Market-Adjusted models. Developed automated modules for event
+                                detection, data ingestion, and preprocessing across equities and sectors.
                             </p>
                             <div class="project-tags">
                                 <span class="tag pixel-text-tiny">PANDAS</span>
@@ -305,7 +337,8 @@
                                 <span class="tag pixel-text-tiny">GITHUB API</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://tomalmog.github.io/CommitTrader/" class="pixel-link pixel-text-tiny" target="_blank">→ LIVE SITE</a>
+                                <a href="https://tomalmog.github.io/CommitTrader/" class="pixel-link pixel-text-tiny"
+                                    target="_blank">→ LIVE SITE</a>
                             </div>
                         </div>
                     </div>
@@ -318,7 +351,10 @@
                         </div>
                         <div class="info-card-body">
                             <p class="pixel-text-tiny info-detail">
-                                Built a prediction-market style platform where Waterloo students create profiles and receive over/under salary predictions driven by community voting, enabling market-based consensus formation on co-op compensation. Designed a dynamic line-movement algorithm updating predicted salaries based on vote distribution across rounds.
+                                Built a prediction-market style platform where Waterloo students create profiles and
+                                receive over/under salary predictions driven by community voting, enabling market-based
+                                consensus formation on co-op compensation. Designed a dynamic line-movement algorithm
+                                updating predicted salaries based on vote distribution across rounds.
                             </p>
                             <div class="project-tags">
                                 <span class="tag pixel-text-tiny">NEXT.JS</span>
@@ -326,7 +362,8 @@
                                 <span class="tag pixel-text-tiny">POSTGRESQL</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://wagerloo.vercel.app/" class="pixel-link pixel-text-tiny" target="_blank">→ LIVE SITE</a>
+                                <a href="https://wagerloo.vercel.app/" class="pixel-link pixel-text-tiny"
+                                    target="_blank">→ LIVE SITE</a>
                             </div>
                         </div>
                     </div>
@@ -339,7 +376,10 @@
                         </div>
                         <div class="info-card-body">
                             <p class="pixel-text-tiny info-detail">
-                                Developed Python package to pause PyTorch training tasks based on real-time electricity prices. Integrated APIs from Electricity Maps and WattTime, supporting global regions with user-provided credentials. Published to PyPI as carbonaware-ml, supporting both minimal and extended installations with scheduler extras.
+                                Developed Python package to pause PyTorch training tasks based on real-time electricity
+                                prices. Integrated APIs from Electricity Maps and WattTime, supporting global regions
+                                with user-provided credentials. Published to PyPI as carbonaware-ml, supporting both
+                                minimal and extended installations with scheduler extras.
                             </p>
                             <div class="project-tags">
                                 <span class="tag pixel-text-tiny">PYTHON</span>
@@ -347,8 +387,10 @@
                                 <span class="tag pixel-text-tiny">API INTEGRATION</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://github.com/tomalmog/carbonaware-ml" class="pixel-link pixel-text-tiny" target="_blank">→ GITHUB</a>
-                                <a href="https://pypi.org/project/carbonaware-ml/" class="pixel-link pixel-text-tiny" target="_blank">→ PYPI</a>
+                                <a href="https://github.com/tomalmog/carbonaware-ml" class="pixel-link pixel-text-tiny"
+                                    target="_blank">→ GITHUB</a>
+                                <a href="https://pypi.org/project/carbonaware-ml/" class="pixel-link pixel-text-tiny"
+                                    target="_blank">→ PYPI</a>
                             </div>
                         </div>
                     </div>
@@ -361,7 +403,10 @@
                         </div>
                         <div class="info-card-body">
                             <p class="pixel-text-tiny info-detail">
-                                Built a real-time computer vision system to detect and classify 52 playing cards with over 95% accuracy. Trained a YOLOv8 deep learning model on Colab GPUs, achieving sub-100ms inference latency for live use. Implemented advanced tracking algorithms that improved simulated blackjack win rates to slightly over 50%.
+                                Built a real-time computer vision system to detect and classify 52 playing cards with
+                                over 95% accuracy. Trained a YOLOv8 deep learning model on Colab GPUs, achieving
+                                sub-100ms inference latency for live use. Implemented advanced tracking algorithms that
+                                improved simulated blackjack win rates to slightly over 50%.
                             </p>
                             <div class="project-tags">
                                 <span class="tag pixel-text-tiny">PYTHON</span>
@@ -370,7 +415,8 @@
                                 <span class="tag pixel-text-tiny">PYTORCH</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://github.com/tomalmog/CV-CardCounting" class="pixel-link pixel-text-tiny" target="_blank">→ GITHUB</a>
+                                <a href="https://github.com/tomalmog/CV-CardCounting" class="pixel-link pixel-text-tiny"
+                                    target="_blank">→ GITHUB</a>
                             </div>
                         </div>
                     </div>
@@ -388,13 +434,14 @@
                 <div class="window-content">
                     <div class="dialogue-box large">
                         <div class="dialogue-text pixel-text-tiny">
-                            Thanks for visiting my portfolio! Feel free to reach out if you'd like to connect or discuss opportunities.
+                            Thanks for visiting my portfolio! Feel free to reach out if you'd like to connect or discuss
+                            opportunities.
                         </div>
                     </div>
 
                     <div class="contact-options">
                         <a href="mailto:talmog@uwaterloo.ca" class="contact-item">
-                           
+
                             <div class="contact-details">
                                 <div class="pixel-text-small">EMAIL</div>
                                 <div class="pixel-text-tiny">talmog@uwaterloo.ca</div>
@@ -402,7 +449,7 @@
                         </a>
 
                         <a href="https://linkedin.com/in/tomalmog" target="_blank" class="contact-item">
-                           
+
                             <div class="contact-details">
                                 <div class="pixel-text-small">LINKEDIN</div>
                                 <div class="pixel-text-tiny">linkedin.com/in/tomalmog</div>
@@ -410,7 +457,7 @@
                         </a>
 
                         <a href="https://github.com/tomalmog" target="_blank" class="contact-item">
-                          
+
                             <div class="contact-details">
                                 <div class="pixel-text-small">GITHUB</div>
                                 <div class="pixel-text-tiny">github.com/tomalmog</div>
@@ -429,4 +476,5 @@
     <script src="script.js"></script>
     <script src="chatbot.js"></script>
 </body>
+
 </html>

@@ -350,11 +350,12 @@ body.font-serif .chat-input {
     color: var(--text-yellow);
 }
 
-.character-sprite img {
+.character-sprite img,
+.profile-photo {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    image-rendering: pixelated;
+    image-rendering: auto;
 }
 
 /* Character Info */
