@@ -1,480 +1,812 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Tom Almog - Portfolio</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="styles.css" />
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tom Almog - Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-</head>
+    <body>
+        <!-- Pixel background -->
+        <div class="pixel-bg"></div>
 
-<body>
-    <!-- Pixel background -->
-    <div class="pixel-bg"></div>
-
-    <!-- Navigation Menu -->
-    <nav class="rpg-nav">
-        <div class="nav-content">
-            <a href="/" class="nav-title-link" data-route="/">
-                <div class="nav-title pixel-text-small">TOM ALMOG</div>
-            </a>
-            <div class="nav-buttons">
-                <button class="nav-btn active" data-route="/about">
-                    <span class="pixel-text-tiny">ABOUT</span>
-                </button>
-                <button class="nav-btn" data-route="/education">
-                    <span class="pixel-text-tiny">EDUCATION</span>
-                </button>
-                <button class="nav-btn" data-route="/experience">
-                    <span class="pixel-text-tiny">EXPERIENCE</span>
-                </button>
-                <button class="nav-btn" data-route="/projects">
-                    <span class="pixel-text-tiny">PROJECTS</span>
-                </button>
-                <button class="nav-btn" data-route="/contact">
-                    <span class="pixel-text-tiny">CONTACT</span>
-                </button>
-            </div>
-            <div class="font-selector">
-                <select id="font-select" class="font-select pixel-text-tiny">
-                    <option value="pixel" style="font-family: 'Press Start 2P', cursive;">🎮 PIXEL</option>
-                    <option value="serif" style="font-family: Georgia, 'Times New Roman', serif;">📜 SERIF</option>
-                    <option value="sans"
-                        style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">📖 SANS</option>
-                </select>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Main Game Container -->
-    <div class="game-container">
-
-        <!-- About Screen -->
-        <section id="about-screen" class="screen active">
-            <div class="window-box">
-                <div class="window-header">
-                    <span class="pixel-text">ABOUT</span>
+        <!-- Navigation Menu -->
+        <nav class="rpg-nav">
+            <div class="nav-content">
+                <a href="/" class="nav-title-link" data-route="/">
+                    <div class="nav-title pixel-text-small">TOM ALMOG</div>
+                </a>
+                <div class="nav-buttons">
+                    <button class="nav-btn active" data-route="/about">
+                        <span class="pixel-text-tiny">ABOUT</span>
+                    </button>
+                    <button class="nav-btn" data-route="/education">
+                        <span class="pixel-text-tiny">EDUCATION</span>
+                    </button>
+                    <button class="nav-btn" data-route="/experience">
+                        <span class="pixel-text-tiny">EXPERIENCE</span>
+                    </button>
+                    <button class="nav-btn" data-route="/projects">
+                        <span class="pixel-text-tiny">PROJECTS</span>
+                    </button>
+                    <button class="nav-btn" data-route="/contact">
+                        <span class="pixel-text-tiny">CONTACT</span>
+                    </button>
                 </div>
-                <div class="window-content">
-                    <div class="profile-grid">
-                        <!-- Character Sprite -->
-                        <div class="character-sprite-container">
-                            <div class="character-sprite">
-                                <img src="images/profile.jpeg" alt="Tom Almog Profile Photo" class="profile-photo">
-                            </div>
-                        </div>
+                <div class="font-selector">
+                    <select
+                        id="font-select"
+                        class="font-select pixel-text-tiny"
+                    >
+                        <option
+                            value="pixel"
+                            style="
+                                font-family:
+                                    &quot;Press Start 2P&quot;, cursive;
+                            "
+                        >
+                            🎮 PIXEL
+                        </option>
+                        <option
+                            value="serif"
+                            style="
+                                font-family:
+                                    Georgia, &quot;Times New Roman&quot;, serif;
+                            "
+                        >
+                            📜 SERIF
+                        </option>
+                        <option
+                            value="sans"
+                            style="
+                                font-family:
+                                    -apple-system, BlinkMacSystemFont,
+                                    &quot;Segoe UI&quot;, sans-serif;
+                            "
+                        >
+                            📖 SANS
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </nav>
 
-                        <!-- Character Info -->
-                        <div class="character-info">
-                            <h2 class="pixel-text profile-name">TOM ALMOG</h2>
-                            <p class="pixel-text-small profile-title">MATHEMATICS STUDENT</p>
-                            <p class="pixel-text-small profile-location">UNIVERSITY OF WATERLOO</p>
-
-                            <div class="social-links">
-                                <a href="mailto:talmog@uwaterloo.ca" class="social-link" target="_blank">
-                                    <span class="pixel-text-tiny">EMAIL</span>
-                                </a>
-                                <a href="https://linkedin.com/in/tomalmog" class="social-link" target="_blank">
-                                    <span class="pixel-text-tiny">LINKEDIN</span>
-                                </a>
-                                <a href="https://github.com/tomalmog" class="social-link" target="_blank">
-                                    <span class="pixel-text-tiny">GITHUB</span>
-                                </a>
-                                <!-- Add more socials as needed -->
-                            </div>
-                        </div>
-
-                        <!-- Arrow Key Visualization -->
-                        <div class="arrow-keys-container">
-                            <div class="arrow-keys-grid">
-                                <div class="arrow-key-spacer"></div>
-                                <button class="arrow-key" data-key="ArrowUp">
-                                    <span>▲</span>
-                                </button>
-                                <div class="arrow-key-spacer"></div>
-
-                                <button class="arrow-key" data-key="ArrowLeft">
-                                    <span>◀</span>
-                                </button>
-                                <button class="arrow-key" data-key="ArrowDown">
-                                    <span>▼</span>
-                                </button>
-                                <button class="arrow-key" data-key="ArrowRight">
-                                    <span>▶</span>
-                                </button>
-                            </div>
-                        </div>
+        <!-- Main Game Container -->
+        <div class="game-container">
+            <!-- About Screen -->
+            <section id="about-screen" class="screen active">
+                <div class="window-box">
+                    <div class="window-header">
+                        <span class="pixel-text">ABOUT</span>
                     </div>
-
-                    <!-- About Text Box -->
-                    <div class="dialogue-box">
-                        <div class="dialogue-text pixel-text-tiny">
-                            Hi! I'm Tom, a first-year Mathematics student at the University of Waterloo with a strong
-                            interest in machine learning and quantitative finance. I enjoy applying mathematical
-                            thinking to solve complex problems and building projects that genuinely have an impact.
-                            <br><br>
-                            Outside of programming and math, music is my biggest passion. I play the guitar and piano,
-                            and am always looking for new music to listen to. I'm also a consistent gym goer and love to
-                            play sports.
-                        </div>
-                    </div>
-
-                    <!-- Chatbot Section -->
-                    <div class="chatbot-container">
-                        <div class="chatbot-header">
-                            <span class="pixel-text-small">CHAT WITH TOM</span>
-                            <button class="chatbot-toggle pixel-text-tiny" onclick="toggleChatbot()">
-                                <span id="chat-toggle-text">OPEN</span>
-                            </button>
-                        </div>
-
-                        <div class="chatbot-window" id="chatbot-window">
-                            <div class="chat-messages" id="chat-messages">
-                                <div class="chat-message bot-message">
-                                    <span class="message-icon">🤖</span>
-                                    <div class="message-content pixel-text-tiny">
-                                        Hey! I'm an AI assistant trained on Tom's portfolio. Ask me anything about his
-                                        education, experience, or projects!
-                                    </div>
+                    <div class="window-content">
+                        <div class="profile-grid">
+                            <!-- Character Sprite -->
+                            <div class="character-sprite-container">
+                                <div class="character-sprite">
+                                    <img
+                                        src="images/profile.jpeg"
+                                        alt="Tom Almog Profile Photo"
+                                        class="profile-photo"
+                                    />
                                 </div>
                             </div>
 
-                            <div class="chat-input-container">
-                                <input type="text" id="chat-input" class="chat-input pixel-text-tiny"
-                                    placeholder="ASK ME ANYTHING..."
-                                    onkeypress="if(event.key==='Enter') sendMessage()" />
-                                <button class="chat-send-btn pixel-text-tiny" onclick="sendMessage()">
-                                    SEND
+                            <!-- Character Info -->
+                            <div class="character-info">
+                                <h2 class="pixel-text profile-name">
+                                    TOM ALMOG
+                                </h2>
+                                <p class="pixel-text-small profile-title">
+                                    MATHEMATICS STUDENT
+                                </p>
+                                <p class="pixel-text-small profile-location">
+                                    UNIVERSITY OF WATERLOO
+                                </p>
+
+                                <div class="social-links">
+                                    <a
+                                        href="mailto:talmog@uwaterloo.ca"
+                                        class="social-link"
+                                        target="_blank"
+                                    >
+                                        <span class="pixel-text-tiny"
+                                            >EMAIL</span
+                                        >
+                                    </a>
+                                    <a
+                                        href="https://linkedin.com/in/tomalmog"
+                                        class="social-link"
+                                        target="_blank"
+                                    >
+                                        <span class="pixel-text-tiny"
+                                            >LINKEDIN</span
+                                        >
+                                    </a>
+                                    <a
+                                        href="https://github.com/tomalmog"
+                                        class="social-link"
+                                        target="_blank"
+                                    >
+                                        <span class="pixel-text-tiny"
+                                            >GITHUB</span
+                                        >
+                                    </a>
+                                    <!-- Add more socials as needed -->
+                                </div>
+                            </div>
+
+                            <!-- Arrow Key Visualization -->
+                            <div class="arrow-keys-container">
+                                <div class="arrow-keys-grid">
+                                    <div class="arrow-key-spacer"></div>
+                                    <button
+                                        class="arrow-key"
+                                        data-key="ArrowUp"
+                                    >
+                                        <span>▲</span>
+                                    </button>
+                                    <div class="arrow-key-spacer"></div>
+
+                                    <button
+                                        class="arrow-key"
+                                        data-key="ArrowLeft"
+                                    >
+                                        <span>◀</span>
+                                    </button>
+                                    <button
+                                        class="arrow-key"
+                                        data-key="ArrowDown"
+                                    >
+                                        <span>▼</span>
+                                    </button>
+                                    <button
+                                        class="arrow-key"
+                                        data-key="ArrowRight"
+                                    >
+                                        <span>▶</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- About Text Box -->
+                        <div class="dialogue-box">
+                            <div class="dialogue-text pixel-text-tiny">
+                                Hi! I'm Tom, a first-year Mathematics student at
+                                the University of Waterloo with a strong
+                                interest in machine learning and quantitative
+                                finance. I enjoy applying mathematical thinking
+                                to solve complex problems and building projects
+                                that genuinely have an impact.
+                                <br /><br />
+                                Outside of programming and math, music is my
+                                biggest passion. I play the guitar and piano,
+                                and am always looking for new music to listen
+                                to. I'm also a consistent gym goer and love to
+                                play sports.
+                            </div>
+                        </div>
+
+                        <!-- Chatbot Section -->
+                        <div class="chatbot-container">
+                            <div class="chatbot-header">
+                                <span class="pixel-text-small"
+                                    >CHAT WITH TOM</span
+                                >
+                                <button
+                                    class="chatbot-toggle pixel-text-tiny"
+                                    onclick="toggleChatbot()"
+                                >
+                                    <span id="chat-toggle-text">OPEN</span>
                                 </button>
                             </div>
+
+                            <div class="chatbot-window" id="chatbot-window">
+                                <div class="chat-messages" id="chat-messages">
+                                    <div class="chat-message bot-message">
+                                        <span class="message-icon">🤖</span>
+                                        <div
+                                            class="message-content pixel-text-tiny"
+                                        >
+                                            Hey! I'm an AI assistant trained on
+                                            Tom's portfolio. Ask me anything
+                                            about his education, experience, or
+                                            projects!
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="chat-input-container">
+                                    <input
+                                        type="text"
+                                        id="chat-input"
+                                        class="chat-input pixel-text-tiny"
+                                        placeholder="ASK ME ANYTHING..."
+                                        onkeypress="
+                                            if (event.key === 'Enter')
+                                                sendMessage();
+                                        "
+                                    />
+                                    <button
+                                        class="chat-send-btn pixel-text-tiny"
+                                        onclick="sendMessage()"
+                                    >
+                                        SEND
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Education Screen -->
-        <section id="education-screen" class="screen">
-            <div class="window-box">
-                <div class="window-header">
-                    <span class="pixel-text">EDUCATION</span>
-                </div>
-                <div class="window-content">
-
-                    <!-- Education Item Template - Copy for each degree/program -->
-                    <div class="info-card">
-                        <div class="info-card-header">
-                            <h3 class="pixel-text-small">UNIVERSITY OF WATERLOO</h3>
-                            <span class="pixel-text-tiny info-date">SEPT 2025 - DEC 2029</span>
-                        </div>
-                        <div class="info-card-body">
-                            <p class="pixel-text-tiny info-subtitle">Bachelor of Mathematics Co-op</p>
-                            <p class="pixel-text-tiny info-detail">• Year: First Year</p>
-                            <p class="pixel-text-tiny info-detail">• Focus: Machine Learning</p>
-                            <p class="pixel-text-tiny info-detail">• Relevant Coursework: CS145 (Enriched Functional
-                                Programming), CS146 (Enriched Algorithm Design and Data Abstraction)</p>
-                        </div>
+            <!-- Education Screen -->
+            <section id="education-screen" class="screen">
+                <div class="window-box">
+                    <div class="window-header">
+                        <span class="pixel-text">EDUCATION</span>
                     </div>
-
-                    <!-- Add more education items here if needed -->
-
-                </div>
-            </div>
-        </section>
-
-        <!-- Experience Screen -->
-        <section id="experience-screen" class="screen">
-            <div class="window-box">
-                <div class="window-header">
-                    <span class="pixel-text">EXPERIENCE</span>
-                </div>
-                <div class="window-content">
-
-                    <!-- Experience 1 -->
-                    <div class="info-card">
-                        <div class="info-card-header">
-                            <h3 class="pixel-text-small">MACHINE LEARNING ENGINEER</h3>
-                            <span class="pixel-text-tiny info-date">SEPT 2025 - PRESENT</span>
-                        </div>
-                        <div class="info-card-body">
-                            <p class="pixel-text-tiny info-subtitle">Wat.AI | Deep Learning, Medical Imaging,
-                                Explainable AI</p>
-                            <p class="pixel-text-tiny info-detail">• Contributing to SEE-DR, a mobile AI system for
-                                early detection of diabetic retinopathy using CNN-based image segmentation and
-                                classification on retinal scans</p>
-                            <p class="pixel-text-tiny info-detail">• Implementing Grad-CAM to generate interpretable
-                                heatmaps highlighting clinically relevant regions</p>
-                            <p class="pixel-text-tiny info-detail">• Preparing and preprocessing large-scale image
-                                datasets for model training</p>
-                            <p class="pixel-text-tiny info-detail">• Collaborating on model deployment pipelines using
-                                TensorFlow Lite and ONNX Runtime for mobile platforms</p>
-                        </div>
-                    </div>
-
-                    <!-- Experience 2 -->
-                    <div class="info-card">
-                        <div class="info-card-header">
-                            <h3 class="pixel-text-small">AUTONOMOUS SYSTEMS ENGINEER</h3>
-                            <span class="pixel-text-tiny info-date">SEPT 2025 - PRESENT</span>
-                        </div>
-                        <div class="info-card-body">
-                            <p class="pixel-text-tiny info-subtitle">Waterloo Aerial Robotics Group | Machine Learning,
-                                Computer Vision, UAV Autonomy</p>
-                            <p class="pixel-text-tiny info-detail">• Training deep learning models for perception tasks
-                                including object detection, tracking, and scene segmentation</p>
-                            <p class="pixel-text-tiny info-detail">• Curating and preprocessing vision datasets to
-                                improve model generalization and robustness</p>
-                            <p class="pixel-text-tiny info-detail">• Deploying optimized ML models to UAV systems for
-                                real-time inference, integrating with navigation pipelines</p>
-                        </div>
-                    </div>
-
-                    <!-- Experience 3 -->
-                    <div class="info-card">
-                        <div class="info-card-header">
-                            <h3 class="pixel-text-small">MACHINE LEARNING ENGINEER</h3>
-                            <span class="pixel-text-tiny info-date">JULY 2025 - AUG 2025</span>
-                        </div>
-                        <div class="info-card-body">
-                            <p class="pixel-text-tiny info-subtitle">myPip | AI Research & Product Development</p>
-                            <p class="pixel-text-tiny info-detail">• Developing multimodal LLM pipelines that convert
-                                user prompts into deployable React Native app components</p>
-                            <p class="pixel-text-tiny info-detail">• Improved accuracy of generated UI structures by 40%
-                                through iterative fine-tuning and model pipeline optimization</p>
-                            <p class="pixel-text-tiny info-detail">• Built modular API connectors for generated apps,
-                                supporting services like Spotify and allowing real-time data access</p>
-                        </div>
-                    </div>
-
-                    <!-- Experience 4 -->
-                    <div class="info-card">
-                        <div class="info-card-header">
-                            <h3 class="pixel-text-small">COMPUTER SCIENCE TUTOR</h3>
-                            <span class="pixel-text-tiny info-date">MAY 2023 - JULY 2025</span>
-                        </div>
-                        <div class="info-card-body">
-                            <p class="pixel-text-tiny info-subtitle">Python, TensorFlow</p>
-                            <p class="pixel-text-tiny info-detail">• Mentored 10+ students in Python, OOP, algorithms,
-                                and ML fundamentals, resulting in grade improvements</p>
-                            <p class="pixel-text-tiny info-detail">• Guided students through projects including games,
-                                web applications, and AI projects</p>
-                            <p class="pixel-text-tiny info-detail">• Introduced recursion, sorting, and asynchronous
-                                programming in an accessible, project-based style</p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Screen -->
-        <section id="projects-screen" class="screen">
-            <div class="window-box">
-                <div class="window-header">
-                    <span class="pixel-text">PROJECTS</span>
-                </div>
-                <div class="window-content">
-
-                    <!-- Publication -->
-                    <div class="info-card project-card">
-                        <div class="info-card-header">
-                            <h3 class="pixel-text-small">PUBLICATION: OPTIMIZER ENERGY EFFICIENCY STUDY</h3>
-                            <span class="pixel-text-tiny info-date">SEPT 2025</span>
-                        </div>
-                        <div class="info-card-body">
-                            <p class="pixel-text-tiny info-detail" style="font-style: italic; margin-bottom: 8px;">
-                                An Analysis of Optimizer Choice on Energy Efficiency and Performance in Neural Network
-                                Training
-                            </p>
-                            <p class="pixel-text-tiny info-detail">
-                                Comprehensive empirical study investigating the relationship between optimizer choice
-                                and energy efficiency in neural network training. Conducted 360 controlled experiments
-                                across three benchmark datasets (MNIST, CIFAR-10, CIFAR-100) using eight popular
-                                optimizers. Using CodeCarbon for precise energy tracking on Apple M1 Pro hardware,
-                                measured training duration, peak memory usage, CO2 emissions, and final model
-                                performance. Identified AdamW and NAdam as consistently efficient choices, while SGD
-                                demonstrates superior performance on complex datasets despite higher emissions.
-                            </p>
-                            <p class="pixel-text-tiny info-detail" style="margin-top: 8px;">
-                                <strong>Status:</strong> Submitted to Sustainable Computing: Informatics and Systems
-                                (Elsevier), Manuscript ID: SUSCOM-D-25-02415, under review.
-                            </p>
-                            <div class="project-tags">
-                                <span class="tag pixel-text-tiny">ENERGY EFFICIENCY</span>
-                                <span class="tag pixel-text-tiny">MACHINE LEARNING</span>
-                                <span class="tag pixel-text-tiny">SUSTAINABLE AI</span>
+                    <div class="window-content">
+                        <!-- Education Item Template - Copy for each degree/program -->
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <h3 class="pixel-text-small">
+                                    UNIVERSITY OF WATERLOO
+                                </h3>
+                                <span class="pixel-text-tiny info-date"
+                                    >SEPT 2025 - DEC 2029</span
+                                >
                             </div>
-                            <div class="project-links">
-                                <a href="https://ssrn.com/abstract=5465242" class="pixel-link pixel-text-tiny"
-                                    target="_blank">→ SSRN</a>
-                                <a href="https://arxiv.org/abs/2509.13516" class="pixel-link pixel-text-tiny"
-                                    target="_blank">→ ARXIV</a>
-                                <a href="https://github.com/tomalmog/optimizer-energy-study"
-                                    class="pixel-link pixel-text-tiny" target="_blank">→ GITHUB</a>
+                            <div class="info-card-body">
+                                <p class="pixel-text-tiny info-subtitle">
+                                    Bachelor of Mathematics Co-op
+                                </p>
+                                <p class="pixel-text-tiny info-detail">
+                                    • Year: First Year
+                                </p>
+                                <p class="pixel-text-tiny info-detail">
+                                    • Focus: Machine Learning
+                                </p>
+                                <p class="pixel-text-tiny info-detail">
+                                    • Relevant Coursework: CS145 (Enriched
+                                    Functional Programming), CS146 (Enriched
+                                    Algorithm Design and Data Abstraction)
+                                </p>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Project 1: CommitTrader -->
-                    <div class="info-card project-card">
-                        <div class="info-card-header">
-                            <h3 class="pixel-text-small">COMMITTRADER - FINANCIAL RESEARCH</h3>
-                            <span class="pixel-text-tiny info-date">OCT 2025</span>
-                        </div>
-                        <div class="info-card-body">
-                            <p class="pixel-text-tiny info-detail">
-                                Designed a quantitative research framework analyzing whether open-source development
-                                correlates with stock prices. Implemented full AR/CAR estimation pipeline with Market,
-                                Mean-Adjusted, and Market-Adjusted models. Developed automated modules for event
-                                detection, data ingestion, and preprocessing across equities and sectors.
-                            </p>
-                            <div class="project-tags">
-                                <span class="tag pixel-text-tiny">PANDAS</span>
-                                <span class="tag pixel-text-tiny">YFINANCE</span>
-                                <span class="tag pixel-text-tiny">GITHUB API</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="https://tomalmog.github.io/CommitTrader/" class="pixel-link pixel-text-tiny"
-                                    target="_blank">→ LIVE SITE</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 2: WagerLoo -->
-                    <div class="info-card project-card">
-                        <div class="info-card-header">
-                            <h3 class="pixel-text-small">WAGERLOO - COOP SALARY PREDICTION MARKET</h3>
-                            <span class="pixel-text-tiny info-date">SEPT 2025</span>
-                        </div>
-                        <div class="info-card-body">
-                            <p class="pixel-text-tiny info-detail">
-                                Built a prediction-market style platform where Waterloo students create profiles and
-                                receive over/under salary predictions driven by community voting, enabling market-based
-                                consensus formation on co-op compensation. Designed a dynamic line-movement algorithm
-                                updating predicted salaries based on vote distribution across rounds.
-                            </p>
-                            <div class="project-tags">
-                                <span class="tag pixel-text-tiny">NEXT.JS</span>
-                                <span class="tag pixel-text-tiny">PRISMA</span>
-                                <span class="tag pixel-text-tiny">POSTGRESQL</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="https://wagerloo.vercel.app/" class="pixel-link pixel-text-tiny"
-                                    target="_blank">→ LIVE SITE</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 3: CarbonAware-ML -->
-                    <div class="info-card project-card">
-                        <div class="info-card-header">
-                            <h3 class="pixel-text-small">CARBONAWARE-ML PYTHON PACKAGE</h3>
-                            <span class="pixel-text-tiny info-date">AUG 2025</span>
-                        </div>
-                        <div class="info-card-body">
-                            <p class="pixel-text-tiny info-detail">
-                                Developed Python package to pause PyTorch training tasks based on real-time electricity
-                                prices. Integrated APIs from Electricity Maps and WattTime, supporting global regions
-                                with user-provided credentials. Published to PyPI as carbonaware-ml, supporting both
-                                minimal and extended installations with scheduler extras.
-                            </p>
-                            <div class="project-tags">
-                                <span class="tag pixel-text-tiny">PYTHON</span>
-                                <span class="tag pixel-text-tiny">PYTORCH</span>
-                                <span class="tag pixel-text-tiny">API INTEGRATION</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="https://github.com/tomalmog/carbonaware-ml" class="pixel-link pixel-text-tiny"
-                                    target="_blank">→ GITHUB</a>
-                                <a href="https://pypi.org/project/carbonaware-ml/" class="pixel-link pixel-text-tiny"
-                                    target="_blank">→ PYPI</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 4: Blackjack Card Counter -->
-                    <div class="info-card project-card">
-                        <div class="info-card-header">
-                            <h3 class="pixel-text-small">REAL-TIME BLACKJACK CARD COUNTER</h3>
-                            <span class="pixel-text-tiny info-date">AUG 2025</span>
-                        </div>
-                        <div class="info-card-body">
-                            <p class="pixel-text-tiny info-detail">
-                                Built a real-time computer vision system to detect and classify 52 playing cards with
-                                over 95% accuracy. Trained a YOLOv8 deep learning model on Colab GPUs, achieving
-                                sub-100ms inference latency for live use. Implemented advanced tracking algorithms that
-                                improved simulated blackjack win rates to slightly over 50%.
-                            </p>
-                            <div class="project-tags">
-                                <span class="tag pixel-text-tiny">PYTHON</span>
-                                <span class="tag pixel-text-tiny">YOLOV8</span>
-                                <span class="tag pixel-text-tiny">OPENCV</span>
-                                <span class="tag pixel-text-tiny">PYTORCH</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="https://github.com/tomalmog/CV-CardCounting" class="pixel-link pixel-text-tiny"
-                                    target="_blank">→ GITHUB</a>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Screen -->
-        <section id="contact-screen" class="screen">
-            <div class="window-box">
-                <div class="window-header">
-                    <span class="pixel-text">CONTACT</span>
-                </div>
-                <div class="window-content">
-                    <div class="dialogue-box large">
-                        <div class="dialogue-text pixel-text-tiny">
-                            Thanks for visiting my portfolio! Feel free to reach out if you'd like to connect or discuss
-                            opportunities.
-                        </div>
-                    </div>
-
-                    <div class="contact-options">
-                        <a href="mailto:talmog@uwaterloo.ca" class="contact-item">
-
-                            <div class="contact-details">
-                                <div class="pixel-text-small">EMAIL</div>
-                                <div class="pixel-text-tiny">talmog@uwaterloo.ca</div>
-                            </div>
-                        </a>
-
-                        <a href="https://linkedin.com/in/tomalmog" target="_blank" class="contact-item">
-
-                            <div class="contact-details">
-                                <div class="pixel-text-small">LINKEDIN</div>
-                                <div class="pixel-text-tiny">linkedin.com/in/tomalmog</div>
-                            </div>
-                        </a>
-
-                        <a href="https://github.com/tomalmog" target="_blank" class="contact-item">
-
-                            <div class="contact-details">
-                                <div class="pixel-text-small">GITHUB</div>
-                                <div class="pixel-text-tiny">github.com/tomalmog</div>
-                            </div>
-                        </a>
+                        <!-- Add more education items here if needed -->
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-    </div>
+            <!-- Experience Screen -->
+            <section id="experience-screen" class="screen">
+                <div class="window-box">
+                    <div class="window-header">
+                        <span class="pixel-text">EXPERIENCE</span>
+                    </div>
+                    <div class="window-content">
+                        <!-- Experience 1 -->
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <h3 class="pixel-text-small">
+                                    QUANTITATIVE DEVELOPER
+                                </h3>
+                                <span class="pixel-text-tiny info-date"
+                                    >DEC 2025 - PRESENT</span
+                                >
+                            </div>
+                            <div class="info-card-body">
+                                <p class="pixel-text-tiny info-subtitle">
+                                    WatStreet | Financial Markets, Machine
+                                    Learning
+                                </p>
+                                <p class="pixel-text-tiny info-detail">
+                                    • Developing a market-regime classifier
+                                    using volatility, autocorrelation shifts,
+                                    and trend persistence features
+                                </p>
+                                <p class="pixel-text-tiny info-detail">
+                                    • Implementing Hidden Markov Models and
+                                    GARCH based signals to detect transitions
+                                    between regimes
+                                </p>
+                                <p class="pixel-text-tiny info-detail">
+                                    • Training a lightweight Transformer
+                                    sequence model, improving regime-shift
+                                    detection accuracy by over 35%
+                                </p>
+                                <p class="pixel-text-tiny info-detail">
+                                    • Building a research pipeline for signal
+                                    generation, backtesting, and evaluation
+                                    using NumPy, Pandas & SciPy
+                                </p>
+                            </div>
+                        </div>
 
-    <script src="font-selector.js"></script>
-    <script src="routing.js"></script>
-    <script src="arrow-keys.js"></script>
-    <script src="script.js"></script>
-    <script src="chatbot.js"></script>
-</body>
+                        <!-- Experience 2 -->
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <h3 class="pixel-text-small">
+                                    MACHINE LEARNING ENGINEER
+                                </h3>
+                                <span class="pixel-text-tiny info-date"
+                                    >SEPT 2025 - PRESENT</span
+                                >
+                            </div>
+                            <div class="info-card-body">
+                                <p class="pixel-text-tiny info-subtitle">
+                                    Wat.AI | Deep Learning, Medical Imaging,
+                                    Explainable AI
+                                </p>
+                                <p class="pixel-text-tiny info-detail">
+                                    • Contributing to SEE-DR, a mobile AI system
+                                    for early detection of diabetic retinopathy
+                                    using CNN-based image segmentation and
+                                    classification on retinal scans
+                                </p>
+                                <p class="pixel-text-tiny info-detail">
+                                    • Implementing Grad-CAM to generate
+                                    interpretable heatmaps highlighting
+                                    clinically relevant regions
+                                </p>
+                                <p class="pixel-text-tiny info-detail">
+                                    • Preparing and preprocessing large-scale
+                                    image datasets for model training
+                                </p>
+                                <p class="pixel-text-tiny info-detail">
+                                    • Collaborating on model deployment
+                                    pipelines using TensorFlow Lite and ONNX
+                                    Runtime for mobile platforms
+                                </p>
+                            </div>
+                        </div>
 
+                        <!-- Experience 2 -->
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <h3 class="pixel-text-small">
+                                    AUTONOMOUS SYSTEMS ENGINEER
+                                </h3>
+                                <span class="pixel-text-tiny info-date"
+                                    >SEPT 2025 - PRESENT</span
+                                >
+                            </div>
+                            <div class="info-card-body">
+                                <p class="pixel-text-tiny info-subtitle">
+                                    Waterloo Aerial Robotics Group | Machine
+                                    Learning, Computer Vision, UAV Autonomy
+                                </p>
+                                <p class="pixel-text-tiny info-detail">
+                                    • Training deep learning models for
+                                    perception tasks including object detection,
+                                    tracking, and scene segmentation
+                                </p>
+                                <p class="pixel-text-tiny info-detail">
+                                    • Curating and preprocessing vision datasets
+                                    to improve model generalization and
+                                    robustness
+                                </p>
+                                <p class="pixel-text-tiny info-detail">
+                                    • Deploying optimized ML models to UAV
+                                    systems for real-time inference, integrating
+                                    with navigation pipelines
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Experience 3 -->
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <h3 class="pixel-text-small">
+                                    MACHINE LEARNING ENGINEER
+                                </h3>
+                                <span class="pixel-text-tiny info-date"
+                                    >JULY 2025 - AUG 2025</span
+                                >
+                            </div>
+                            <div class="info-card-body">
+                                <p class="pixel-text-tiny info-subtitle">
+                                    myPip | AI Research & Product Development
+                                </p>
+                                <p class="pixel-text-tiny info-detail">
+                                    • Developing multimodal LLM pipelines that
+                                    convert user prompts into deployable React
+                                    Native app components
+                                </p>
+                                <p class="pixel-text-tiny info-detail">
+                                    • Improved accuracy of generated UI
+                                    structures by 40% through iterative
+                                    fine-tuning and model pipeline optimization
+                                </p>
+                                <p class="pixel-text-tiny info-detail">
+                                    • Built modular API connectors for generated
+                                    apps, supporting services like Spotify and
+                                    allowing real-time data access
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Experience 4 -->
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <h3 class="pixel-text-small">
+                                    COMPUTER SCIENCE TUTOR
+                                </h3>
+                                <span class="pixel-text-tiny info-date"
+                                    >MAY 2023 - JULY 2025</span
+                                >
+                            </div>
+                            <div class="info-card-body">
+                                <p class="pixel-text-tiny info-subtitle">
+                                    Python, TensorFlow
+                                </p>
+                                <p class="pixel-text-tiny info-detail">
+                                    • Mentored 10+ students in Python, OOP,
+                                    algorithms, and ML fundamentals, resulting
+                                    in grade improvements
+                                </p>
+                                <p class="pixel-text-tiny info-detail">
+                                    • Guided students through projects including
+                                    games, web applications, and AI projects
+                                </p>
+                                <p class="pixel-text-tiny info-detail">
+                                    • Introduced recursion, sorting, and
+                                    asynchronous programming in an accessible,
+                                    project-based style
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects Screen -->
+            <section id="projects-screen" class="screen">
+                <div class="window-box">
+                    <div class="window-header">
+                        <span class="pixel-text">PROJECTS</span>
+                    </div>
+                    <div class="window-content">
+                        <!-- Publication -->
+                        <div class="info-card project-card">
+                            <div class="info-card-header">
+                                <h3 class="pixel-text-small">
+                                    PUBLICATION: OPTIMIZER ENERGY EFFICIENCY
+                                    STUDY
+                                </h3>
+                                <span class="pixel-text-tiny info-date"
+                                    >SEPT 2025</span
+                                >
+                            </div>
+                            <div class="info-card-body">
+                                <p
+                                    class="pixel-text-tiny info-detail"
+                                    style="
+                                        font-style: italic;
+                                        margin-bottom: 8px;
+                                    "
+                                >
+                                    An Analysis of Optimizer Choice on Energy
+                                    Efficiency and Performance in Neural Network
+                                    Training
+                                </p>
+                                <p class="pixel-text-tiny info-detail">
+                                    Comprehensive empirical study investigating
+                                    the relationship between optimizer choice
+                                    and energy efficiency in neural network
+                                    training. Conducted 360 controlled
+                                    experiments across three benchmark datasets
+                                    (MNIST, CIFAR-10, CIFAR-100) using eight
+                                    popular optimizers. Using CodeCarbon for
+                                    precise energy tracking on Apple M1 Pro
+                                    hardware, measured training duration, peak
+                                    memory usage, CO2 emissions, and final model
+                                    performance. Identified AdamW and NAdam as
+                                    consistently efficient choices, while SGD
+                                    demonstrates superior performance on complex
+                                    datasets despite higher emissions.
+                                </p>
+                                <p
+                                    class="pixel-text-tiny info-detail"
+                                    style="margin-top: 8px"
+                                >
+                                    <strong>Status:</strong> Submitted to
+                                    Sustainable Computing: Informatics and
+                                    Systems (Elsevier), Manuscript ID:
+                                    SUSCOM-D-25-02415, under review.
+                                </p>
+                                <div class="project-tags">
+                                    <span class="tag pixel-text-tiny"
+                                        >ENERGY EFFICIENCY</span
+                                    >
+                                    <span class="tag pixel-text-tiny"
+                                        >MACHINE LEARNING</span
+                                    >
+                                    <span class="tag pixel-text-tiny"
+                                        >SUSTAINABLE AI</span
+                                    >
+                                </div>
+                                <div class="project-links">
+                                    <a
+                                        href="https://ssrn.com/abstract=5465242"
+                                        class="pixel-link pixel-text-tiny"
+                                        target="_blank"
+                                        >→ SSRN</a
+                                    >
+                                    <a
+                                        href="https://arxiv.org/abs/2509.13516"
+                                        class="pixel-link pixel-text-tiny"
+                                        target="_blank"
+                                        >→ ARXIV</a
+                                    >
+                                    <a
+                                        href="https://github.com/tomalmog/optimizer-energy-study"
+                                        class="pixel-link pixel-text-tiny"
+                                        target="_blank"
+                                        >→ GITHUB</a
+                                    >
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project 1: CommitTrader -->
+                        <div class="info-card project-card">
+                            <div class="info-card-header">
+                                <h3 class="pixel-text-small">
+                                    COMMITTRADER - FINANCIAL RESEARCH
+                                </h3>
+                                <span class="pixel-text-tiny info-date"
+                                    >OCT 2025</span
+                                >
+                            </div>
+                            <div class="info-card-body">
+                                <p class="pixel-text-tiny info-detail">
+                                    Designed a quantitative research framework
+                                    analyzing whether open-source development
+                                    correlates with stock prices. Implemented
+                                    full AR/CAR estimation pipeline with Market,
+                                    Mean-Adjusted, and Market-Adjusted models.
+                                    Developed automated modules for event
+                                    detection, data ingestion, and preprocessing
+                                    across equities and sectors.
+                                </p>
+                                <div class="project-tags">
+                                    <span class="tag pixel-text-tiny"
+                                        >PANDAS</span
+                                    >
+                                    <span class="tag pixel-text-tiny"
+                                        >YFINANCE</span
+                                    >
+                                    <span class="tag pixel-text-tiny"
+                                        >GITHUB API</span
+                                    >
+                                </div>
+                                <div class="project-links">
+                                    <a
+                                        href="https://tomalmog.github.io/CommitTrader/"
+                                        class="pixel-link pixel-text-tiny"
+                                        target="_blank"
+                                        >→ LIVE SITE</a
+                                    >
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project 2: WagerLoo -->
+                        <div class="info-card project-card">
+                            <div class="info-card-header">
+                                <h3 class="pixel-text-small">
+                                    WAGERLOO - COOP SALARY PREDICTION MARKET
+                                </h3>
+                                <span class="pixel-text-tiny info-date"
+                                    >SEPT 2025</span
+                                >
+                            </div>
+                            <div class="info-card-body">
+                                <p class="pixel-text-tiny info-detail">
+                                    Built a prediction-market style platform
+                                    where Waterloo students create profiles and
+                                    receive over/under salary predictions driven
+                                    by community voting, enabling market-based
+                                    consensus formation on co-op compensation.
+                                    Designed a dynamic line-movement algorithm
+                                    updating predicted salaries based on vote
+                                    distribution across rounds.
+                                </p>
+                                <div class="project-tags">
+                                    <span class="tag pixel-text-tiny"
+                                        >NEXT.JS</span
+                                    >
+                                    <span class="tag pixel-text-tiny"
+                                        >PRISMA</span
+                                    >
+                                    <span class="tag pixel-text-tiny"
+                                        >POSTGRESQL</span
+                                    >
+                                </div>
+                                <div class="project-links">
+                                    <a
+                                        href="https://wagerloo.vercel.app/"
+                                        class="pixel-link pixel-text-tiny"
+                                        target="_blank"
+                                        >→ LIVE SITE</a
+                                    >
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project 3: CarbonAware-ML -->
+                        <div class="info-card project-card">
+                            <div class="info-card-header">
+                                <h3 class="pixel-text-small">
+                                    CARBONAWARE-ML PYTHON PACKAGE
+                                </h3>
+                                <span class="pixel-text-tiny info-date"
+                                    >AUG 2025</span
+                                >
+                            </div>
+                            <div class="info-card-body">
+                                <p class="pixel-text-tiny info-detail">
+                                    Developed Python package to pause PyTorch
+                                    training tasks based on real-time
+                                    electricity prices. Integrated APIs from
+                                    Electricity Maps and WattTime, supporting
+                                    global regions with user-provided
+                                    credentials. Published to PyPI as
+                                    carbonaware-ml, supporting both minimal and
+                                    extended installations with scheduler
+                                    extras.
+                                </p>
+                                <div class="project-tags">
+                                    <span class="tag pixel-text-tiny"
+                                        >PYTHON</span
+                                    >
+                                    <span class="tag pixel-text-tiny"
+                                        >PYTORCH</span
+                                    >
+                                    <span class="tag pixel-text-tiny"
+                                        >API INTEGRATION</span
+                                    >
+                                </div>
+                                <div class="project-links">
+                                    <a
+                                        href="https://github.com/tomalmog/carbonaware-ml"
+                                        class="pixel-link pixel-text-tiny"
+                                        target="_blank"
+                                        >→ GITHUB</a
+                                    >
+                                    <a
+                                        href="https://pypi.org/project/carbonaware-ml/"
+                                        class="pixel-link pixel-text-tiny"
+                                        target="_blank"
+                                        >→ PYPI</a
+                                    >
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project 4: Blackjack Card Counter -->
+                        <div class="info-card project-card">
+                            <div class="info-card-header">
+                                <h3 class="pixel-text-small">
+                                    REAL-TIME BLACKJACK CARD COUNTER
+                                </h3>
+                                <span class="pixel-text-tiny info-date"
+                                    >AUG 2025</span
+                                >
+                            </div>
+                            <div class="info-card-body">
+                                <p class="pixel-text-tiny info-detail">
+                                    Built a real-time computer vision system to
+                                    detect and classify 52 playing cards with
+                                    over 95% accuracy. Trained a YOLOv8 deep
+                                    learning model on Colab GPUs, achieving
+                                    sub-100ms inference latency for live use.
+                                    Implemented advanced tracking algorithms
+                                    that improved simulated blackjack win rates
+                                    to slightly over 50%.
+                                </p>
+                                <div class="project-tags">
+                                    <span class="tag pixel-text-tiny"
+                                        >PYTHON</span
+                                    >
+                                    <span class="tag pixel-text-tiny"
+                                        >YOLOV8</span
+                                    >
+                                    <span class="tag pixel-text-tiny"
+                                        >OPENCV</span
+                                    >
+                                    <span class="tag pixel-text-tiny"
+                                        >PYTORCH</span
+                                    >
+                                </div>
+                                <div class="project-links">
+                                    <a
+                                        href="https://github.com/tomalmog/CV-CardCounting"
+                                        class="pixel-link pixel-text-tiny"
+                                        target="_blank"
+                                        >→ GITHUB</a
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Screen -->
+            <section id="contact-screen" class="screen">
+                <div class="window-box">
+                    <div class="window-header">
+                        <span class="pixel-text">CONTACT</span>
+                    </div>
+                    <div class="window-content">
+                        <div class="dialogue-box large">
+                            <div class="dialogue-text pixel-text-tiny">
+                                Thanks for visiting my portfolio! Feel free to
+                                reach out if you'd like to connect or discuss
+                                opportunities.
+                            </div>
+                        </div>
+
+                        <div class="contact-options">
+                            <a
+                                href="mailto:talmog@uwaterloo.ca"
+                                class="contact-item"
+                            >
+                                <div class="contact-details">
+                                    <div class="pixel-text-small">EMAIL</div>
+                                    <div class="pixel-text-tiny">
+                                        talmog@uwaterloo.ca
+                                    </div>
+                                </div>
+                            </a>
+
+                            <a
+                                href="https://linkedin.com/in/tomalmog"
+                                target="_blank"
+                                class="contact-item"
+                            >
+                                <div class="contact-details">
+                                    <div class="pixel-text-small">LINKEDIN</div>
+                                    <div class="pixel-text-tiny">
+                                        linkedin.com/in/tomalmog
+                                    </div>
+                                </div>
+                            </a>
+
+                            <a
+                                href="https://github.com/tomalmog"
+                                target="_blank"
+                                class="contact-item"
+                            >
+                                <div class="contact-details">
+                                    <div class="pixel-text-small">GITHUB</div>
+                                    <div class="pixel-text-tiny">
+                                        github.com/tomalmog
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <script src="font-selector.js"></script>
+        <script src="routing.js"></script>
+        <script src="arrow-keys.js"></script>
+        <script src="script.js"></script>
+        <script src="chatbot.js"></script>
+    </body>
 </html>
