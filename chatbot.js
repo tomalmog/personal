@@ -21,24 +21,30 @@ EDUCATION:
 
 EXPERIENCE:
 
-1. Machine Learning Engineer at Wat.AI (Sept 2025 - Present)
+1. Quantitative Developer at WatStreet (Dec 2025 - Present)
+    - Developing a market-regime classifier using volatility, autocorrelation shifts, and trend persistence features.
+    - Implementing Hidden Markov Models and GARCH based signals to detect transitions between regimes.
+    - Training a lightweight Transformer sequence model, improving regime-shift detection accuracy by over 35%.
+    - Building a research pipeline for signal generation, backtesting, and evaluation using NumPy, Pandas & SciPy.
+
+2. Machine Learning Engineer at Wat.AI (Sept 2025 - Present)
    - Contributing to SEE-DR, a mobile AI system for early detection of diabetic retinopathy
    - Using CNN-based image segmentation and classification on retinal scans
    - Implementing Grad-CAM for interpretable heatmaps
    - Preparing and preprocessing large-scale image datasets
    - Working with TensorFlow Lite and ONNX Runtime for mobile deployment
 
-2. Autonomous Systems Engineer at Waterloo Aerial Robotics Group (Sept 2025 - Present)
+3. Autonomous Systems Engineer at Waterloo Aerial Robotics Group (Sept 2025 - Present)
    - Training deep learning models for perception tasks (object detection, tracking, scene segmentation)
    - Curating and preprocessing vision datasets
    - Deploying optimized ML models to UAV systems for real-time inference
 
-3. Machine Learning Engineer at myPip (July 2025 - Aug 2025)
+4. Machine Learning Engineer at myPip (July 2025 - Aug 2025)
    - Developed multimodal LLM pipelines converting prompts to React Native components
    - Improved UI generation accuracy by 40%
    - Built modular API connectors supporting Spotify and other services
 
-4. Computer Science Tutor (May 2023 - July 2025)
+5. Computer Science Tutor (May 2023 - July 2025)
    - Mentored 10+ students in Python, OOP, algorithms, and ML fundamentals
    - Guided students through projects including games, web apps, and AI
    - Taught recursion, sorting, and asynchronous programming
