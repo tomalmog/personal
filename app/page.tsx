@@ -42,19 +42,7 @@ export default function Home() {
             ]
         },
         {
-            title: 'CommitTrader - Financial Research',
-            description: 'Quantitative research framework analyzing correlation between open-source development and stock prices. Full AR/CAR estimation pipeline with Market, Mean-Adjusted, and Market-Adjusted models.',
-            tags: ['Pandas', 'yFinance', 'GitHub API'],
-            links: [{ label: 'Live Site', url: 'https://tomalmog.github.io/CommitTrader/' }]
-        },
-        {
-            title: 'WagerLoo - Co-op Salary Prediction Market',
-            description: 'Prediction-market platform where Waterloo students receive over/under salary predictions driven by community voting. Dynamic line-movement algorithm updates predictions.',
-            tags: ['Next.js', 'Prisma', 'PostgreSQL'],
-            links: [{ label: 'Live Site', url: 'https://wagerloo.vercel.app/' }]
-        },
-        {
-            title: 'CarbonAware-ML Python Package',
+            title: 'Python Package: CarbonAware-ML',
             description: 'Python package to pause PyTorch training based on real-time electricity prices. Integrated Electricity Maps and WattTime APIs. Published to PyPI.',
             tags: ['Python', 'PyTorch', 'API Integration'],
             links: [
@@ -63,7 +51,35 @@ export default function Home() {
             ]
         },
         {
-            title: 'Real-Time Blackjack Card Counter',
+            title: 'Prediction Market: WagerLoo',
+            description: 'Prediction-market platform where Waterloo students receive over/under salary predictions driven by community voting. Dynamic line-movement algorithm updates predictions.',
+            tags: ['Next.js', 'Prisma', 'PostgreSQL'],
+            links: [
+                { label: 'Live Site', url: 'https://wagerloo.vercel.app/' },
+                { label: 'GitHub', url: 'https://github.com/tomalmog/WagerLoo' }
+            ]
+        },
+        {
+            title: 'Financial Research: CommitTrader',
+            description: 'Quantitative research framework analyzing correlation between open-source development and stock prices. Full AR/CAR estimation pipeline with Market, Mean-Adjusted, and Market-Adjusted models.',
+            tags: ['Pandas', 'yFinance', 'GitHub API'],
+            links: [
+                { label: 'Live Site', url: 'https://tomalmog.github.io/CommitTrader/' },
+                { label: 'GitHub', url: 'https://github.com/tomalmog/CommitTrader' }
+            ]
+        },
+        {
+            title: 'Tempo: Automated Claude Runner',
+            description: 'Automated Claude Code runner with rate limit handling. Features smart rate limit detection, multi-cycle support, full markdown logging, and crash recovery. Runs long tasks overnight without intervention.',
+            tags: ['Rust', 'CLI', 'Automation'],
+            links: [
+                { label: 'Live Site', url: 'https://claudetempo.vercel.app/' },
+                { label: 'GitHub', url: 'https://github.com/tomalmog/tempo' }
+            ]
+        },
+
+        {
+            title: 'Computer Vision: Real-Time Blackjack Card Counter',
             description: 'Computer vision system detecting 52 playing cards with 95%+ accuracy. YOLOv8 model with sub-100ms inference. Improved simulated win rates to over 50%.',
             tags: ['Python', 'YOLOv8', 'OpenCV', 'PyTorch'],
             links: [{ label: 'GitHub', url: 'https://github.com/tomalmog/CV-CardCounting' }]
