@@ -73,7 +73,7 @@ export default function Home() {
             description: 'Automated Claude Code runner with rate limit handling. Features smart rate limit detection, multi-cycle support, full markdown logging, and crash recovery. Runs long tasks overnight without intervention.',
             tags: ['Rust', 'CLI', 'Automation'],
             links: [
-                { label: 'Live Site', url: 'https://claudetempo.vercel.app/' },
+                { label: 'Live Site', url: '/tempo' },
                 { label: 'GitHub', url: 'https://github.com/tomalmog/tempo' }
             ]
         },
