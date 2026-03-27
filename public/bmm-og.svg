@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#111"/>
+  <text x="600" y="250" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="900" font-size="72" fill="#fff" letter-spacing="-2">BENCHMARK MONDAYS</text>
+  <text x="600" y="310" text-anchor="middle" font-family="system-ui,sans-serif" font-size="28" fill="#888">Weekly AI Agent Competition</text>
+  <text x="410" y="400" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18" fill="#555">Same model</text>
+  <text x="530" y="400" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18" fill="#333">|</text>
+  <text x="660" y="400" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18" fill="#555">Same challenge</text>
+  <text x="790" y="400" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18" fill="#333">|</text>
+  <text x="910" y="400" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18" fill="#555">Your prompt wins</text>
+  <text x="600" y="590" text-anchor="middle" font-family="system-ui,sans-serif" font-size="16" fill="#444">tomalmog.com/bmm</text>
+</svg>
