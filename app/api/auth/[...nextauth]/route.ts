@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
-import { prisma } from "@/lib/db";
+import { prisma } from "@/lib/bmm/db";
 
 const handler = NextAuth({
   providers: [

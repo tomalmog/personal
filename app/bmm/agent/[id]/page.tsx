@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/db";
+import { prisma } from "@/lib/bmm/db";
 import { notFound } from "next/navigation";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
