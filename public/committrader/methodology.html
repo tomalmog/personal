@@ -1,0 +1,256 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Methodology - CommitTrader Research</title>
+    <style>
+        :root {
+            --color-bg: #fafafa;
+            --color-text: #1a1a1a;
+            --color-text-light: #666;
+            --color-border: #e0e0e0;
+            --color-accent: #2c2c2c;
+            --font-serif: 'Georgia', 'Times New Roman', serif;
+            --font-sans: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            line-height: 1.7;
+            color: var(--color-text);
+            background: var(--color-bg);
+        }
+
+        .nav {
+            background: white;
+            border-bottom: 1px solid var(--color-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            gap: 35px;
+            font-size: 0.95em;
+            justify-content: center;
+        }
+
+        .nav a {
+            color: var(--color-text);
+            text-decoration: none;
+            transition: opacity 0.4s ease;
+            opacity: 0.6;
+        }
+
+        .nav a:hover {
+            opacity: 1;
+        }
+
+        .header {
+            background: white;
+            border-bottom: 1px solid var(--color-border);
+            padding: 100px 40px 80px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-family: var(--font-serif);
+            font-size: 2.8em;
+            font-weight: 400;
+            color: var(--color-accent);
+            letter-spacing: -0.02em;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 40px 100px;
+        }
+
+        h2 {
+            font-family: var(--font-serif);
+            font-size: 1.8em;
+            font-weight: 400;
+            color: var(--color-accent);
+            margin-top: 60px;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--color-border);
+            letter-spacing: -0.01em;
+        }
+
+        h3 {
+            font-family: var(--font-serif);
+            font-size: 1.2em;
+            font-weight: 400;
+            color: var(--color-accent);
+            margin: 25px 0 15px 0;
+        }
+
+        .method-box {
+            background: white;
+            padding: 35px;
+            margin: 25px 0;
+            border: 1px solid var(--color-border);
+            border-left: 2px solid var(--color-text);
+        }
+
+        code {
+            background: #f5f5f5;
+            padding: 3px 8px;
+            font-family: 'Menlo', 'Courier New', monospace;
+            font-size: 0.9em;
+            color: var(--color-text);
+        }
+
+        ol, ul {
+            margin: 15px 0;
+            padding-left: 25px;
+            line-height: 1.9;
+        }
+
+        li {
+            margin: 10px 0;
+            color: var(--color-text);
+        }
+
+        p {
+            margin: 15px 0;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 60px 20px 50px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .container {
+                padding: 40px 20px;
+            }
+
+            .nav-content {
+                flex-direction: column;
+                gap: 15px;
+                padding: 20px;
+            }
+
+            .method-box {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="index.html">Home</a>
+            <a href="report.html">Full Report</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="methodology.html">Methodology</a>
+            <a href="downloads.html">Downloads</a>
+        </div>
+    </nav>
+
+    <div class="header">
+        <h1>Research Methodology</h1>
+    </div>
+
+    <div class="container">
+        <h2>Event Study Framework</h2>
+        <p>
+            This research employs standard event study methodology from financial econometrics to
+            measure the impact of GitHub events on stock returns.
+        </p>
+
+        <div class="method-box">
+            <h3>1. Event Identification</h3>
+            <p>Three types of GitHub events are analyzed:</p>
+            <ul>
+                <li><strong>Releases:</strong> Tagged version releases (excluding pre-releases)</li>
+                <li><strong>Commit Spikes:</strong> Unusual increases in commit activity (2+ standard deviations)</li>
+                <li><strong>Milestones:</strong> Major version releases, first commits, repository creation</li>
+            </ul>
+        </div>
+
+        <div class="method-box">
+            <h3>2. Expected Returns Calculation</h3>
+            <p>We use the <strong>market model</strong> to estimate expected returns:</p>
+            <p><code>R_it = α_i + β_i × R_mt + ε_it</code></p>
+            <p>Where:</p>
+            <ul>
+                <li><code>R_it</code> = Stock return for company i at time t</li>
+                <li><code>R_mt</code> = Market return (S&P 500)</li>
+                <li><code>α_i, β_i</code> = OLS regression parameters</li>
+            </ul>
+            <p>Parameters are estimated using 100 trading days (-130 to -31 days before event).</p>
+        </div>
+
+        <div class="method-box">
+            <h3>3. Abnormal Returns</h3>
+            <p><code>AR_it = R_it - E(R_it)</code></p>
+            <p>Where <code>E(R_it)</code> is the expected return from the market model.</p>
+        </div>
+
+        <div class="method-box">
+            <h3>4. Cumulative Abnormal Returns</h3>
+            <p><code>CAR_i(t1, t2) = Σ AR_it</code> for t = t1 to t2</p>
+            <p>We calculate CAR for multiple windows:</p>
+            <ul>
+                <li>Day 0: Event day only</li>
+                <li>Days 0 to +1: Event day plus next day</li>
+                <li>Days -1 to +1: Three-day window</li>
+                <li>Days -5 to +5: Full event window</li>
+            </ul>
+        </div>
+
+        <h2>Statistical Testing</h2>
+
+        <div class="method-box">
+            <h3>Parametric Tests</h3>
+            <ul>
+                <li><strong>t-test:</strong> Tests if mean abnormal return differs from zero</li>
+                <li><strong>ANOVA:</strong> Compares abnormal returns across event types</li>
+            </ul>
+        </div>
+
+        <div class="method-box">
+            <h3>Non-Parametric Tests</h3>
+            <ul>
+                <li><strong>Sign Test:</strong> Tests if median AR equals zero (no distributional assumptions)</li>
+                <li><strong>Wilcoxon Signed-Rank:</strong> Robust alternative to t-test</li>
+            </ul>
+        </div>
+
+        <h2>Data Sources</h2>
+        <ul>
+            <li><strong>GitHub Data:</strong> GitHub REST API v3</li>
+            <li><strong>Stock Prices:</strong> Yahoo Finance (via yfinance library)</li>
+            <li><strong>Market Index:</strong> S&P 500 (^GSPC)</li>
+        </ul>
+
+        <h2>Limitations</h2>
+        <ul>
+            <li><strong>Confounding Events:</strong> Other news may occur simultaneously with GitHub events</li>
+            <li><strong>Selection Bias:</strong> Analysis limited to companies with public GitHub presence</li>
+            <li><strong>Data Quality:</strong> Depends on accuracy of GitHub API and stock data</li>
+            <li><strong>Market Efficiency:</strong> Markets may quickly incorporate public information</li>
+        </ul>
+    </div>
+</body>
+</html>

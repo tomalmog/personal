@@ -1,0 +1,504 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CommitTrader Research - Full Report</title>
+    <style>
+        :root {
+            --color-bg: #fafafa;
+            --color-text: #1a1a1a;
+            --color-text-light: #666;
+            --color-border: #e0e0e0;
+            --color-accent: #2c2c2c;
+            --font-serif: 'Georgia', 'Times New Roman', serif;
+            --font-sans: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            line-height: 1.7;
+            color: var(--color-text);
+            background: var(--color-bg);
+        }
+
+        .nav {
+            background: white;
+            border-bottom: 1px solid var(--color-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            gap: 35px;
+            font-size: 0.95em;
+            justify-content: center;
+        }
+
+        .nav a {
+            color: var(--color-text);
+            text-decoration: none;
+            transition: opacity 0.4s ease;
+            opacity: 0.6;
+        }
+
+        .nav a:hover {
+            opacity: 1;
+        }
+
+        .header {
+            background: white;
+            border-bottom: 1px solid var(--color-border);
+            padding: 60px 50px;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 40px 80px;
+        }
+
+        .header h1 {
+            font-family: var(--font-serif);
+            font-size: 2.8em;
+            font-weight: 400;
+            color: var(--color-accent);
+            margin-bottom: 15px;
+            letter-spacing: -0.02em;
+        }
+
+        .header .subtitle {
+            color: var(--color-text-light);
+            font-size: 1em;
+            margin: 10px 0;
+            font-weight: 300;
+        }
+
+        .section {
+            background: white;
+            padding: 50px;
+            margin-bottom: 30px;
+            border: 1px solid var(--color-border);
+            border-top: none;
+        }
+
+        .section:first-of-type {
+            border-top: 1px solid var(--color-border);
+        }
+
+        .section h2 {
+            font-family: var(--font-serif);
+            font-size: 1.8em;
+            font-weight: 400;
+            color: var(--color-accent);
+            margin: 0 0 30px 0;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--color-border);
+            letter-spacing: -0.01em;
+        }
+
+        .section h3 {
+            font-family: var(--font-serif);
+            font-size: 1.3em;
+            font-weight: 400;
+            color: var(--color-accent);
+            margin: 30px 0 15px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1px;
+            background: var(--color-border);
+            border: 1px solid var(--color-border);
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 35px 25px;
+            text-align: center;
+            transition: background 0.4s ease;
+        }
+
+        .stat-card:hover {
+            background: #fcfcfc;
+        }
+
+        .stat-card .label {
+            font-size: 0.75em;
+            color: var(--color-text-light);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            font-weight: 500;
+        }
+
+        .stat-card .value {
+            font-size: 2em;
+            font-weight: 300;
+            color: var(--color-accent);
+            font-family: var(--font-serif);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            border: 1px solid var(--color-border);
+        }
+
+        th, td {
+            padding: 16px 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        th {
+            background: #f9f9f9;
+            color: var(--color-text);
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.75em;
+            letter-spacing: 1px;
+        }
+
+        tr:hover {
+            background: #fcfcfc;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .significance {
+            display: inline-block;
+            padding: 3px 10px;
+            font-size: 0.85em;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        .sig-high {
+            background: #1a1a1a;
+            color: white;
+        }
+
+        .sig-med {
+            background: #666;
+            color: white;
+        }
+
+        .sig-low {
+            background: #999;
+            color: white;
+        }
+
+        .sig-none {
+            background: #f0f0f0;
+            color: var(--color-text-light);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px 20px;
+            color: var(--color-text-light);
+            font-size: 0.9em;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .methodology {
+            background: #f9f9f9;
+            padding: 30px;
+            border-left: 2px solid var(--color-text);
+            margin: 30px 0;
+        }
+
+        .methodology h3 {
+            margin-top: 0;
+            font-size: 1.1em;
+        }
+
+        .methodology p,
+        .methodology ul {
+            color: var(--color-text);
+            line-height: 1.8;
+        }
+
+        .methodology ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .methodology li {
+            margin: 8px 0;
+        }
+
+        .plot-container {
+            margin: 40px 0;
+            background: white;
+            padding: 20px 0;
+        }
+
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px 60px;
+            }
+
+            .header {
+                padding: 40px 30px;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .section {
+                padding: 30px 25px;
+            }
+
+            .nav-content {
+                flex-direction: column;
+                gap: 15px;
+                padding: 20px;
+            }
+
+            th, td {
+                padding: 12px 10px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+    <script src="https://cdn.plot.ly/plotly-2.26.0.min.js" charset="utf-8"></script>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="index.html">Home</a>
+            <a href="report.html">Full Report</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="methodology.html">Methodology</a>
+            <a href="downloads.html">Downloads</a>
+        </div>
+    </nav>
+
+    <div class="header">
+        <h1>CommitTrader Research Report</h1>
+        <div class="subtitle">
+            Quantitative Analysis of GitHub Activity and Stock Price Relationships
+        </div>
+    </div>
+
+    <div class="container">
+    <div class="section">
+        <h2>Executive Summary</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="label">Total Events Analyzed</div>
+                <div class="value">1,413</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Valid Event Studies</div>
+                <div class="value">1,413</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Companies Analyzed</div>
+                <div class="value">31</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Repositories Tracked</div>
+                <div class="value">47</div>
+            </div>
+        </div>
+
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Metric</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Mean AR (Day 0)</td>
+                    <td>0.0773%</td>
+                </tr>
+                <tr>
+                    <td>Median AR (Day 0)</td>
+                    <td>-0.0175%</td>
+                </tr>
+                <tr>
+                    <td>Mean CAR (-5, +5)</td>
+                    <td>0.1257%</td>
+                </tr>
+                <tr>
+                    <td>% Events with Positive AR</td>
+                    <td>49.3%</td>
+                </tr>
+                <tr>
+                    <td>Standard Deviation</td>
+                    <td>2.1619%</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="section">
+        <h2>Key Findings</h2>
+        <div class="methodology">
+            <h3>Research Question</h3>
+            <p>
+                Does public GitHub activity from open-source repositories associated with
+                publicly traded companies have measurable impact on stock prices?
+            </p>
+
+            <h3>Main Results</h3>
+            <ul>
+                <li><strong>Mean Abnormal Return (Day 0):</strong> 0.0773%</li>
+                <li><strong>Mean CAR (-5, +5):</strong> 0.1257%</li>
+                <li><strong>Events with Positive Returns:</strong> 49.3%</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Statistical Significance</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Test</th>
+                    <th>P-Value</th>
+                    <th>Significance</th>
+                    <th>N</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td>t_test</td>
+                    <td>0.1794</td>
+                    <td><span class="significance sig-none">ns</span></td>
+                    <td>1413</td>
+                </tr>
+
+                <tr>
+                    <td>sign_test</td>
+                    <td>0.6321</td>
+                    <td><span class="significance sig-none">ns</span></td>
+                    <td>N/A</td>
+                </tr>
+
+                <tr>
+                    <td>wilcoxon_test</td>
+                    <td>0.8225</td>
+                    <td><span class="significance sig-none">ns</span></td>
+                    <td>N/A</td>
+                </tr>
+
+                <tr>
+                    <td>cross_sectional</td>
+                    <td>0.1794</td>
+                    <td><span class="significance sig-none">ns</span></td>
+                    <td>1413</td>
+                </tr>
+
+                <tr>
+                    <td>CAR_0_0_test</td>
+                    <td>0.1794</td>
+                    <td><span class="significance sig-none">ns</span></td>
+                    <td>1413</td>
+                </tr>
+
+                <tr>
+                    <td>CAR_0_1_test</td>
+                    <td>0.8090</td>
+                    <td><span class="significance sig-none">ns</span></td>
+                    <td>1413</td>
+                </tr>
+
+                <tr>
+                    <td>CAR_-1_1_test</td>
+                    <td>0.9373</td>
+                    <td><span class="significance sig-none">ns</span></td>
+                    <td>1413</td>
+                </tr>
+
+                <tr>
+                    <td>CAR_0_5_test</td>
+                    <td>0.5458</td>
+                    <td><span class="significance sig-none">ns</span></td>
+                    <td>1413</td>
+                </tr>
+
+                <tr>
+                    <td>CAR_-5_5_test</td>
+                    <td>0.5023</td>
+                    <td><span class="significance sig-none">ns</span></td>
+                    <td>1413</td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="section">
+        <h2>Methodology</h2>
+        <div class="methodology">
+            <h3>Event Study Design</h3>
+            <p>
+                This analysis employs standard event study methodology to measure abnormal stock returns
+                around GitHub release events. The market model is used to calculate expected returns:
+            </p>
+            <p style="text-align: center; font-style: italic; margin: 20px 0;">
+                E(R<sub>it</sub>) = α<sub>i</sub> + β<sub>i</sub> × R<sub>mt</sub>
+            </p>
+            <p>
+                Where R<sub>it</sub> is the stock return, R<sub>mt</sub> is the market return (S&P 500),
+                and parameters are estimated over a 100-day estimation window (-130 to -31 days before the event).
+            </p>
+
+            <h3>Statistical Tests</h3>
+            <ul>
+                <li><strong>t-test:</strong> Parametric test for mean abnormal returns</li>
+                <li><strong>Sign test:</strong> Non-parametric test based on proportion of positive ARs</li>
+                <li><strong>Wilcoxon test:</strong> Non-parametric rank-based test</li>
+                <li><strong>Cross-sectional test:</strong> Tests for abnormal returns using cross-sectional variance</li>
+            </ul>
+
+            <h3>Event Windows</h3>
+            <p>Multiple event windows tested: (0,0), (0,+1), (-1,+1), (0,+5), and (-5,+5) days</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><strong>CommitTrader Research Platform</strong></p>
+        <p>This research is for educational purposes only and should not be used as investment advice.</p>
+        <p style="margin-top: 15px;">
+            <a href="visualizations.html" style="color: inherit; opacity: 0.6; transition: opacity 0.3s;">Visualizations</a> |
+            <a href="methodology.html" style="color: inherit; opacity: 0.6; transition: opacity 0.3s;">Methodology</a> |
+            <a href="downloads.html" style="color: inherit; opacity: 0.6; transition: opacity 0.3s;">Downloads</a>
+        </p>
+    </div>
+    </div>
+</body>
+</html>

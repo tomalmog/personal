@@ -64,7 +64,7 @@ export default function Home() {
             description: 'Quantitative research framework analyzing correlation between open-source development and stock prices. Full AR/CAR estimation pipeline with Market, Mean-Adjusted, and Market-Adjusted models.',
             tags: ['Pandas', 'yFinance', 'GitHub API'],
             links: [
-                { label: 'Live Site', url: 'https://tomalmog.github.io/CommitTrader/' },
+                { label: 'Live Site', url: '/committrader' },
                 { label: 'GitHub', url: 'https://github.com/tomalmog/CommitTrader' }
             ]
         },
