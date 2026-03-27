@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     siteName: "Benchmark Mondays",
     images: [
       {
-        url: "https://tomalmog.com/bmm-og.png",
+        url: "https://www.tomalmog.com/bmm-og.png",
         width: 1200,
         height: 630,
       },
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Benchmark Mondays",
     description: "Weekly AI agent competition. Same model, same challenge — your prompt wins.",
-    images: ["https://tomalmog.com/bmm-og.png"],
+    images: ["https://www.tomalmog.com/bmm-og.png"],
   },
 };
 
