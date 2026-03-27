@@ -59,22 +59,22 @@ export default function EditAgentPage() {
         <div><label className="block text-sm font-semibold mb-1">System Prompt</label><textarea value={systemPrompt} onChange={(e) => setSystemPrompt(e.target.value)} rows={6} maxLength={10000} className="w-full border border-gray-300 px-3 py-2 text-sm" /></div>
         <div className="grid grid-cols-2 gap-3">
           <div className="p-3">
-            <div className="flex justify-between items-center mb-1"><label className="text-xs text-gray-500 cursor-help" title="Controls randomness. Lower = focused and deterministic. Higher = creative and varied.">Temperature</label><span className="text-xs font-mono text-gray-400">{temperature}</span></div>
+            <div className="flex justify-between items-center mb-1"><label className="text-xs text-gray-500" title="Controls randomness. Lower = focused and deterministic. Higher = creative and varied.">Temperature</label><span className="text-xs font-mono text-gray-400">{temperature}</span></div>
             <input type="range" min="0" max="2" step="0.1" value={temperature} onChange={(e) => setTemperature(parseFloat(e.target.value))} className="w-full accent-gray-900" />
             <div className="flex justify-between text-[10px] text-gray-300 mt-0.5"><span>Focused</span><span>Creative</span></div>
           </div>
           <div className="p-3">
-            <div className="flex justify-between items-center mb-1"><label className="text-xs text-gray-500 cursor-help" title="Limits token selection to top percentage of likely tokens. Lower = more focused. Higher = more diversity.">Top P</label><span className="text-xs font-mono text-gray-400">{topP}</span></div>
+            <div className="flex justify-between items-center mb-1"><label className="text-xs text-gray-500" title="Limits token selection to top percentage of likely tokens. Lower = more focused. Higher = more diversity.">Top P</label><span className="text-xs font-mono text-gray-400">{topP}</span></div>
             <input type="range" min="0.1" max="1" step="0.05" value={topP} onChange={(e) => setTopP(parseFloat(e.target.value))} className="w-full accent-gray-900" />
             <div className="flex justify-between text-[10px] text-gray-300 mt-0.5"><span>Narrow</span><span>Diverse</span></div>
           </div>
           <div className="p-3">
-            <div className="flex justify-between items-center mb-1"><label className="text-xs text-gray-500 cursor-help" title="Max tokens the model can generate per response. Higher = longer reasoning, more compute.">Max Tokens</label><span className="text-xs font-mono text-gray-400">{maxTokens}</span></div>
+            <div className="flex justify-between items-center mb-1"><label className="text-xs text-gray-500" title="Max tokens the model can generate per response. Higher = longer reasoning, more compute.">Max Tokens</label><span className="text-xs font-mono text-gray-400">{maxTokens}</span></div>
             <input type="range" min="64" max="512" step="32" value={maxTokens} onChange={(e) => setMaxTokens(parseInt(e.target.value))} className="w-full accent-gray-900" />
             <div className="flex justify-between text-[10px] text-gray-300 mt-0.5"><span>Short</span><span>Long</span></div>
           </div>
           <div className="p-3">
-            <div className="flex justify-between items-center mb-1"><label className="text-xs text-gray-500 cursor-help" title="Penalizes repeating tokens. Higher = more varied. Lower = natural repetition.">Repetition Penalty</label><span className="text-xs font-mono text-gray-400">{repetitionPenalty}</span></div>
+            <div className="flex justify-between items-center mb-1"><label className="text-xs text-gray-500" title="Penalizes repeating tokens. Higher = more varied. Lower = natural repetition.">Repetition Penalty</label><span className="text-xs font-mono text-gray-400">{repetitionPenalty}</span></div>
             <input type="range" min="1" max="2" step="0.05" value={repetitionPenalty} onChange={(e) => setRepetitionPenalty(parseFloat(e.target.value))} className="w-full accent-gray-900" />
             <div className="flex justify-between text-[10px] text-gray-300 mt-0.5"><span>Natural</span><span>Varied</span></div>
           </div>
