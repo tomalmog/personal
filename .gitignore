@@ -8,6 +8,9 @@
 # Vercel
 .vercel
 
+# Next.js build output
+.next/
+
 # Node modules (if you add any dependencies later)
 node_modules/
 
