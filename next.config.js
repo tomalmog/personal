@@ -5,7 +5,7 @@ const nextConfig = {
       return [
           {
               source: '/bmm/:path*',
-              destination: 'https://benchmark-mondays-web.vercel.app/:path*',
+              destination: 'https://benchmark-mondays-web.vercel.app/bmm/:path*',
           },
       ];
   },
