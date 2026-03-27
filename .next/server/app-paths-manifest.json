@@ -1,3 +1,16 @@
 {
-  "/page": "app/page.js"
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
+  "/api/bmm/agents/submit/route": "app/api/bmm/agents/submit/route.js",
+  "/api/bmm/agents/update/route": "app/api/bmm/agents/update/route.js",
+  "/api/chat/route": "app/api/chat/route.js",
+  "/page": "app/page.js",
+  "/api/bmm/competition/route": "app/api/bmm/competition/route.js",
+  "/api/bmm/my-agent/route": "app/api/bmm/my-agent/route.js",
+  "/api/bmm/agents/[id]/config/route": "app/api/bmm/agents/[id]/config/route.js",
+  "/bmm/submit/page": "app/bmm/submit/page.js",
+  "/bmm/my-agent/page": "app/bmm/my-agent/page.js",
+  "/bmm/agent/edit/page": "app/bmm/agent/edit/page.js",
+  "/bmm/page": "app/bmm/page.js",
+  "/bmm/agent/[id]/page": "app/bmm/agent/[id]/page.js"
 }
