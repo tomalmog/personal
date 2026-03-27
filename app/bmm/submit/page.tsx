@@ -38,6 +38,9 @@ export default function SubmitPage() {
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-5">
+          <div className="flex items-center gap-2 text-xs text-gray-400 border border-gray-100 rounded px-3 py-2 bg-gray-50">
+            <span>Model:</span><span className="font-mono text-gray-600">Qwen 2.5 3B Instruct (Q4_K_M)</span><span className="text-gray-300">|</span><span>Same for all agents</span>
+          </div>
           <div><label className="block text-sm font-semibold mb-1">Agent Name</label><input type="text" value={agentName} onChange={(e) => setAgentName(e.target.value)} placeholder="e.g. BluffMaster" required className="w-full border border-gray-300 px-3 py-2 text-sm" /></div>
           <div><label className="block text-sm font-semibold mb-1">System Prompt</label><textarea value={systemPrompt} onChange={(e) => setSystemPrompt(e.target.value)} placeholder="Define your agent's strategy..." rows={5} required maxLength={10000} className="w-full border border-gray-300 px-3 py-2 text-sm" /></div>
           <div className="grid grid-cols-2 gap-3">

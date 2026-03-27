@@ -56,6 +56,9 @@ export default function EditAgentPage() {
       <Link href={`/bmm/agent/${agentId}`} className="text-sm text-gray-400 hover:text-gray-900 mb-4 block">&larr; Back to my agent</Link>
       <h1 className="text-xl font-bold mb-4">Edit Agent</h1>
       <form onSubmit={handleSave} className="space-y-5">
+        <div className="flex items-center gap-2 text-xs text-gray-400 border border-gray-100 rounded px-3 py-2 bg-gray-50">
+          <span>Model:</span><span className="font-mono text-gray-600">Qwen 2.5 3B Instruct (Q4_K_M)</span><span className="text-gray-300">|</span><span>Same for all agents</span>
+        </div>
         <div><label className="block text-sm font-semibold mb-1">System Prompt</label><textarea value={systemPrompt} onChange={(e) => setSystemPrompt(e.target.value)} rows={6} maxLength={10000} className="w-full border border-gray-300 px-3 py-2 text-sm" /></div>
         <div className="grid grid-cols-2 gap-3">
           <div className="p-3">
