@@ -13,45 +13,75 @@ export default function Leaderboard({ entries, arenaType }: { entries: Leaderboa
   const isPoker = arenaType === "poker";
 
   return (
-    <div className="border border-gray-200 bg-white">
+    <div className="border border-gray-200 bg-white overflow-x-auto">
       <div className="px-4 py-3 text-xs font-bold uppercase tracking-wider border-b border-gray-100">Live Leaderboard</div>
       {isPoker ? (
-        <>
-          <div className="grid grid-cols-[40px_1fr_100px_80px_60px] px-4 py-2 text-xs uppercase text-gray-400 font-semibold border-b border-gray-200">
-            <span>#</span><span>Agent</span><span className="text-right">Bankroll</span><span className="text-right">P&L</span><span className="text-right">Matches</span>
-          </div>
-          {entries.map((e) => {
-            const pnl = e.totalValue - 100000;
-            return (
-              <Link key={e.id} href={`/bmm/agent/${e.id}`} className="grid grid-cols-[40px_1fr_100px_80px_60px] px-4 py-3 border-b border-gray-50 hover:bg-gray-50 items-center text-sm">
-                <span className={`font-bold text-base ${e.rank <= 3 ? "text-gray-900" : "text-gray-400"}`}>{e.rank}</span>
-                <span><span className="font-semibold">{e.name}</span><br /><span className="text-xs text-gray-400">by @{e.githubLogin}</span></span>
-                <span className="text-right font-semibold text-gray-900">${e.totalValue.toLocaleString("en-US", { maximumFractionDigits: 0 })}</span>
-                <span className={`text-right font-semibold ${pnl >= 0 ? "text-green-600" : "text-red-600"}`}>{pnl >= 0 ? "+" : ""}${pnl.toLocaleString("en-US", { maximumFractionDigits: 0 })}</span>
-                <span className="text-right text-gray-500 text-xs">{e.tradeCount}</span>
-              </Link>
-            );
-          })}
-        </>
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="text-xs uppercase text-gray-400 font-semibold border-b border-gray-200">
+              <th className="px-3 py-2 text-left w-10">#</th>
+              <th className="px-3 py-2 text-left">Agent</th>
+              <th className="px-3 py-2 text-right whitespace-nowrap">Bankroll</th>
+              <th className="px-3 py-2 text-right whitespace-nowrap">P&L</th>
+              <th className="px-3 py-2 text-right whitespace-nowrap">Matches</th>
+            </tr>
+          </thead>
+          <tbody>
+            {entries.map((e) => {
+              const pnl = e.totalValue - 100000;
+              return (
+                <tr key={e.id} className="border-b border-gray-50 hover:bg-gray-50">
+                  <td className="px-3 py-3">
+                    <Link href={`/bmm/agent/${e.id}`} className={`font-bold text-base ${e.rank <= 3 ? "text-gray-900" : "text-gray-400"}`}>{e.rank}</Link>
+                  </td>
+                  <td className="px-3 py-3">
+                    <Link href={`/bmm/agent/${e.id}`}>
+                      <span className="font-semibold">{e.name}</span><br />
+                      <span className="text-xs text-gray-400">by @{e.githubLogin}</span>
+                    </Link>
+                  </td>
+                  <td className="px-3 py-3 text-right font-semibold text-gray-900 whitespace-nowrap">
+                    <Link href={`/bmm/agent/${e.id}`}>${e.totalValue.toLocaleString("en-US", { maximumFractionDigits: 0 })}</Link>
+                  </td>
+                  <td className={`px-3 py-3 text-right font-semibold whitespace-nowrap ${pnl >= 0 ? "text-green-600" : "text-red-600"}`}>
+                    <Link href={`/bmm/agent/${e.id}`}>{pnl >= 0 ? "+" : ""}${Math.abs(pnl).toLocaleString("en-US", { maximumFractionDigits: 0 })}</Link>
+                  </td>
+                  <td className="px-3 py-3 text-right text-gray-500 text-xs whitespace-nowrap">
+                    <Link href={`/bmm/agent/${e.id}`}>{e.tradeCount}</Link>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       ) : (
-        <>
-          <div className="grid grid-cols-[40px_1fr_90px_90px_80px_60px] px-4 py-2 text-xs uppercase text-gray-400 font-semibold border-b border-gray-200">
-            <span>#</span><span>Agent</span><span className="text-right">Total</span><span className="text-right">Invested</span><span className="text-right">P&L</span><span className="text-right">Trades</span>
-          </div>
-          {entries.map((e) => {
-            const pnl = e.totalValue - 100000;
-            return (
-              <Link key={e.id} href={`/bmm/agent/${e.id}`} className="grid grid-cols-[40px_1fr_90px_90px_80px_60px] px-4 py-3 border-b border-gray-50 hover:bg-gray-50 items-center text-sm">
-                <span className={`font-bold text-base ${e.rank <= 3 ? "text-gray-900" : "text-gray-400"}`}>{e.rank}</span>
-                <span><span className="font-semibold">{e.name}</span><br /><span className="text-xs text-gray-400">by @{e.githubLogin}</span></span>
-                <span className="text-right font-semibold text-gray-900">${e.totalValue.toLocaleString("en-US", { maximumFractionDigits: 0 })}</span>
-                <span className="text-right text-gray-500 text-xs">${e.invested.toLocaleString("en-US", { maximumFractionDigits: 0 })}</span>
-                <span className={`text-right font-semibold ${pnl >= 0 ? "text-green-600" : "text-red-600"}`}>{pnl >= 0 ? "+" : ""}${pnl.toLocaleString("en-US", { maximumFractionDigits: 0 })}</span>
-                <span className="text-right text-gray-500 text-xs">{e.tradeCount.toLocaleString()}</span>
-              </Link>
-            );
-          })}
-        </>
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="text-xs uppercase text-gray-400 font-semibold border-b border-gray-200">
+              <th className="px-3 py-2 text-left w-10">#</th>
+              <th className="px-3 py-2 text-left">Agent</th>
+              <th className="px-3 py-2 text-right whitespace-nowrap">Total</th>
+              <th className="px-3 py-2 text-right whitespace-nowrap">Invested</th>
+              <th className="px-3 py-2 text-right whitespace-nowrap">P&L</th>
+              <th className="px-3 py-2 text-right whitespace-nowrap">Trades</th>
+            </tr>
+          </thead>
+          <tbody>
+            {entries.map((e) => {
+              const pnl = e.totalValue - 100000;
+              return (
+                <tr key={e.id} className="border-b border-gray-50 hover:bg-gray-50">
+                  <td className="px-3 py-3"><Link href={`/bmm/agent/${e.id}`} className={`font-bold text-base ${e.rank <= 3 ? "text-gray-900" : "text-gray-400"}`}>{e.rank}</Link></td>
+                  <td className="px-3 py-3"><Link href={`/bmm/agent/${e.id}`}><span className="font-semibold">{e.name}</span><br /><span className="text-xs text-gray-400">by @{e.githubLogin}</span></Link></td>
+                  <td className="px-3 py-3 text-right font-semibold text-gray-900 whitespace-nowrap"><Link href={`/bmm/agent/${e.id}`}>${e.totalValue.toLocaleString("en-US", { maximumFractionDigits: 0 })}</Link></td>
+                  <td className="px-3 py-3 text-right text-gray-500 text-xs whitespace-nowrap"><Link href={`/bmm/agent/${e.id}`}>${e.invested.toLocaleString("en-US", { maximumFractionDigits: 0 })}</Link></td>
+                  <td className={`px-3 py-3 text-right font-semibold whitespace-nowrap ${pnl >= 0 ? "text-green-600" : "text-red-600"}`}><Link href={`/bmm/agent/${e.id}`}>{pnl >= 0 ? "+" : ""}${Math.abs(pnl).toLocaleString("en-US", { maximumFractionDigits: 0 })}</Link></td>
+                  <td className="px-3 py-3 text-right text-gray-500 text-xs whitespace-nowrap"><Link href={`/bmm/agent/${e.id}`}>{e.tradeCount.toLocaleString()}</Link></td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       )}
     </div>
   );
