@@ -18,7 +18,7 @@ export default function Leaderboard({ entries, arenaType }: { entries: Leaderboa
       {isPoker ? (
         <>
           <div className="grid grid-cols-[40px_1fr_100px_80px_60px] px-4 py-2 text-xs uppercase text-gray-400 font-semibold border-b border-gray-200">
-            <span>#</span><span>Agent</span><span className="text-right">Bankroll</span><span className="text-right">P&L</span><span className="text-right">Hands</span>
+            <span>#</span><span>Agent</span><span className="text-right">Bankroll</span><span className="text-right">P&L</span><span className="text-right">Matches</span>
           </div>
           {entries.map((e) => {
             const pnl = e.totalValue - 100000;

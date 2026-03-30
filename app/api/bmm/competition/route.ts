@@ -18,12 +18,29 @@ export async function GET() {
     include: { agent: { include: { user: true } } },
   });
 
-  const tradeCounts = await prisma.action.groupBy({
-    by: ["agentId"],
-    where: { competitionId: competition.id, actionType: { in: ["buy", "sell", "call", "raise", "fold", "check"] }, rejected: false },
-    _count: true,
-  });
-  const tradeCountMap = new Map(tradeCounts.map((tc: any) => [tc.agentId, tc._count]));
+  // For poker: count distinct rounds (matches) per agent. For stocks: count trades.
+  const isPoker = competition.arenaType === "poker";
+  let tradeCountMap: Map<string, number>;
+
+  if (isPoker) {
+    const matchCounts = await prisma.action.groupBy({
+      by: ["agentId", "roundId"],
+      where: { competitionId: competition.id },
+    });
+    const perAgent: Record<string, Set<string>> = {};
+    for (const mc of matchCounts as any[]) {
+      if (!perAgent[mc.agentId]) perAgent[mc.agentId] = new Set();
+      perAgent[mc.agentId].add(mc.roundId);
+    }
+    tradeCountMap = new Map(Object.entries(perAgent).map(([id, rounds]) => [id, rounds.size]));
+  } else {
+    const tradeCounts = await prisma.action.groupBy({
+      by: ["agentId"],
+      where: { competitionId: competition.id, actionType: { in: ["buy", "sell"] }, rejected: false },
+      _count: true,
+    });
+    tradeCountMap = new Map(tradeCounts.map((tc: any) => [tc.agentId, tc._count]));
+  }
 
   const leaderboardEntries = portfolios.map((p: any, i: number) => {
     const totalValue = Number(p.totalValue);
