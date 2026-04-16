@@ -168,7 +168,7 @@ export default function Home() {
 
                             <div className="space-y-6 text-lg text-gray-600 leading-relaxed">
                                 <p>
-                                    Hi! I'm Tom, a first-year Mathematics student at the University of Waterloo
+                                    Hi! I'm Tom, a Mathematics student at the University of Waterloo
                                     with a strong interest in machine learning and quantitative finance. I enjoy
                                     applying mathematical thinking to solve complex problems and building projects
                                     that genuinely have an impact.
