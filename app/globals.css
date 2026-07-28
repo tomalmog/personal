@@ -8,12 +8,69 @@
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
 body {
     font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+/* Window theme tokens. The accent follows the scene's clock:
+   meadow green by day, firefly amber by night. */
+[data-theme='light'] {
+    --surface: #ffffff;
+    --surface-2: #f6f7f8;
+    --ink: #1b1e23;
+    --muted: #6a7280;
+    --hairline: #e8eaed;
+    --accent: #2e7d52;
+    --accent-soft: #eaf4ee;
+}
+
+[data-theme='dark'] {
+    --surface: #16181d;
+    --surface-2: #1e2127;
+    --ink: #e9eaec;
+    --muted: #868d98;
+    --hairline: #262a31;
+    --accent: #d9a94e;
+    --accent-soft: #2a2517;
+}
+
+.mono-label {
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+/* Subtle scrollbar inside the window */
+.window-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: var(--hairline) transparent;
+}
+.window-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+.window-scroll::-webkit-scrollbar-thumb {
+    background: var(--hairline);
+    border-radius: 3px;
+}
+.window-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+@keyframes eq-bounce {
+    0%, 100% { transform: scaleY(0.3); }
+    50% { transform: scaleY(1); }
+}
+.eq-bar {
+    transform-origin: bottom;
+    animation: eq-bounce 0.9s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+    .eq-bar {
+        animation: none;
+        transform: scaleY(0.6);
+    }
 }

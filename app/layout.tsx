@@ -2,8 +2,9 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-    title: 'Tom Almog - Portfolio',
-    description: 'Tom Almog - Mathematics student at University of Waterloo. Machine Learning, Quantitative Finance, and Software Development.',
+    title: 'Tom Almog',
+    description:
+        'Tom Almog — CS student at the University of Waterloo building ML systems that ship. Founding engineer, researcher, and maker of things.',
 };
 
 export default function RootLayout({
@@ -16,7 +17,10 @@ export default function RootLayout({
             <head>
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-                <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+                    rel="stylesheet"
+                />
             </head>
             <body>{children}</body>
         </html>
