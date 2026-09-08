@@ -2,11 +2,27 @@
 
 import { useEffect, useState } from 'react';
 
+interface Entry {
+    name: string;
+    artist?: string;
+    url: string;
+}
+
 interface MusicData {
     available: boolean;
     nowPlaying: boolean;
-    track: { name: string; artist: string } | null;
-    artists: string[];
+    track: Entry | null;
+    tracks: Entry[];
+    artists: Entry[];
+}
+
+function joinLinks(entries: Entry[]) {
+    return entries.map((e, i) => (
+        <span key={e.url}>
+            {i > 0 && ' \u00b7 '}
+            <a href={e.url}>{e.name}</a>
+        </span>
+    ));
 }
 
 export default function Music() {
@@ -31,29 +47,34 @@ export default function Music() {
         };
     }, []);
 
-    // Until the feed answers, and whenever it can't, the plain link stands alone.
+    // Until the feed answers, and whenever it can't, fall back to a plain link.
     if (!data?.available) {
         return (
-            <div className="music">
-                <p>
-                    <a href="https://www.last.fm/user/TomAlmog">music i listen to.</a>
-                </p>
-            </div>
+            <>
+                <h2>music i like</h2>
+                <ul>
+                    <li>
+                        <a href="https://www.last.fm/user/TomAlmog">last.fm/user/TomAlmog</a>
+                    </li>
+                </ul>
+            </>
         );
     }
 
     return (
-        <div className="music">
-            {data.track && (
-                <p>
-                    {data.nowPlaying ? 'currently listening to ' : 'last played '}
-                    {data.track.name} by {data.track.artist}
-                </p>
-            )}
-            {data.artists.length > 0 && <p>on repeat this month: {data.artists.join(', ')}</p>}
-            <p>
-                <a href="https://www.last.fm/user/TomAlmog">more music i listen to.</a>
-            </p>
-        </div>
+        <>
+            <h2>music i like</h2>
+            <ul>
+                {data.track && (
+                    <li>
+                        {data.nowPlaying ? 'currently playing ' : 'last played '}
+                        <a href={data.track.url}>{data.track.name}</a>
+                        {data.track.artist && ` by ${data.track.artist}`}
+                    </li>
+                )}
+                {data.tracks.length > 0 && <li>top songs this month: {joinLinks(data.tracks)}</li>}
+                {data.artists.length > 0 && <li>top artists this month: {joinLinks(data.artists)}</li>}
+            </ul>
+        </>
     );
 }
