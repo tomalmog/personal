@@ -9,11 +9,6 @@ export default function Home() {
             <h1>Tom Almog</h1>
             <p className="lede">cs @ waterloo. building ML systems.</p>
 
-            <ul>
-                <li><a href="https://github.com/tomalmog">github.com/tomalmog</a></li>
-                <li><a href="https://linkedin.com/in/tomalmog">linkedin.com/in/tomalmog</a></li>
-            </ul>
-
             <h2>now</h2>
             <ul>
                 <li>founding engineer at <strong>Parkalytics</strong>. building models and systems for drone data collection</li>
@@ -47,6 +42,10 @@ export default function Home() {
             <Music />
 
             <p className="outro">want to reach out? email me here <a href="mailto:talmog@uwaterloo.ca">talmog@uwaterloo.ca</a></p>
+            <ul>
+                <li><a href="https://github.com/tomalmog">github.com/tomalmog</a></li>
+                <li><a href="https://linkedin.com/in/tomalmog">linkedin.com/in/tomalmog</a></li>
+            </ul>
         </main>
     );
 }
