@@ -28,6 +28,13 @@ export default function Home() {
                 <li><strong>Waterloo Aerial Robotics Group</strong> (may to aug 2025) - perception models running on real drones at 45 FPS.</li>
             </ul>
 
+            <h2>hackathons</h2>
+            <ul>
+                <li>1st @ NexHacks, polymarket track</li>
+                <li>1st @ LA Hacks, fetch.ai track</li>
+                <li>1st @ HackBrown, fetch.ai track</li>
+            </ul>
+
             <h2>things i made</h2>
             <ul>
                 <li><a href="https://github.com/tomalmog/tempo">Tempo</a> - rust CLI that runs Claude Code overnight. 9,000+ downloads.</li>
