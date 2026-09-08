@@ -11,8 +11,8 @@ export default function Home() {
 
             <h2>now</h2>
             <ul>
-                <li>founding engineer at <strong>Parkalytics</strong>. building models and systems for drone data collection</li>
-                <li>building <strong>Peira</strong>. RL environments for physics and engineering</li>
+                <li>founding engineer at <strong>Parkalytics</strong>. building models and systems for drone data collection.</li>
+                <li>building <strong>Peira</strong>. RL environments for physics and engineering.</li>
             </ul>
 
             <h2>before</h2>
