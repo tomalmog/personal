@@ -1,6 +1,6 @@
 # Deployment Guide - Vercel
 
-This guide will help you deploy your RPG portfolio to Vercel with the AI chatbot functionality.
+This guide covers deploying the site to Vercel.
 
 ## Prerequisites
 
@@ -126,3 +126,14 @@ git push
 ```
 
 Vercel will automatically deploy your changes!
+
+## Environment variables
+
+| Name | Used by | Notes |
+| --- | --- | --- |
+| `GROQ_API_KEY` | `/api/chat` | |
+| `LASTFM_API_KEY` | `/api/music` | Without it the music section is hidden entirely. |
+
+Vercel bakes these in at build time, so after adding or changing one you
+must redeploy for it to take effect.
+
