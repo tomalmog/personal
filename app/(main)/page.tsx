@@ -31,12 +31,11 @@ export default function Home() {
 
             <h2>things i made</h2>
             <ul>
-                <li><a href="https://github.com/tomalmog/crucible">Crucible</a> - agentic platform for fine-tuning and evaluating LLMs. 13 training methods, agent with 35+ MCP tools.</li>
+                <li><a href="https://github.com/tomalmog/crucible">Crucible</a> - agentic platform for fine-tuning and evaluating LLMs.</li>
                 <li><a href="https://github.com/tomalmog/tempo">Tempo</a> - rust CLI that runs Claude Code overnight. 9,000+ downloads.</li>
                 <li><a href="https://pypi.org/project/carbonaware-ml/">CarbonAware-ML</a> - pauses PyTorch training on live carbon intensity signals. 2,400+ downloads.</li>
                 <li><a href="https://arxiv.org/abs/2509.13516">an analysis of optimizer choice on energy efficiency</a> - first author paper, under review at Sustainable Computing.</li>
                 <li><a href="https://wagerloo.vercel.app/">WagerLoo</a> - prediction market for waterloo co-op salaries. 80+ student sign ups.</li>
-                <li><a href="https://huggingface.co/tomalmog/oct-retinal-classifier">retinal OCT classifier</a> - 99.6% accuracy across 84,000+ scans.</li>
             </ul>
 
             <h2>hackathons</h2>
