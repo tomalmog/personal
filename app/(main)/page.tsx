@@ -17,15 +17,15 @@ export default function Home() {
 
             <h2>now</h2>
             <ul>
-                <li>founding engineer at Parkalytics - computer vision turning drone imagery into parking analytics.</li>
-                <li><a href="https://github.com/tomalmog/crucible">Crucible</a> - agentic platform for fine-tuning and evaluating LLMs.</li>
+                <li>founding engineer at <strong>Parkalytics</strong>. building models and systems for drone data collection</li>
+                <li>building <strong>Peira</strong>. RL environments for physics and engineering</li>
             </ul>
 
             <h2>before</h2>
             <ul>
                 <li><strong>Polymarket</strong> (apr 2026) - autoencoder flagging anomalous trades for insider trading review.</li>
                 <li><strong>WatStreet</strong> (dec 2025 to mar 2026) - transformer time series models for market making.</li>
-                <li><strong>Wat.AI</strong> (sep to dec 2025) - retinal lesion segmentation research, with a paper.</li>
+                <li><strong>Wat.AI</strong> (sep to dec 2025) - conducted research on retinal lesion segmentation, built the best model for diabetic retinopathy detection</li>
                 <li><strong>Waterloo Aerial Robotics Group</strong> (may to aug 2025) - perception models running on real drones at 45 FPS.</li>
             </ul>
 
