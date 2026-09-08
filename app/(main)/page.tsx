@@ -10,7 +10,6 @@ export default function Home() {
             <p className="lede">cs @ waterloo. building ML systems.</p>
 
             <ul>
-                <li><a href="mailto:talmog@uwaterloo.ca">talmog@uwaterloo.ca</a></li>
                 <li><a href="https://github.com/tomalmog">github.com/tomalmog</a></li>
                 <li><a href="https://linkedin.com/in/tomalmog">linkedin.com/in/tomalmog</a></li>
             </ul>
