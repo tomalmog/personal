@@ -74,6 +74,9 @@ export default function Music() {
                 )}
                 {data.tracks.length > 0 && <li>top songs this month: {joinLinks(data.tracks)}</li>}
                 {data.artists.length > 0 && <li>top artists this month: {joinLinks(data.artists)}</li>}
+                <li>
+                    <a href="https://www.last.fm/user/TomAlmog">last.fm/user/TomAlmog</a>
+                </li>
             </ul>
         </>
     );

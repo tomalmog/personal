@@ -73,6 +73,10 @@ ul + p {
     margin-top: 0.75rem;
 }
 
+.outro {
+    margin-top: 1.25rem;
+}
+
 a {
     color: var(--link);
 }
