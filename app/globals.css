@@ -35,8 +35,7 @@ body {
 
 main {
     max-width: 65ch;
-    margin: 0 auto;
-    padding: 4rem 1.5rem 6rem;
+    padding: 2rem 1.5rem 4rem;
     position: relative;
 }
 
@@ -81,7 +80,7 @@ a:visited {
 
 .theme-toggle {
     position: absolute;
-    top: 3.9rem;
+    top: 1.9rem;
     right: 1.5rem;
     display: flex;
     align-items: center;
@@ -103,13 +102,4 @@ a:visited {
 .theme-toggle:focus-visible {
     outline: 2px solid var(--link);
     outline-offset: 2px;
-}
-
-@media (max-width: 640px) {
-    main {
-        padding-top: 3rem;
-    }
-    .theme-toggle {
-        top: 2.9rem;
-    }
 }
