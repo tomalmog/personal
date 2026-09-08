@@ -47,7 +47,7 @@ export default function Home() {
 
             <Music />
 
-            <p className="outro">building something interesting? <a href="mailto:talmog@uwaterloo.ca">reach out</a>.</p>
+            <p className="outro">want to reach out? email me here <a href="mailto:talmog@uwaterloo.ca">talmog@uwaterloo.ca</a></p>
         </main>
     );
 }
