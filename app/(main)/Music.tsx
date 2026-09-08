@@ -47,19 +47,8 @@ export default function Music() {
         };
     }, []);
 
-    // Until the feed answers, and whenever it can't, fall back to a plain link.
-    if (!data?.available) {
-        return (
-            <>
-                <h2>music i like</h2>
-                <ul>
-                    <li>
-                        <a href="https://www.last.fm/user/TomAlmog">last.fm/user/TomAlmog</a>
-                    </li>
-                </ul>
-            </>
-        );
-    }
+    // Render nothing until the feed answers, and nothing at all if it can't.
+    if (!data?.available) return null;
 
     return (
         <>
