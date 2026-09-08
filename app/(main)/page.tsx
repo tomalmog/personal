@@ -28,13 +28,6 @@ export default function Home() {
                 <li><strong>Waterloo Aerial Robotics Group</strong> (may to aug 2025) - perception models running on real drones at 45 FPS.</li>
             </ul>
 
-            <h2>hackathons</h2>
-            <ul>
-                <li>1st @ NexHacks, polymarket track</li>
-                <li>1st @ LA Hacks, fetch.ai track</li>
-                <li>1st @ HackBrown, fetch.ai track</li>
-            </ul>
-
             <h2>things i made</h2>
             <ul>
                 <li><a href="https://github.com/tomalmog/tempo">Tempo</a> - rust CLI that runs Claude Code overnight. 9,000+ downloads.</li>
@@ -42,6 +35,13 @@ export default function Home() {
                 <li><a href="https://arxiv.org/abs/2509.13516">an analysis of optimizer choice on energy efficiency</a> - first author paper, under review at Sustainable Computing.</li>
                 <li><a href="https://wagerloo.vercel.app/">WagerLoo</a> - prediction market for waterloo co-op salaries. 80+ student sign ups.</li>
                 <li><a href="https://huggingface.co/tomalmog/oct-retinal-classifier">retinal OCT classifier</a> - 99.6% accuracy across 84,000+ scans.</li>
+            </ul>
+
+            <h2>hackathons</h2>
+            <ul>
+                <li>1st @ NexHacks, polymarket track</li>
+                <li>1st @ LAHacks, fetch.ai track</li>
+                <li>1st @ HackBrown, fetch.ai track</li>
             </ul>
 
             <p><a href="https://www.last.fm/user/TomAlmog">music i listen to.</a></p>
