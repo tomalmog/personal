@@ -3,9 +3,11 @@ import './globals.css';
 
 export const metadata: Metadata = {
     title: 'Tom Almog',
-    description:
-        'Tom Almog — CS student at the University of Waterloo building ML systems that ship. Founding engineer, researcher, and maker of things.',
+    description: 'Tom Almog — CS student at the University of Waterloo. Founding engineer, researcher, and maker of things.',
 };
+
+// Applies the saved theme before first paint so the page never flashes.
+const THEME_SCRIPT = `try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}`;
 
 export default function RootLayout({
     children,
@@ -13,14 +15,9 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en">
+        <html lang="en" suppressHydrationWarning>
             <head>
-                <link rel="preconnect" href="https://fonts.googleapis.com" />
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-                <link
-                    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
-                    rel="stylesheet"
-                />
+                <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
             </head>
             <body>{children}</body>
         </html>

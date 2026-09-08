@@ -1,43 +1,45 @@
-'use client';
-
-import { useEffect, useState } from 'react';
-import Wallpaper from './components/Wallpaper';
-import Window from './components/Window';
-
-function MenuBarClock() {
-    const [time, setTime] = useState('');
-    useEffect(() => {
-        const tick = () =>
-            setTime(new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }));
-        tick();
-        const id = setInterval(tick, 10_000);
-        return () => clearInterval(id);
-    }, []);
-    return <span suppressHydrationWarning>{time}</span>;
-}
+import ThemeToggle from './ThemeToggle';
 
 export default function Home() {
     return (
-        <div className="fixed inset-0 overflow-hidden">
-            <Wallpaper />
+        <main>
+            <ThemeToggle />
 
-            {/* Faux menu bar */}
-            <div
-                className="absolute left-0 right-0 top-0 flex items-center justify-between px-4 py-2 font-mono text-xs text-white/90"
-                style={{ textShadow: '0 1px 3px rgba(0,0,0,0.45)' }}
-            >
-                <span>
-                    tomalmog.com <span className="text-white/55">//</span> online
-                </span>
-                <MenuBarClock />
-            </div>
+            <h1>Tom Almog</h1>
+            <p className="lede">CS @ Waterloo. I build ML systems that ship.</p>
 
-            {/* The window */}
-            <div className="absolute inset-x-2 bottom-2 top-9 flex items-center justify-center sm:inset-x-6 sm:top-12 sm:bottom-6">
-                <div className="h-full max-h-[760px] w-full max-w-[1100px] sm:h-[min(100%,760px)] sm:w-[88%]">
-                    <Window />
-                </div>
-            </div>
-        </div>
+            <ul>
+                <li><a href="mailto:talmog@uwaterloo.ca">talmog@uwaterloo.ca</a></li>
+                <li><a href="https://github.com/tomalmog">github.com/tomalmog</a></li>
+                <li><a href="https://linkedin.com/in/tomalmog">linkedin.com/in/tomalmog</a></li>
+                <li><a href="/resume.pdf">resume</a></li>
+            </ul>
+
+            <h2>Now</h2>
+            <ul>
+                <li>Founding engineer at Parkalytics — computer vision turning drone imagery into parking analytics.</li>
+                <li><a href="https://github.com/tomalmog/crucible">Crucible</a> — agentic platform for fine-tuning and evaluating LLMs.</li>
+            </ul>
+
+            <h2>Before</h2>
+            <ul>
+                <li><strong>Polymarket</strong> (Apr 2026) — autoencoder flagging anomalous trades for insider-trading review.</li>
+                <li><strong>WatStreet</strong> (Dec 2025 – Mar 2026) — transformer time-series models for market making.</li>
+                <li><strong>Wat.AI</strong> (Sep – Dec 2025) — retinal lesion segmentation research, with a paper.</li>
+                <li><strong>Waterloo Aerial Robotics Group</strong> (May – Aug 2025) — perception models running on real drones at 45 FPS.</li>
+            </ul>
+
+            <h2>Things I made</h2>
+            <ul>
+                <li><a href="https://arxiv.org/abs/2509.13516">An Analysis of Optimizer Choice on Energy Efficiency</a> — first-author paper, 360 experiments. Under review at Sustainable Computing.</li>
+                <li><a href="https://huggingface.co/tomalmog/oct-retinal-classifier">Retinal OCT classifier</a> — 99.6% accuracy across 84,000+ scans.</li>
+                <li><a href="https://pypi.org/project/carbonaware-ml/">CarbonAware-ML</a> — pauses PyTorch training on live carbon-intensity signals. 2,400+ downloads.</li>
+                <li><a href="https://wagerloo.vercel.app/">WagerLoo</a> — prediction market for Waterloo co-op salaries.</li>
+                <li><a href="https://github.com/tomalmog/tempo">Tempo</a> — Rust CLI that runs Claude Code overnight.</li>
+                <li><a href="https://github.com/tomalmog/CV-CardCounting">Card counter</a> — real-time blackjack card detection, 95%+ accuracy.</li>
+            </ul>
+
+            <p><a href="https://www.last.fm/user/TomAlmog">Music I listen to.</a></p>
+        </main>
     );
 }
