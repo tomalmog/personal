@@ -1,4 +1,5 @@
 import ThemeToggle from './ThemeToggle';
+import Music from './Music';
 
 export default function Home() {
     return (
@@ -44,7 +45,7 @@ export default function Home() {
                 <li>1st @ HackBrown, fetch.ai track</li>
             </ul>
 
-            <p><a href="https://www.last.fm/user/TomAlmog">music i listen to.</a></p>
+            <Music />
         </main>
     );
 }

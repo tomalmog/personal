@@ -69,8 +69,13 @@ li {
     margin-bottom: 0;
 }
 
-ul + p {
+ul + p,
+.music {
     margin-top: 0.75rem;
+}
+
+.music p {
+    margin-bottom: 0;
 }
 
 a {

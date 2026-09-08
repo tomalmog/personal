@@ -1,0 +1,40 @@
+import { NextResponse } from 'next/server';
+
+export const dynamic = 'force-dynamic';
+
+const USER = 'TomAlmog';
+const BASE = 'https://ws.audioscrobbler.com/2.0/';
+
+async function lastfm(method: string, params: Record<string, string>, key: string) {
+    const qs = new URLSearchParams({ method, user: USER, api_key: key, format: 'json', ...params });
+    const res = await fetch(`${BASE}?${qs}`, { next: { revalidate: 60 } });
+    if (!res.ok) throw new Error(`${method} failed: ${res.status}`);
+    return res.json();
+}
+
+export async function GET() {
+    const key = process.env.LASTFM_API_KEY;
+    if (!key) return NextResponse.json({ available: false });
+
+    try {
+        const [recent, top] = await Promise.all([
+            lastfm('user.getRecentTracks', { limit: '1' }, key),
+            lastfm('user.getTopArtists', { limit: '3', period: '1month' }, key),
+        ]);
+
+        const track = recent?.recenttracks?.track?.[0];
+        const artists: string[] = (top?.topartists?.artist ?? [])
+            .map((a: { name?: string }) => a?.name)
+            .filter(Boolean);
+
+        return NextResponse.json({
+            available: true,
+            nowPlaying: track?.['@attr']?.nowplaying === 'true',
+            track: track ? { name: track.name, artist: track.artist?.['#text'] ?? '' } : null,
+            artists,
+        });
+    } catch (error) {
+        console.error('Last.fm error:', error);
+        return NextResponse.json({ available: false });
+    }
+}
